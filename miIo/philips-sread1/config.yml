@@ -1,0 +1,5 @@
+name: 'Philips Smart Desk Lamp'
+packageKey: 'Philips Light Driver'
+permissions:
+  lan: {}
+  discovery: {}

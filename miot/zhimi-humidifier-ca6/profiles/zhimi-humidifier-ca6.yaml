@@ -1,0 +1,55 @@
+name: zhimi-humidifier-ca6
+components:
+- id: main
+  capabilities:
+  - id: switch
+    version: 1
+  - id: temperatureMeasurement
+    version: 1
+  - id: relativeHumidityMeasurement
+    version: 1
+  - id: connectamber53538.zhimica6fanmode
+    version: 1
+  - id: connectamber53538.zhimica6targethumidity
+    version: 1
+  - id: connectamber53538.zhimica6waterlevel
+    version: 1
+  - id: connectamber53538.zhimihumidifierdrymode
+    version: 1
+  - id: refresh
+    version: 1
+  categories:
+  - name: Humidifier
+preferences:
+- name: ipAddress
+  title: IP Address
+  description: Zhimi Humidifier CA6의 IP 주소
+  required: true
+  preferenceType: string
+  definition:
+    stringType: text
+    default: ""
+- name: token
+  title: Token
+  description: Zhimi Humidifier CA6의 토큰 (32자리 hex)
+  required: true
+  preferenceType: string
+  definition:
+    stringType: text
+    default: ""
+- name: pollingInterval
+  title: 갱신주기 (초)
+  description: 얼마나 자주 갱신할지 설정 (기본값 60초)
+  required: false
+  preferenceType: integer
+  definition:
+    minimum: 30
+    maximum: 300
+    default: 60
+- name: createDev
+  title: 추가 기기 만들기
+  description: on off 전환시 또다른 Zhimi Humidifier 기기를 생성합니다.
+  required: false
+  preferenceType: boolean
+  definition:
+    default: false

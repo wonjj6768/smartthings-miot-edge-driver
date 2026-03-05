@@ -1,0 +1,5 @@
+name: 'Qingping Air Monitor Lite2'
+packageKey: 'Qingping Air Monitor Driver2'
+permissions:
+  lan: {}
+  discovery: {}

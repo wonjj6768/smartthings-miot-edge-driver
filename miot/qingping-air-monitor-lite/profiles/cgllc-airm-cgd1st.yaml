@@ -1,0 +1,115 @@
+name: cgllc-airm-cgd1st
+components:
+- id: main
+  capabilities:
+  - id: temperatureMeasurement
+    version: 1
+  - id: relativeHumidityMeasurement
+    version: 1
+  - id: dustSensor
+    version: 1
+  - id: carbonDioxideMeasurement
+    version: 1
+  - id: battery
+    version: 1
+  - id: refresh
+    version: 1
+  categories:
+  - name: AirQualityDetector
+deviceConfig:
+  dashboard:
+    states:
+      - component: main
+        capability: temperatureMeasurement
+        version: 1
+        group: main
+        values:
+          - label: "{{temperature.value}}{{temperature.unit}}"
+        composite: true
+      - component: main
+        capability: relativeHumidityMeasurement
+        version: 1
+        group: main
+        values:
+          - label: " {{humidity.value}}{{humidity.unit}}"
+        composite: true
+      - component: main
+        capability: carbonDioxideMeasurement
+        version: 1
+        group: main
+        values:
+          - label: " {{carbonDioxide.value}}{{carbonDioxide.unit}}"
+        composite: true
+    actions: []
+    basicPlus: []
+  detailView:
+    - component: main
+      capability: temperatureMeasurement
+      version: 1
+    - component: main
+      capability: relativeHumidityMeasurement
+      version: 1
+    - component: main
+      capability: carbonDioxideMeasurement
+      version: 1
+    - component: main
+      capability: dustSensor
+      version: 1
+    - component: main
+      capability: battery
+      version: 1
+    - component: main
+      capability: refresh
+      version: 1
+  automation:
+    conditions:
+      - component: main
+        capability: temperatureMeasurement
+        version: 1
+      - component: main
+        capability: relativeHumidityMeasurement
+        version: 1
+      - component: main
+        capability: carbonDioxideMeasurement
+        version: 1
+      - component: main
+        capability: dustSensor
+        version: 1
+      - component: main
+        capability: battery
+        version: 1
+    actions: []
+
+preferences:
+- name: ipAddress
+  title: IP Address
+  description: Qingping Air Monitor 의 IP 주소
+  required: true
+  preferenceType: string
+  definition:
+    stringType: text
+    default: ""
+- name: token
+  title: Token
+  description: Qingping Air monitor의 토큰
+  required: true
+  preferenceType: string
+  definition:
+    stringType: text
+    default: ""
+- name: pollingInterval
+  title: 갱신주기 (초)
+  description: 얼마나 자주 갱신할지 설정 (기본값 60초)
+  required: false
+  preferenceType: integer
+  definition:
+    minimum: 30
+    maximum: 300
+    default: 60
+- name: createDev
+  title: 추가 기기 만들기
+  description: on off 전환시 또다른 Qingping Air monitor 기기를 생성합니다.
+  required: false
+  preferenceType: boolean
+  definition:
+    default: false

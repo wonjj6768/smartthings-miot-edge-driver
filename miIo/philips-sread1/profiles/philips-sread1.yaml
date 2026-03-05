@@ -1,0 +1,45 @@
+name: philips-sread1
+components:
+- id: main
+  capabilities:
+  - id: switch
+    version: 1
+  - id: switchLevel
+    version: 1
+  - id: refresh
+    version: 1
+  categories:
+  - name: Light
+preferences:
+- name: ipAddress
+  title: IP Address
+  description: 조명의 IP 주소
+  required: true
+  preferenceType: string
+  definition:
+    stringType: text
+    default: ""
+- name: token
+  title: Token
+  description: 조명의 토큰 (32자)
+  required: true
+  preferenceType: string
+  definition:
+    stringType: text
+    default: ""
+- name: pollingInterval
+  title: 갱신주기 (초)
+  description: 상태 갱신 주기 (기본값 60초)
+  required: false
+  preferenceType: integer
+  definition:
+    minimum: 30
+    maximum: 300
+    default: 60
+- name: createDev
+  title: 추가 기기 만들기
+  description: on/off 전환시 새 조명 기기를 생성합니다.
+  required: false
+  preferenceType: boolean
+  definition:
+    default: false

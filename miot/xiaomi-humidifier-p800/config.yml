@@ -1,0 +1,5 @@
+name: 'Xiaomi Humidifier P800'
+packageKey: 'Xiaomi Humidifier P800 Driver'
+permissions:
+  lan: {}
+  discovery: {}
