@@ -1,0 +1,180 @@
+name: dmaker-dehumidifier-22ht
+components:
+- id: main
+  capabilities:
+  - id: switch
+    version: 1
+  - id: relativeHumidityMeasurement
+    version: 1
+  - id: temperatureMeasurement
+    version: 1
+  - id: concertmirror08464.dmk22htMode
+    version: 1
+  - id: concertmirror08464.dmk22htTargetHumidity
+    version: 1
+  - id: concertmirror08464.dmk22htBuzzer
+    version: 1
+  - id: concertmirror08464.dmk22htIndicatorLight
+    version: 1
+  - id: concertmirror08464.dmk22htIndicatorBrightness
+    version: 1
+  - id: concertmirror08464.dmk22htChildLock
+    version: 1
+  - id: concertmirror08464.dmk22htTankStatus
+    version: 1
+  - id: refresh
+    version: 1
+  categories:
+  - name: Dehumidifier
+deviceConfig:
+  dashboard:
+    states:
+    - component: main
+      capability: switch
+      version: 1
+      group: main
+      values:
+      - label: "{{switch.value}}"
+    - component: main
+      capability: relativeHumidityMeasurement
+      version: 1
+      group: main
+      values:
+      - label: " {{humidity.value}}{{humidity.unit}}"
+      composite: true
+    - component: main
+      capability: temperatureMeasurement
+      version: 1
+      group: main
+      values:
+      - label: " {{temperature.value}}{{temperature.unit}}"
+      composite: true
+    actions:
+    - component: main
+      capability: switch
+      version: 1
+    basicPlus: []
+  detailView:
+  - component: main
+    capability: switch
+    version: 1
+  - component: main
+    capability: relativeHumidityMeasurement
+    version: 1
+  - component: main
+    capability: temperatureMeasurement
+    version: 1
+  - component: main
+    capability: concertmirror08464.dmk22htMode
+    version: 1
+  - component: main
+    capability: concertmirror08464.dmk22htTargetHumidity
+    version: 1
+  - component: main
+    capability: concertmirror08464.dmk22htBuzzer
+    version: 1
+  - component: main
+    capability: concertmirror08464.dmk22htIndicatorLight
+    version: 1
+  - component: main
+    capability: concertmirror08464.dmk22htIndicatorBrightness
+    version: 1
+  - component: main
+    capability: concertmirror08464.dmk22htChildLock
+    version: 1
+  - component: main
+    capability: concertmirror08464.dmk22htTankStatus
+    version: 1
+  - component: main
+    capability: refresh
+    version: 1
+  automation:
+    conditions:
+    - component: main
+      capability: switch
+      version: 1
+    - component: main
+      capability: relativeHumidityMeasurement
+      version: 1
+    - component: main
+      capability: temperatureMeasurement
+      version: 1
+    - component: main
+      capability: concertmirror08464.dmk22htMode
+      version: 1
+    - component: main
+      capability: concertmirror08464.dmk22htTargetHumidity
+      version: 1
+    - component: main
+      capability: concertmirror08464.dmk22htBuzzer
+      version: 1
+    - component: main
+      capability: concertmirror08464.dmk22htIndicatorLight
+      version: 1
+    - component: main
+      capability: concertmirror08464.dmk22htIndicatorBrightness
+      version: 1
+    - component: main
+      capability: concertmirror08464.dmk22htChildLock
+      version: 1
+    - component: main
+      capability: concertmirror08464.dmk22htTankStatus
+      version: 1
+    actions:
+    - component: main
+      capability: switch
+      version: 1
+    - component: main
+      capability: concertmirror08464.dmk22htMode
+      version: 1
+    - component: main
+      capability: concertmirror08464.dmk22htTargetHumidity
+      version: 1
+    - component: main
+      capability: concertmirror08464.dmk22htBuzzer
+      version: 1
+    - component: main
+      capability: concertmirror08464.dmk22htIndicatorLight
+      version: 1
+    - component: main
+      capability: concertmirror08464.dmk22htIndicatorBrightness
+      version: 1
+    - component: main
+      capability: concertmirror08464.dmk22htChildLock
+      version: 1
+    - component: main
+      capability: refresh
+      version: 1
+preferences:
+- name: ipAddress
+  title: IP Address
+  description: Dmaker Dehumidifier 22HT의 IP 주소
+  required: true
+  preferenceType: string
+  definition:
+    stringType: text
+    default: ""
+- name: token
+  title: Token
+  description: Dmaker Dehumidifier 22HT의 토큰 (32자리 hex)
+  required: true
+  preferenceType: string
+  definition:
+    stringType: text
+    default: ""
+- name: pollingInterval
+  title: 갱신주기 (초)
+  description: 얼마나 자주 갱신할지 설정 (기본값 60초)
+  required: false
+  preferenceType: integer
+  definition:
+    minimum: 30
+    maximum: 300
+    default: 60
+- name: createDev
+  title: 추가 기기 만들기
+  description: on off 전환시 또다른 Dmaker Dehumidifier 22HT 기기를 생성합니다.
+  required: false
+  preferenceType: boolean
+  definition:
+    default: false

@@ -1,0 +1,5 @@
+name: 'Dmaker 22ht Dehumidifier'
+packageKey: 'Dmaker 22ht Dehumidifier Driver'
+permissions:
+  lan: {}
+  discovery: {}

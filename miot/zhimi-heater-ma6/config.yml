@@ -1,0 +1,5 @@
+name: 'Smartmi Heater MA6'
+packageKey: 'Smartmi Heater MA6 Driver'
+permissions:
+  lan: {}
+  discovery: {}

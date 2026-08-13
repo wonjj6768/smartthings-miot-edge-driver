@@ -1,0 +1,5 @@
+name: 'Solove Fan F5 New'
+packageKey: 'Solove Fan F5 New Driver'
+permissions:
+  lan: {}
+  discovery: {}

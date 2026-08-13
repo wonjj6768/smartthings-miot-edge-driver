@@ -1,0 +1,5 @@
+name: 'Kadeer X1701 Dehumidifier'
+packageKey: 'Kadeer X1701 Dehumidifier Driver'
+permissions:
+  lan: {}
+  discovery: {}

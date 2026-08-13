@@ -1,0 +1,5 @@
+name: 'NWT 330ef Dehumidifier'
+packageKey: 'NWT 330ef Dehumidifier Driver'
+permissions:
+  lan: {}
+  discovery: {}

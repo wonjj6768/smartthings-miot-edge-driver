@@ -1,0 +1,5 @@
+name: 'Aden Fight Dehumidifier'
+packageKey: 'Aden Fight Dehumidifier Driver'
+permissions:
+  lan: {}
+  discovery: {}

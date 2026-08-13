@@ -1,0 +1,5 @@
+name: 'Smartmi Heater MA5'
+packageKey: 'Smartmi Heater MA5 Driver'
+permissions:
+  lan: {}
+  discovery: {}

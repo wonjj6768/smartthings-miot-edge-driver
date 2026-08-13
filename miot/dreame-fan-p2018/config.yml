@@ -1,0 +1,5 @@
+name: 'Dreame Fan P2018'
+packageKey: 'Dreame Fan P2018 Driver'
+permissions:
+  lan: {}
+  discovery: {}

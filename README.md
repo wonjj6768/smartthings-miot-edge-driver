@@ -57,13 +57,17 @@ Each driver README states which grade its decision rests on.
   `hass-xiaomi-miot`'s `MIOT_LOCAL_MODELS`. That list marks models worth
   attempting over the LAN rather than models upstream has verified: entries
   arrive in bulk, and some are commented out again after users report failures.
-  Upstream can absorb that because it falls back to the Xiaomi cloud API. These
-  drivers ship and are reported working, but the protocol proof is indirect.
+  Upstream can absorb that because it falls back to the Xiaomi cloud API, while
+  this repository has no cloud path.
 
 A MIoT spec, product manual, or app screenshot proves the feature contract
-(enums, ranges, units) and never the LAN protocol. New drivers require
-`confirmed` evidence; the `circumstantial` drivers predate that rule and are
-kept as they are.
+(enums, ranges, units) and never the LAN protocol.
+
+Both grades ship. Drivers built on circumstantial evidence are worth having
+because the LAN mapping is almost always right for a model upstream marks as
+local, but the protocol proof is indirect, so if a `circumstantial` driver does
+not answer at all the protocol verdict itself is the first thing to question.
+Every driver README states its grade.
 
 ## Drivers
 
@@ -139,6 +143,14 @@ Supported drivers are grouped by protocol and device type.
 | `miot/dmaker-humidifier-p2` | `dmaker.humidifier.p2` | Dmaker Humidifier P2 | `Dmaker Humidifier P2` |
 | `miot/xiaomi-humidifier-3lite` | `xiaomi.humidifier.3lite` | Xiaomi Smart Humidifier 3 Lite | `Xiaomi Humidifier 3lite` |
 | `miot/xiaomi-humidifier-4lite` | `xiaomi.humidifier.4lite` | Xiaomi Humidifier 4 Lite | `Xiaomi Humidifier 4lite` |
+| `miot/deerma-humidifier-ct500` | `deerma.humidifier.ct500` | Deerma Humidifier CT500 | `Deerma Humidifier CT500` |
+| `miot/deerma-humidifier-jsq2g` | `deerma.humidifier.jsq2g` | Deerma Humidifier JSQ2G | `Deerma Humidifier JSQ2G` |
+| `miot/deerma-humidifier-rz300` | `deerma.humidifier.rz300` | Deerma Humidifier RZ300 | `Deerma Humidifier RZ300` |
+| `miot/leshow-humidifier-jsq2` | `leshow.humidifier.jsq2` | Leshow Humidifier JSQ2 | `Leshow Humidifier JSQ2` |
+| `miot/leshow-humidifier-jsq3` | `leshow.humidifier.jsq3` | Leshow Humidifier JSQ3 | `Leshow Humidifier JSQ3` |
+| `miot/mate-humidifier-cs01` | `mate.humidifier.cs01` | Mate Humidifier CS01 | `Mate Humidifier CS01` |
+| `miot/xiaomi-humidifier-p3` | `xiaomi.humidifier.p3` | Xiaomi Humidifier P3 | `Xiaomi Humidifier P3` |
+| `miot/zhimi-humidifier-cb1a` | `zhimi.humidifier.cb1a` | Zhimi Humidifier CB1A | `Zhimi Humidifier CB1A` |
 
 ### MIoT Dehumidifiers
 
@@ -151,6 +163,15 @@ Supported drivers are grouped by protocol and device type.
 | `miot/nwt-dehumidifier-16l` | `nwt.fan.16l` | NWT Dehumidifier 16L | `NWT Dehumidifier 16L` |
 | `miot/nwt-dehumidifier-60l` | `nwt.derh.60l` | NWT Dehumidifier 60L | `NWT Dehumidifier 60L` |
 | `miot/nwt-dehumidifier-24wu1` | `nwt.derh.24wu1` | NWT Dehumidifier 24WU1 | `NWT Dehumidifier 24WU1` |
+| `miot/aden-dehumidifier-derh16` | `aden.derh.derh16` | Aden D16 Dehumidifier | `Aden D16 Dehumidifier` |
+| `miot/aden-dehumidifier-fight` | `aden.derh.fight` | Aden Fight Dehumidifier | `Aden Fight Dehumidifier` |
+| `miot/deye-dehumidifier-u20a3` | `deye.derh.u20a3` | Deye U20 Dehumidifier | `Deye U20 Dehumidifier` |
+| `miot/deye-dehumidifier-z12a3` | `deye.derh.z12a3` | Deye Z12 Dehumidifier | `Deye Z12 Dehumidifier` |
+| `miot/dmaker-dehumidifier-22ht` | `dmaker.derh.22ht` | Dmaker 22ht Dehumidifier | `Dmaker 22ht Dehumidifier` |
+| `miot/dmaker-dehumidifier-50l` | `dmaker.derh.50l` | Dmaker 50l Dehumidifier | `Dmaker 50l Dehumidifier` |
+| `miot/kadeer-dehumidifier-x1701` | `kadeer.derh.x1701` | Kadeer X1701 Dehumidifier | `Kadeer X1701 Dehumidifier` |
+| `miot/nwt-dehumidifier-330ef` | `nwt.derh.330ef` | NWT 330ef Dehumidifier | `NWT 330ef Dehumidifier` |
+| `miot/nwt-dehumidifier-nwt10l` | `nwt.derh.nwt10l` | NWT 10l Dehumidifier | `NWT 10l Dehumidifier` |
 
 ### MIoT Fans
 
@@ -188,6 +209,11 @@ Supported drivers are grouped by protocol and device type.
 | `miot/zhimi-fan-fa2` | `zhimi.fan.fa2` | Zhimi Fan FA2 | `Zhimi Fan FA2` |
 | `miot/zhimi-fan-fb1` | `zhimi.fan.fb1` | Zhimi Fan FB1 | `Zhimi Fan FB1` |
 | `miot/dmaker-fan-p23` | `dmaker.fan.p23` | Mijia Fan P23 | `Mijia Fan P23` |
+| `miot/dreame-fan-l2146` | `dreame.fan.l2146` | Dreame Fan L2146 | `Dreame Fan L2146` |
+| `miot/dreame-fan-p2018` | `dreame.fan.p2018` | Dreame Fan P2018 | `Dreame Fan P2018` |
+| `miot/kadeer-fan-l22xh2` | `kadeer.fan.l22xh2` | Kadeer Fan L22XH2 | `Kadeer Fan L22XH2` |
+| `miot/solove-fan-f5new` | `solove.fan.f5new` | Solove Fan F5 New | `Solove Fan F5 New` |
+| `miot/viomi-fan-v13` | `viomi.fan.v13` | Viomi Fan V13 | `Viomi Fan V13` |
 
 ### MIoT Other Devices
 
@@ -197,6 +223,23 @@ Supported drivers are grouped by protocol and device type.
 | `miot/xiaomi-fish-tank-m200` | `xiaomi.fishbowl.m200` | Xiaomi Smart Fishbowl M200 | `Xiaomi Smart Fishbowl M200` |
 | `miot/zhimi-heater-mc2` | `zhimi.heater.mc2` | Mi Smart Space Heater S | `Mi Smart Space Heater S` |
 | `miot/zhimi-heater-mc2a` | `zhimi.heater.mc2a` | Mi Smart Space Heater S MC2A | `Mi Smart Space Heater S MC2A` |
+| `miot/kadeer-heater-l250sr` | `kadeer.heater.l250sr` | Kadeer L250 Heater | `Kadeer L250 Heater` |
+| `miot/leshow-heater-bs2` | `leshow.heater.bs2` | Leshow BS2 Heater | `Leshow BS2 Heater` |
+| `miot/leshow-heater-nfj2lx` | `leshow.heater.nfj2lx` | Leshow NFJ2 Heater | `Leshow NFJ2 Heater` |
+| `miot/leshow-heater-nfj3lx` | `leshow.heater.nfj3lx` | Leshow NFJ3 Heater | `Leshow NFJ3 Heater` |
+| `miot/viomi-heater-v10` | `viomi.heater.v10` | Viomi V10 Heater | `Viomi V10 Heater` |
+| `miot/viomi-heater-v5` | `viomi.heater.v5` | Viomi V5 Heater | `Viomi V5 Heater` |
+| `miot/viomi-heater-v6` | `viomi.heater.v6` | Viomi Heater V6 | `Viomi Heater V6` |
+| `miot/viomi-heater-v8` | `viomi.heater.v8` | Viomi Heater V8 | `Viomi Heater V8` |
+| `miot/viomi-heater-v9` | `viomi.heater.v9` | Viomi Heater V9 | `Viomi Heater V9` |
+| `miot/xiaomi-heater-ma4` | `xiaomi.heater.ma4` | Xiaomi Heater MA4 | `Xiaomi Heater MA4` |
+| `miot/xiaomi-heater-ma7` | `xiaomi.heater.ma7` | Xiaomi Heater MA7 | `Xiaomi Heater MA7` |
+| `miot/xiaomi-heater-ma8` | `xiaomi.heater.ma8` | Xiaomi Heater MA8 | `Xiaomi Heater MA8` |
+| `miot/zhimi-heater-ma2` | `zhimi.heater.ma2` | Smartmi Heater MA2 | `Smartmi Heater MA2` |
+| `miot/zhimi-heater-ma5` | `zhimi.heater.ma5` | Smartmi Heater MA5 | `Smartmi Heater MA5` |
+| `miot/zhimi-heater-ma6` | `zhimi.heater.ma6` | Smartmi Heater MA6 | `Smartmi Heater MA6` |
+| `miot/zhimi-heater-za3` | `zhimi.heater.za3` | Smartmi Heater ZA3 | `Smartmi Heater ZA3` |
+| `miot/zhimi-heater-zb1a` | `zhimi.heater.zb1a` | Smartmi Heater ZB1A | `Smartmi Heater ZB1A` |
 | `miot/qingping-air-monitor-lite` | `cgllc.airm.cgd1st` | Qingping Air Monitor Lite | `Qingping Air Monitor Lite2` |
 | `miot/xiaomi-pet-waterer-iv02` | `xiaomi.pet_waterer.iv02` | Xiaomi Pet Waterer IV02 | `Xiaomi Pet Waterer IV02` |
 | `miot/xiaomi-pet-waterer-70m2` | `xiaomi.pet_waterer.70m2` | Xiaomi Pet Waterer 70M2 | `Xiaomi Pet Waterer 70M2` |
@@ -253,6 +296,7 @@ Supported drivers are grouped by protocol and device type.
 | `miIo/deerma-humidifier-mjjsq` | `deerma.humidifier.mjjsq` | Mi Smart Antibacterial Humidifier | `Deerma Humidifier MJJSQ` |
 | `miIo/deerma-humidifier-jsq` | `deerma.humidifier.jsq` | Mi Smart Antibacterial Humidifier | `Deerma Humidifier JSQ` |
 | `miIo/deerma-humidifier-jsq1` | `deerma.humidifier.jsq1` | Mi Smart Antibacterial Humidifier | `Deerma Humidifier JSQ1` |
+| `miIo/shuii-humidifier-jsq002` | `shuii.humidifier.jsq002` | Shuii Humidifier JSQ002 | `Shuii Humidifier JSQ002` |
 
 ### miIO Dehumidifiers
 
@@ -271,6 +315,7 @@ Supported drivers are grouped by protocol and device type.
 | `miIo/zhimi-fan-v3` | `zhimi.fan.v3` | Smartmi Smart Wireless Fan 1st Gen (ZLBPLDS01ZM) | `Zhimi Fan V3` |
 | `miIo/zhimi-fan-v2` | `zhimi.fan.v2` | Smartmi DC Pedestal Fan | `Zhimi Fan V2` |
 | `miIo/dmaker-fan-p5` | `dmaker.fan.p5` | Mi Smart Standing Fan 1X | `Mi Smart Standing Fan 1X` |
+| `miIo/air-fan-ca23ad9` | `air.fan.ca23ad9` | Airmate Fan CA23AD9 | `Airmate Fan CA23AD9` |
 
 ### miIO Air Conditioners
 

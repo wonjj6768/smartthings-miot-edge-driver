@@ -1,0 +1,5 @@
+name: 'Deye Z12 Dehumidifier'
+packageKey: 'Deye Z12 Dehumidifier Driver'
+permissions:
+  lan: {}
+  discovery: {}

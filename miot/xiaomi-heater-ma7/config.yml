@@ -1,0 +1,5 @@
+name: 'Xiaomi Heater MA7'
+packageKey: 'Xiaomi Heater MA7 Driver'
+permissions:
+  lan: {}
+  discovery: {}

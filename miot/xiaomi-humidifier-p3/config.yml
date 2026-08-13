@@ -1,0 +1,5 @@
+name: 'Xiaomi Humidifier P3'
+packageKey: 'Xiaomi Humidifier P3 Driver'
+permissions:
+  lan: {}
+  discovery: {}

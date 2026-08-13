@@ -1,0 +1,5 @@
+name: 'Deerma Humidifier RZ300'
+packageKey: 'Deerma Humidifier RZ300 Driver'
+permissions:
+  lan: {}
+  discovery: {}

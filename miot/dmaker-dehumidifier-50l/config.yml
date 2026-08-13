@@ -1,0 +1,5 @@
+name: 'Dmaker 50l Dehumidifier'
+packageKey: 'Dmaker 50l Dehumidifier Driver'
+permissions:
+  lan: {}
+  discovery: {}

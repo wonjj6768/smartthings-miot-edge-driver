@@ -1,0 +1,5 @@
+name: 'Viomi Fan V13'
+packageKey: 'Viomi Fan V13 Driver'
+permissions:
+  lan: {}
+  discovery: {}

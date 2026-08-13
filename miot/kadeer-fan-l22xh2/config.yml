@@ -1,0 +1,5 @@
+name: 'Kadeer Fan L22XH2'
+packageKey: 'Kadeer Fan L22XH2 Driver'
+permissions:
+  lan: {}
+  discovery: {}

@@ -1,0 +1,5 @@
+name: 'Leshow BS2 Heater'
+packageKey: 'Leshow BS2 Heater Driver'
+permissions:
+  lan: {}
+  discovery: {}

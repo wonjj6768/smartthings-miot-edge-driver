@@ -1,0 +1,5 @@
+name: 'Deerma Humidifier CT500'
+packageKey: 'Deerma Humidifier CT500 Driver'
+permissions:
+  lan: {}
+  discovery: {}

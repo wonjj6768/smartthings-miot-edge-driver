@@ -1,0 +1,5 @@
+name: 'Deye U20 Dehumidifier'
+packageKey: 'Deye U20 Dehumidifier Driver'
+permissions:
+  lan: {}
+  discovery: {}

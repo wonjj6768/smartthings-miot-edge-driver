@@ -1,0 +1,5 @@
+name: 'Airmate Fan CA23AD9'
+packageKey: 'Airmate Fan CA23AD9 Driver'
+permissions:
+  lan: {}
+  discovery: {}

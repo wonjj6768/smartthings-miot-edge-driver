@@ -1,0 +1,5 @@
+name: 'Shuii Humidifier JSQ002'
+packageKey: 'Shuii Humidifier JSQ002 Driver'
+permissions:
+  lan: {}
+  discovery: {}

@@ -1,0 +1,5 @@
+name: 'Kadeer L250 Heater'
+packageKey: 'Kadeer L250 Heater Driver'
+permissions:
+  lan: {}
+  discovery: {}

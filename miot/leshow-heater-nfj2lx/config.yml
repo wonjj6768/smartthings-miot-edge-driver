@@ -1,0 +1,5 @@
+name: 'Leshow NFJ2 Heater'
+packageKey: 'Leshow NFJ2 Heater Driver'
+permissions:
+  lan: {}
+  discovery: {}

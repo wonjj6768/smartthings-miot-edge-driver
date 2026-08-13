@@ -1,0 +1,5 @@
+name: 'Mate Humidifier CS01'
+packageKey: 'Mate Humidifier CS01 Driver'
+permissions:
+  lan: {}
+  discovery: {}

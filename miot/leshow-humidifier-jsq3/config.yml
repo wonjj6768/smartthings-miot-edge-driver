@@ -1,0 +1,5 @@
+name: 'Leshow Humidifier JSQ3'
+packageKey: 'Leshow Humidifier JSQ3 Driver'
+permissions:
+  lan: {}
+  discovery: {}

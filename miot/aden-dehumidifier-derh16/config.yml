@@ -1,0 +1,5 @@
+name: 'Aden D16 Dehumidifier'
+packageKey: 'Aden D16 Dehumidifier Driver'
+permissions:
+  lan: {}
+  discovery: {}

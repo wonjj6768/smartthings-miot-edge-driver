@@ -1,0 +1,5 @@
+name: 'Viomi Heater V9'
+packageKey: 'Viomi Heater V9 Driver'
+permissions:
+  lan: {}
+  discovery: {}

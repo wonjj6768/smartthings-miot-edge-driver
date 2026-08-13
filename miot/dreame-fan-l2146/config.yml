@@ -1,0 +1,5 @@
+name: 'Dreame Fan L2146'
+packageKey: 'Dreame Fan L2146 Driver'
+permissions:
+  lan: {}
+  discovery: {}

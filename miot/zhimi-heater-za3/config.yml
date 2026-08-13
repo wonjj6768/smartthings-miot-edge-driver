@@ -1,0 +1,5 @@
+name: 'Smartmi Heater ZA3'
+packageKey: 'Smartmi Heater ZA3 Driver'
+permissions:
+  lan: {}
+  discovery: {}
