@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT curtain motor model `xiaomi.curt
 - specModel: `xiaomi-acn009`
 - URN: `urn:miot-spec-v2:device:curtain:0000A00C:xiaomi-acn009:1`
 - Basis: current `hass-xiaomi-miot` lists exact model `xiaomi.curtain.acn009` in `MIOT_LOCAL_MODELS` with no `MIIO_TO_MIOT_SPECS` conversion, so its local host/token path sends `get_properties` and `set_properties` with `siid`/`piid`. The exact MIoT spec is the equivalent capability contract.
-- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded. See "Evidence Grades" in the root README.md.
+- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded.
 
 ## Exposed Capabilities
 

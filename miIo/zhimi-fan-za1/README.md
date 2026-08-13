@@ -7,7 +7,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO fan model `zhimi.fan.za1`.
 - Protocol: miIO
 - Model: `zhimi.fan.za1`
 - Basis: python-miio lists exact model `zhimi.fan.za1` in the classic Zhimi Fan miIO integration, uses `Device` / `get_prop` with one-property polling for ZA1, and implements `set_power`, `set_speed_level`, `set_natural_level`, `set_angle_enable`, `set_led_b`, `set_buzzer`, and `set_child_lock`; Home Assistant Xiaomi Miio also lists this model under the classic Standing Fan platform.
-- Evidence: confirmed. Source: python-miio-classic+home-assistant-xiaomi-miio+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio-classic+home-assistant-xiaomi-miio+miot-spec.
 
 ## Exposed Capabilities
 

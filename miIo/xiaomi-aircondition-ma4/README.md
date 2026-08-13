@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi classic miIO air conditioner model `x
 - specModel: `xiaomi-ma4`
 - URN: `urn:miot-spec-v2:device:air-conditioner:0000A004:xiaomi-ma4:2`
 - Basis: current `hass-xiaomi-miot` lists exact model `xiaomi.aircondition.ma4` in `MIIO_TO_MIOT_SPECS` with `extend_model` pointing at `xiaomi.aircondition.ma1`, so `Miio2MiotHelper` reads every value with `get_prop` and writes with `set_power`, `set_mode`, `set_temp`, `set_energysave`, `set_auxheat`, `set_sleep`, `set_dry`, `set_wind_level`, `set_swing`, `set_swingh`, `set_beep`, and `set_light`. The exact model also appears in `MIOT_LOCAL_MODELS`, but the runtime resolves the `miio2miot` converter first, so the classic classification applies. The exact MIoT spec v2 is the equivalent capability contract.
-- Evidence: confirmed. Source: hass-xiaomi-miot-miio2miot+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: hass-xiaomi-miot-miio2miot+miot-spec.
 
 ## Exposed Capabilities
 

@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT fish-tank model `xiaomi.fishbowl
 - specModel: `xiaomi-m200`
 - URN: `urn:miot-spec-v2:device:fish-tank:0000A0A2:xiaomi-m200:2`
 - Basis: hass-xiaomi-miot local device support and issue logs identify exact model `xiaomi.fishbowl.m200` with local/LAN MIoT updater behavior; exact MIoT spec v2 supplies the feature contract below.
-- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded. See "Evidence Grades" in the root README.md.
+- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded.
 
 ## Exposed Capabilities
 

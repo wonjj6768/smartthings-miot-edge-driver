@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi/MIoT zhimi air purifier vb2 model `zh
 - specModel: `zhimi-vb2`
 - URN: `urn:miot-spec-v2:device:air-purifier:0000A007:zhimi-vb2:1`
 - Basis: python-miio lists this as AirPurifierMiot _MAPPING; core controls are power, mode, and fan level.
-- Evidence: confirmed. Source: python-miio+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec.
 
 ## Exposed Capabilities
 

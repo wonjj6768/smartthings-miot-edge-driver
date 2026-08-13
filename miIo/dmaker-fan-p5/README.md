@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for one miIO model: `dmaker.fan.p5`.
 - Spec model: `dmaker-p5`
 - URN: none recorded for this classic miIO mapping
 - Basis: python-miio `FanP5` lists the exact model with classic `get_prop` and `s_*` commands. openHAB documents `dmaker.fan.p5` as Mi Smart Standing Fan 1X.
-- Evidence: confirmed. Source: python-miio+openhab-model-doc. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+openhab-model-doc.
 
 ## Exposed Capabilities
 

@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Baomi MIoT air purifier model `baomi.airpuri
 - specModel: `baomi-450a`
 - URN: `urn:miot-spec-v2:device:air-purifier:0000A007:baomi-450a:1`
 - Basis: current `hass-xiaomi-miot` lists exact model `baomi.airpurifier.450a` in `MIOT_LOCAL_MODELS` with no `MIIO_TO_MIOT_SPECS` conversion, so its local host/token path sends `get_properties` and `set_properties` with `siid`/`piid`. The exact MIoT spec is the equivalent capability contract.
-- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded. See "Evidence Grades" in the root README.md.
+- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded.
 
 ## Exposed Capabilities
 

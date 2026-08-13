@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT air conditioner model `xiaomi.ai
 - specModel: `xiaomi-r09h00`
 - URN: `urn:miot-spec-v2:device:air-conditioner:0000A004:xiaomi-r09h00:4`
 - Basis: current `hass-xiaomi-miot` lists exact model `xiaomi.airc.r09h00` in `MIOT_LOCAL_MODELS` with no `MIIO_TO_MIOT_SPECS` conversion, so its local host/token path sends `get_properties` and `set_properties` with `siid`/`piid`. The exact MIoT spec is the equivalent capability contract.
-- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded. See "Evidence Grades" in the root README.md.
+- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded.
 
 ## Exposed Capabilities
 

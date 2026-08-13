@@ -11,7 +11,7 @@ This LAN driver needs the device Xiaomi token and local IP address. Use [Xiaomi 
 - Protocol: miIO
 - Model: `chuangmi.plug.v2`
 - Basis: python-miio `ChuangmiPlug` lists this exact model with `power`, `temperature`, and `set_power`; syssi/xiaomiplug identifies it as Xiaomi Smart WiFi Socket with power and temperature support.
-- Evidence: confirmed. Source: python-miio+homeassistant-integration. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+homeassistant-integration.
 
 ## Exposed Capabilities
 

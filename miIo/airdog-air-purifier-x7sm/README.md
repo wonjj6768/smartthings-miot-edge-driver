@@ -7,7 +7,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO air purifier model `airdog.airpu
 - Protocol: miIO
 - Model: `airdog.airpurifier.x7sm`
 - Basis: python-miio `miio.integrations.airdog.airpurifier.airpurifier_airdog` lists exact model `airdog.airpurifier.x7sm` in `class AirDogX3(Device)`, whose `AVAILABLE_PROPERTIES` entry for this model is the shared list plus `hcho`. It reads `power`, `mode`, `speed`, `lock`, `clean`, `pm`, `hcho` over classic `get_prop` and writes with `send("set_power", [0|1])`, `send("set_wind", [modeIndex, speed])`, `send("set_lock", [0|1])`, and `send("set_clean")`. Rejected native MIoT: no `MiotDevice` mapping for this model.
-- Evidence: confirmed. Source: python-miio-classic. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio-classic.
 
 ## Exposed Capabilities
 

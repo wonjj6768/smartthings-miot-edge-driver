@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi/MIoT zhimi humidifier ca6 model `zhim
 - specModel: `zhimi-ca6`
 - URN: `urn:miot-spec-v2:device:humidifier:0000A00E:zhimi-ca6:1`
 - Basis: current `python-miio` implements exact model `zhimi.humidifier.ca6` as `AirHumidifierMiotCA6(MiotDevice)`, with `_MAPPINGS_CA6` and `get_properties`/`set_properties`. The exact MIoT spec confirms the mapped property contract.
-- Evidence: confirmed. Source: python-miio-miot+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio-miot+miot-spec.
 
 ## Exposed Capabilities
 

@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi Mi Smart Standing Fan Pro product cod
 - Spec model: `dmaker-p15`
 - URN: `urn:miot-spec-v2:device:fan:0000A005:dmaker-p15:1`
 - Basis: python-miio `FanMiot` supports exact model `dmaker.fan.p15` with the P11 MIoT layout; openHAB documents it as Mi Smart Standing Fan Pro; MIoT spec v1 confirms the core siid/piid layout.
-- Evidence: confirmed. Source: python-miio+miot-spec+openhab-model-doc. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec+openhab-model-doc.
 
 ## Exposed Capabilities
 

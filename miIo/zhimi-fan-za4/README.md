@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the classic Xiaomi miIO fan model `zhimi.fan.za4
 - specModel: `zhimi-za4`
 - URN: `urn:miot-spec-v2:device:fan:0000A005:zhimi-za4:3`
 - Basis: current `python-miio` lists exact model `zhimi.fan.za4` in the classic `Fan(Device)` implementation, polls with one-property `get_prop` requests, and writes with `set_*` methods. The MIoT spec is equivalent capability-contract evidence only.
-- Evidence: confirmed. Source: python-miio-classic+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio-classic+miot-spec.
 
 ## Exposed Capabilities
 

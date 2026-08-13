@@ -7,7 +7,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO dehumidifier model `nwt.derh.wdh
 - Protocol: miIO
 - Model: `nwt.derh.wdh318efw1`
 - Basis: python-miio `miio.integrations.nwt.dehumidifier.airdehumidifier` lists exact model `nwt.derh.wdh318efw1` in `class AirDehumidifier(Device)`. Its `status()` reads with `get_properties(properties, max_properties=1)`, so every property is a separate classic `get_prop` request, and it writes with `set_power`, `set_mode`, `set_fan_level`, `set_led`, `set_buzzer`, `set_child_lock`, and `set_auto`. The docstring records a real device response payload. Rejected native MIoT: no `MiotDevice` mapping and no MIoT spec URN for this model.
-- Evidence: confirmed. Source: python-miio-classic. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio-classic.
 
 ## Exposed Capabilities
 

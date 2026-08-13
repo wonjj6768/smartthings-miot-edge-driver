@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi/MIoT zhimi air purifier mb4 model `zh
 - specModel: `zhimi-mb4`
 - URN: `urn:miot-spec-v2:device:air-purifier:0000A007:zhimi-mb4:2`
 - Basis: python-miio lists this as AirPurifierMiot _MAPPING_MB4; core controls are power and auto/sleep/favorite mode, core sensors are PM2.5 and filter life.
-- Evidence: confirmed. Source: python-miio+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec.
 
 ## Exposed Capabilities
 

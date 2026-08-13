@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for one MIoT model: `dmaker.fan.p45`.
 - Spec model: `dmaker-p45`
 - URN: `urn:miot-spec-v2:device:fan:0000A005:dmaker-p45:1`
 - Basis: python-miio `FanMiot` lists the exact model with MIoT siid/piid mapping. MIoT spec v1 confirms power, fan level, mode, horizontal swing, angle, off delay, indicator light, buzzer, child lock, and stepless fan speed. Model docs identify `dmaker.fan.p45` as Mijia DC Inverter Tower Fan 2.
-- Evidence: confirmed. Source: python-miio+miot-spec+model-doc+kr-user-report. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec+model-doc+kr-user-report.
 
 ## Exposed Capabilities
 

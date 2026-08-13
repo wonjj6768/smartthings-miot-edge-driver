@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT dehumidifier model `dmaker.derh.
 - specModel: `dmaker-22l`
 - URN: `urn:miot-spec-v2:device:dehumidifier:0000A02D:dmaker-22l:1`
 - Basis: homebridge-miot includes an exact `dmaker.derh.22l` local MIoT device module with `requiresMiCloud=false` and explicit siid/piid mapping; the exact MIoT spec confirms the mapped properties below.
-- Evidence: confirmed. Source: homebridge-miot-local+miot-spec+xiaomihumidifier-miot. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: homebridge-miot-local+miot-spec+xiaomihumidifier-miot.
 
 ## Exposed Capabilities
 

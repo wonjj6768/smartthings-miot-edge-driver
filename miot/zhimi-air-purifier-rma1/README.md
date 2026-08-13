@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi/MIoT zhimi air purifier rma1 model `z
 - specModel: `zhimi-rma1`
 - URN: `urn:miot-spec-v2:device:air-purifier:0000A007:zhimi-rma1:1`
 - Basis: python-miio lists this as AirPurifierMiot _MAPPING_RMA1; uses a three-mode custom capability.
-- Evidence: confirmed. Source: python-miio+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec.
 
 ## Exposed Capabilities
 

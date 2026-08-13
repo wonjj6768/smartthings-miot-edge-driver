@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT fan model `xiaomi.fan.p30`.
 - specModel: `xiaomi-p30`
 - URN: `urn:miot-spec-v2:device:fan:0000A005:xiaomi-p30:1:0000D062`
 - Basis: current `syssi/xiaomi_fan` implements exact model `xiaomi.fan.p30` as `FanXiaomiP30(MiotDevice)`, with explicit `siid`/`piid` mapping, `get_properties` polling, and `set_property` writes. The exact MIoT spec confirms the mapped fan contract.
-- Evidence: confirmed. Source: python-miio-miot+syssi-xiaomi-fan-exact+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio-miot+syssi-xiaomi-fan-exact+miot-spec.
 
 ## Exposed Capabilities
 

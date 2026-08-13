@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT fan model `dmaker.fan.p5c`.
 - specModel: `dmaker-p5c`
 - URN: `urn:miot-spec-v2:device:fan:0000A005:dmaker-p5c:2`
 - Basis: Exact MIoT spec defines local fan properties for `dmaker.fan.p5c`, and openHAB logs for the exact model show local `get_properties` mapping.
-- Evidence: confirmed. Source: miot-spec+openhab-local. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: miot-spec+openhab-local.
 
 ## Exposed Capabilities
 

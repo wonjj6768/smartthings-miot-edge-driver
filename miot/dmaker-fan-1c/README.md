@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for one MIoT model: `dmaker.fan.1c`.
 - Spec model: `dmaker-1c`
 - URN: `urn:miot-spec-v2:device:fan:0000A005:dmaker-1c:1`
 - Basis: python-miio `FanMiot` includes a Fan1C mapping; MIoT spec v1 confirms the same core siid/piid mapping.
-- Evidence: confirmed. Source: python-miio+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec.
 
 ## Exposed Capabilities
 

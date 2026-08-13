@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT humidifier model `zhimi.humidifi
 - specModel: `zhimi-ca7`
 - URN: `urn:miot-spec-v2:device:humidifier:0000A00E:zhimi-ca7:1:0000D061`
 - Basis: current `hass-xiaomi-miot` lists exact model `zhimi.humidifier.ca7` in `MIOT_LOCAL_MODELS` with no `MIIO_TO_MIOT_SPECS` conversion, so its local host/token path sends `get_properties` and `set_properties` with `siid`/`piid`. The exact MIoT spec is the equivalent capability contract.
-- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded. See "Evidence Grades" in the root README.md.
+- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded.
 
 ## Exposed Capabilities
 

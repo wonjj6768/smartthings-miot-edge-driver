@@ -11,7 +11,7 @@ SmartThings Edge LAN driver for the Smartmi Smart Wireless Fan 1st Gen product c
 - specModel: `zhimi-v3`
 - URN: `urn:miot-spec-v2:device:fan:0000A005:zhimi-v3:3`
 - Basis: python-miio lists `zhimi.fan.v3` in the classic `Fan` miIO integration and defines the local `get_prop` and `set_*` methods used here.
-- Evidence: confirmed. Source: python-miio+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec.
 
 ## Exposed Capabilities
 

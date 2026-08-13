@@ -7,7 +7,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO humidifier model `deerma.humidif
 - Protocol: miIO
 - Model: `deerma.humidifier.jsq1`
 - Basis: python-miio `miio.integrations.deerma.humidifier.airhumidifier_mjjsq` lists exact model `deerma.humidifier.jsq1` in `class AirHumidifierMjjsq(Device)`. Its `status()` reads with `get_properties(properties, max_properties=1)`, so every property is a separate classic `get_prop` request, and it writes with `Set_OnOff`, `Set_HumidifierGears`, `SetLedState`, `SetTipSound_Status`, `Set_HumiValue`, and `Set_wet_and_protect`. Its `AVAILABLE_PROPERTIES` entry is the shared list plus `wet_and_protect`. Rejected native MIoT: no `MiotDevice` mapping for this model.
-- Evidence: confirmed. Source: python-miio-classic. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio-classic.
 
 ## Exposed Capabilities
 

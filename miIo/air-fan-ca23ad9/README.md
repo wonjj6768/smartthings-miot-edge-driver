@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO fan model `air.fan.ca23ad9`.
 - specModel: `air-ca23ad9`
 - URN: `urn:miot-spec-v2:device:fan:0000A005:air-ca23ad9:1`
 - Basis: the exact `hass-xiaomi-miot` `MIIO_TO_MIOT_SPECS` converter reads this model with `get_prop` and writes `SetSwitch`, `SetLevel`, `SetH_Swing`, `SetV_Swing`, and `SetMode`; the MIoT spec is only the equivalent feature contract.
-- Evidence: confirmed. Source: hass-xiaomi-miot-miio2miot+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: hass-xiaomi-miot-miio2miot+miot-spec.
 
 ## Exposed Capabilities
 

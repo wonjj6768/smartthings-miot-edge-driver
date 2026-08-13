@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT humidifier model `xiaomi.humidif
 - specModel: `xiaomi-3lite`
 - URN: `urn:miot-spec-v2:device:humidifier:0000A00E:xiaomi-3lite:1:0000D061`
 - Basis: current `hass-xiaomi-miot` lists exact model `xiaomi.humidifier.3lite` in `MIOT_LOCAL_MODELS`; its local path sends `get_properties` and `set_properties` with `siid`/`piid` mappings. The exact MIoT spec confirms the mapped property contract.
-- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded. See "Evidence Grades" in the root README.md.
+- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded.
 
 ## Exposed Capabilities
 

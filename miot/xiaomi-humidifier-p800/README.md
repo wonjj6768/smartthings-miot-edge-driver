@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi/MIoT xiaomi humidifier p800 model `xi
 - specModel: `xiaomi-p800`
 - URN: `urn:miot-spec-v2:device:humidifier:0000A00E:xiaomi-p800:1`
 - Basis: current `hass-xiaomi-miot` lists exact model `xiaomi.humidifier.p800` in `MIOT_LOCAL_MODELS`; its local path sends `get_properties` and `set_properties` with `siid`/`piid` mappings. This model is not `deerma.humidifier.jsq5`.
-- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded. See "Evidence Grades" in the root README.md.
+- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded.
 
 ## Exposed Capabilities
 

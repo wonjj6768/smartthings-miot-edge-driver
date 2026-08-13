@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT dehumidifier model `xiaomi.derh.
 - specModel: `xiaomi-13l`
 - URN: `urn:miot-spec-v2:device:dehumidifier:0000A02D:xiaomi-13l:2`
 - Basis: current `hass-xiaomi-miot` lists exact model `xiaomi.derh.13l` in `MIOT_LOCAL_MODELS`; its local path sends `get_properties` and `set_properties` with `siid`/`piid` mappings. The exact MIoT spec confirms the mapped property contract.
-- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded. See "Evidence Grades" in the root README.md.
+- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded.
 
 `xiaomi.derh.lite` / specModel `xiaomi-lite` is a separate model/spec and is not included in this one-model driver.
 

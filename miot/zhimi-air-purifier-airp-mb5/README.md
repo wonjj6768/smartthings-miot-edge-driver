@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for one MIoT model: `zhimi.airp.mb5`.
 - Spec model: `zhimi-mb5`
 - URN: `urn:miot-spec-v2:device:air-purifier:0000A007:zhimi-mb5:1`
 - Basis: python-miio lists `zhimi.airp.mb5` in `AirPurifierMiot` with the VA2 MIoT mapping; python-miio issue #1406 and openHAB document it as Xiaomi Smart Air Purifier 4; MIoT spec v1 confirms the core siid/piid layout.
-- Evidence: confirmed. Source: python-miio+miot-spec+model-doc. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec+model-doc.
 
 ## Exposed Capabilities
 

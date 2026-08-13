@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT heater model `zhimi.heater.mc2a`
 - specModel: `zhimi-mc2a`
 - URN: `urn:miot-spec-v2:device:heater:0000A01A:zhimi-mc2a:1`
 - Basis: python-miio `miio.integrations.zhimi.heater.heater_miot` has an exact `zhimi.heater.mc2a` entry in `_MAPPINGS` on `class HeaterMiot(MiotDevice)`, spelling out siid/piid for power, target temperature, countdown, temperature, child lock, and buzzer. That is a native MIoT `get_properties` / `set_properties` implementation. The exact MIoT spec is the equivalent capability contract for ranges. Rejected classic miIO: there is no `MIIO_TO_MIOT_SPECS` entry and no `get_prop` implementation for this model.
-- Evidence: confirmed. Source: python-miio-miot+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio-miot+miot-spec.
 
 ## Exposed Capabilities
 

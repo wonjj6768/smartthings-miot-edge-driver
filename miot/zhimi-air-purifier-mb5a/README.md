@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi/MIoT zhimi air purifier mb5a model `z
 - specModel: `zhimi-mb5a`
 - URN: `urn:miot-spec-v2:device:air-purifier:0000A007:zhimi-mb5a:1`
 - Basis: python-miio lists this as AirPurifierMiot; MIoT spec uses the same core siid/piid mapping as zhimi-mb5.
-- Evidence: confirmed. Source: python-miio+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec.
 
 ## Exposed Capabilities
 

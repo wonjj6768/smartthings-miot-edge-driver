@@ -10,7 +10,7 @@ SmartThings Edge LAN driver for exact Xiaomi ecosystem model `aden.derh.fight`.
 - URN: `urn:miot-spec-v2:device:dehumidifier:0000A02D:aden-fight:1`
 - Driver path: `miot/aden-dehumidifier-fight`
 - Basis: current `hass-xiaomi-miot` `MIOT_LOCAL_MODELS` contains the exact model and no `MIIO_TO_MIOT_SPECS` converter; its local host/token path therefore uses native `get_properties` and `set_properties` with siid/piid. The exact MIoT spec is the feature contract.
-- Evidence: circumstantial. Source: hass-xiaomi-miot-local+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: circumstantial. Source: hass-xiaomi-miot-local+miot-spec.
 
 ## Exposed Capabilities
 

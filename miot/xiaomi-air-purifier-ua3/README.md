@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT air purifier model `xiaomi.airp.
 - specModel: `xiaomi-ua3`
 - URN: `urn:miot-spec-v2:device:air-purifier:0000A007:xiaomi-ua3:2`
 - Basis: `hass-xiaomi-miot` lists this exact model for local MIoT host/token access using
-- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded. See "Evidence Grades" in the root README.md.
+- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded.
   `get_properties` and `set_properties`; the exact MIoT spec supplies the property contract.
 
 ## Exposed Capabilities

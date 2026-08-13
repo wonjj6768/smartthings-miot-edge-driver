@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi/MIoT zhimi humidifier ca4 model `zhim
 - specModel: `zhimi-ca4`
 - URN: `urn:miot-spec-v2:device:humidifier:0000A00E:zhimi-ca4:2`
 - Basis: python-miio lists this as AirHumidifierMiot _MAPPINGS_CA4; core controls are power, mode, target humidity, dry mode, LED/display, buzzer, and child lock.
-- Evidence: confirmed. Source: python-miio+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec.
 
 ## Exposed Capabilities
 

@@ -7,7 +7,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO philips sread2 model `philips.li
 - Protocol: miIO
 - Model: `philips.light.sread2`
 - Basis: current `python-miio` lists exact model `philips.light.sread2` in `PhilipsEyecare(Device)` and implements classic `get_prop`, `set_power`, `set_brightness`, and `set_scene` methods. The MIoT spec is equivalent capability-contract evidence only.
-- Evidence: confirmed. Source: python-miio-classic+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio-classic+miot-spec.
 
 ## Exposed Capabilities
 

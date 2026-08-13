@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT heater model `zhimi.heater.mc2`.
 - specModel: `zhimi-mc2`
 - URN: `urn:miot-spec-v2:device:heater:0000A01A:zhimi-mc2:1`
 - Basis: the exact MIoT spec, `python-miio` HeaterMiot mapping, and openHAB Xiaomi Mi IO model/channel listing all confirm the same core local MIoT properties for this model.
-- Evidence: confirmed. Source: miot-spec+python-miio+openhab. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: miot-spec+python-miio+openhab.
 
 ## Exposed Capabilities
 

@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT airer model `xiaomi.airer.pro3`.
 - specModel: `xiaomi-pro3`
 - URN: `urn:miot-spec-v2:device:airer:0000A00D:xiaomi-pro3:2:0000D067`
 - Basis: current `hass-xiaomi-miot` lists exact model `xiaomi.airer.pro3` in `MIOT_LOCAL_MODELS` with no `MIIO_TO_MIOT_SPECS` conversion, so its local host/token path sends `get_properties` and `set_properties` with `siid`/`piid`. The exact MIoT spec is the equivalent capability contract.
-- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded. See "Evidence Grades" in the root README.md.
+- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded.
 
 ## Exposed Capabilities
 

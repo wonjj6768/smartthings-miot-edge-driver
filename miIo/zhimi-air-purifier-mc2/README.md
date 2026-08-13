@@ -7,7 +7,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO zhimi air purifier mc2 model `zh
 - Protocol: miIO
 - Model: `zhimi.airpurifier.mc2`
 - Basis: python-miio lists this under classic AirPurifier miIO support; MIoT spec exists but does not determine the LAN helper.
-- Evidence: confirmed. Source: python-miio+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec.
 
 ## Exposed Capabilities
 

@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT fan model `solove.fan.f5new`.
 - specModel: `solove-f5new`
 - URN: `urn:miot-spec-v2:device:fan:0000A005:solove-f5new:1`
 - Basis: current `hass-xiaomi-miot` lists exact model `solove.fan.f5new` in `MIOT_LOCAL_MODELS` with no classic converter, so its local path uses `get_properties` and `set_properties`; the exact MIoT spec supplies this mapping.
-- Evidence: circumstantial. Source: hass-xiaomi-miot-local+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: circumstantial. Source: hass-xiaomi-miot-local+miot-spec.
 
 ## Exposed Capabilities
 

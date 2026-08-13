@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for exact model `leshow.humidifier.jsq2`.
 - specModel: `leshow-jsq2`
 - URN: `urn:miot-spec-v2:device:humidifier:0000A00E:leshow-jsq2:2`
 - Basis: The exact model is present in hass-xiaomi-miot MIOT_LOCAL_MODELS, whose host/token local path uses native get_properties/set_properties; the exact MIoT spec supplies this capability contract.
-- Evidence: circumstantial. Source: hass-xiaomi-miot-local+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: circumstantial. Source: hass-xiaomi-miot-local+miot-spec.
 
 ## Exposed Capabilities
 

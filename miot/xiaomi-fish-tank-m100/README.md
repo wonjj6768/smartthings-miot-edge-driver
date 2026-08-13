@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT fish-tank model `hfjh.fishbowl.m
 - specModel: `hfjh-m100`
 - URN: `urn:miot-spec-v2:device:fish-tank:0000A0A2:hfjh-m100:3`
 - Basis: current `hass-xiaomi-miot` lists exact model `hfjh.fishbowl.m100` in `MIOT_LOCAL_MODELS`; its local path sends `get_properties` and `set_properties` with `siid`/`piid` mappings. The exact MIoT spec confirms the mapped fish-tank contract.
-- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded. See "Evidence Grades" in the root README.md.
+- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded.
 
 ## Exposed Capabilities
 

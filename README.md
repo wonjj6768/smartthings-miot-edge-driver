@@ -27,48 +27,6 @@ These LAN drivers need the Xiaomi device token and local IP address. Use [Xiaomi
 4. Enter `ipAddress`, `token`, and `pollingInterval` in device preferences.
 5. Toggle `createDev` when using the LAN manual creation pattern.
 
-## How A Protocol Is Decided
-
-Xiaomi LAN devices speak one of two protocols, and a driver has to pick the
-right one up front. There is no probing and no cloud fallback here, so a wrong
-guess just leaves the device unresponsive.
-
-| Protocol | RPC methods on the wire | Addressing |
-|----------|-------------------------|------------|
-| classic miIO | `get_prop`, `set_power`, other `set_*` | property names |
-| native MIoT | `get_properties`, `set_properties`, `action` | `siid` / `piid` |
-
-The decision is made per exact model id, never per product name or product
-family. A sibling model with an identical spec shape is not evidence. Every
-decision is recorded in `data/protocol-decisions.csv` and repeated in the
-`Protocol Decision` section of each driver README.
-
-### Evidence Grades
-
-Each driver README states which grade its decision rests on.
-
-- `Evidence: confirmed` - the exact model's LAN command shape is visible
-  somewhere concrete: a real device response, `python-miio` exact-model source
-  (`Device` with `send("get_prop")` / `set_*` for miIO, `MiotDevice` with
-  `_MAPPING` / `siid` / `piid` for MIoT), another project's exact-model
-  implementation with visible command names, or an exact
-  `MIIO_TO_MIOT_SPECS` entry in `hass-xiaomi-miot`.
-- `Evidence: circumstantial` - the only source is exact-model membership in
-  `hass-xiaomi-miot`'s `MIOT_LOCAL_MODELS`. That list marks models worth
-  attempting over the LAN rather than models upstream has verified: entries
-  arrive in bulk, and some are commented out again after users report failures.
-  Upstream can absorb that because it falls back to the Xiaomi cloud API, while
-  this repository has no cloud path.
-
-A MIoT spec, product manual, or app screenshot proves the feature contract
-(enums, ranges, units) and never the LAN protocol.
-
-Both grades ship. Drivers built on circumstantial evidence are worth having
-because the LAN mapping is almost always right for a model upstream marks as
-local, but the protocol proof is indirect, so if a `circumstantial` driver does
-not answer at all the protocol verdict itself is the first thing to question.
-Every driver README states its grade.
-
 ## Drivers
 
 Supported drivers are grouped by protocol and device type.

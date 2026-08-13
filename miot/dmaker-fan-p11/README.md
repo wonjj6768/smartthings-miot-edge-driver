@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for one MIoT model: `dmaker.fan.p11`.
 - Spec model: `dmaker-p11`
 - URN: `urn:miot-spec-v2:device:fan:0000A005:dmaker-p11:1`
 - Basis: python-miio `FanMiot` lists exact model `dmaker.fan.p11`; model docs identify it as Xiaomi Smart Fan V2 / Mi Smart Standing Fan 2 class; MIoT spec v1 confirms the core siid/piid layout.
-- Evidence: confirmed. Source: python-miio+miot-spec+model-doc. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec+model-doc.
 
 ## Exposed Capabilities
 

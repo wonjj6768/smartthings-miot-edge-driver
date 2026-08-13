@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT fan model `xiaomi.fan.p69`.
 - specModel: `xiaomi-p69`
 - URN: `urn:miot-spec-v2:device:fan:0000A005:xiaomi-p69:1:0000D062`
 - Basis: user device report identifies the exact model as Mijia Smart Desktop Air Circulation Fan, and a real LAN MIoT response from that device confirmed the core siid/piid mapping in the exact MIoT spec.
-- Evidence: confirmed. Source: real-device+miot-spec+user-device-report. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: real-device+miot-spec+user-device-report.
 
 ## Exposed Capabilities
 

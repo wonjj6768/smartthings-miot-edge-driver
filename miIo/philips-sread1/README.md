@@ -7,7 +7,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO philips sread1 model `philips.li
 - Protocol: miIO
 - Model: `philips.light.sread1`
 - Basis: MIoT spec exists, but repository implementation uses miIO get_prop/set_* methods.
-- Evidence: confirmed. Source: existing-driver+python-miio. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: existing-driver+python-miio.
 
 ## Exposed Capabilities
 

@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT humidifier model `xiaomi.humidif
 - specModel: `xiaomi-4lite`
 - URN: `urn:miot-spec-v2:device:humidifier:0000A00E:xiaomi-4lite:2:0000D061`
 - Basis: the exact MIoT spec confirms the local MIoT service/property contract. The Xiaomi Home / ha_xiaomi_home MIoT stack is spec-driven for Wi-Fi MIoT devices, and this driver maps only the core LAN MIoT properties from the exact spec.
-- Evidence: confirmed. Source: miot-spec+ha-xiaomi-home-miot-local+xiaomi-home-product-family. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: miot-spec+ha-xiaomi-home-miot-local+xiaomi-home-product-family.
 
 ## Exposed Capabilities
 

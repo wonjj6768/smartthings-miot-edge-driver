@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO fan model `zhimi.fan.v2`.
 - specModel: `zhimi-v2`
 - URN: `urn:miot-spec-v2:device:fan:0000A005:zhimi-v2:1`
 - Basis: python-miio `miio.integrations.zhimi.fan.fan` lists exact model `zhimi.fan.v2` in `class Fan(Device)`, reads its properties with `send("get_prop")`, and writes with `set_power`, `set_speed_level`, `set_natural_level`, `set_angle_enable`, `set_angle`, `set_led`, `set_led_b`, `set_buzzer`, and `set_child_lock`. The `zhimi-v2` MIoT spec is used only as the equivalent capability contract for the angle range and battery reporting. Rejected native MIoT: no `MiotDevice` mapping and no `MIOT_LOCAL_MODELS` entry for this model.
-- Evidence: confirmed. Source: python-miio-classic+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio-classic+miot-spec.
 
 ## Exposed Capabilities
 

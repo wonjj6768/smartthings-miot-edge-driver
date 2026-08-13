@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT fan model `dmaker.fan.p8`.
 - specModel: `dmaker-p8`
 - URN: `urn:miot-spec-v2:device:fan:0000A005:dmaker-p8:2`
 - Basis: `hass-xiaomi-miot` commit `0e8644f` lists exact model `dmaker.fan.p8` for local MIoT, while `homebridge-xiaomi-fan` commit `1725e5b` classifies it as MIoT and implements local `siid` / `piid` access.
-- Evidence: confirmed. Source: hass-xiaomi-miot-local+homebridge-miot-local+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: hass-xiaomi-miot-local+homebridge-miot-local+miot-spec.
 
 ## Exposed Capabilities
 

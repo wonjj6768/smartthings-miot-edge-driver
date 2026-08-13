@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT humidifier model `dmaker.humidif
 - specModel: `dmaker-p2`
 - URN: `urn:miot-spec-v2:device:humidifier:0000A00E:dmaker-p2:2`
 - Basis: hass-xiaomi-miot local device support and issue logs identify exact model `dmaker.humidifier.p2` with local/LAN MIoT updater behavior; exact MIoT spec v2 supplies the feature contract below.
-- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded. See "Evidence Grades" in the root README.md.
+- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded.
 
 ## Exposed Capabilities
 

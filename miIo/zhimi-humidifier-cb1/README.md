@@ -7,7 +7,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO zhimi humidifier cb1 model `zhim
 - Protocol: miIO
 - Model: `zhimi.humidifier.cb1`
 - Basis: python-miio AirHumidifier lists one-property get_prop polling plus power, mode, humidity, temperature, target humidity, dry mode, depth-derived water level, LED brightness, buzzer, and child lock.
-- Evidence: confirmed. Source: python-miio. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio.
 
 ## Exposed Capabilities
 

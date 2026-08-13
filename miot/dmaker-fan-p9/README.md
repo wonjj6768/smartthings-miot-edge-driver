@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for one MIoT model: `dmaker.fan.p9`.
 - Spec model: `dmaker-p9`
 - URN: `urn:miot-spec-v2:device:fan:0000A005:dmaker-p9:2`
 - Basis: python-miio lists `dmaker.fan.p9` in `FanMiot` with MIoT siid/piid mapping; openHAB documents it as Mi Smart Tower Fan / Xiaomi Mijia Smart Tower Fan; MIoT spec v2 confirms the core siid/piid layout.
-- Evidence: confirmed. Source: python-miio+miot-spec+openhab-model-doc. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec+openhab-model-doc.
 
 ## Exposed Capabilities
 

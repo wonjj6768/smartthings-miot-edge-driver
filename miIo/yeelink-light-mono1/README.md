@@ -7,7 +7,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO light model `yeelink.light.mono1
 - Protocol: miIO
 - Model: `yeelink.light.mono1`
 - Basis: `python-miio` lists `yeelink.light.mono1` in the Yeelight miIO integration and implements `get_prop`, `set_power`, and `set_bright`; the MIoT spec records the equivalent mono light contract for power and brightness.
-- Evidence: confirmed. Source: python-miio+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec.
 
 ## Exposed Capabilities
 

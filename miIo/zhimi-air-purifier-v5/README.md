@@ -7,7 +7,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO air purifier model `zhimi.airpur
 - Protocol: miIO
 - Model: `zhimi.airpurifier.v5`
 - Basis: `python-miio` lists `zhimi.airpurifier.v5` in the classic Zhimi air purifier miIO integration and defines `favorite_level` with `set_level_favorite` range `0..17`.
-- Evidence: confirmed. Source: python-miio+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec.
 
 ## Exposed Capabilities
 

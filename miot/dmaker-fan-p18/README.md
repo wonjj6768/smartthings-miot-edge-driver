@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for one MIoT model: `dmaker.fan.p18`.
 - Spec model: `dmaker-p18`
 - URN: `urn:miot-spec-v2:device:fan:0000A005:dmaker-p18:1`
 - Basis: python-miio `FanMiot` lists `dmaker.fan.p18` and maps it to the `dmaker.fan.p10` MIoT property layout.
-- Evidence: confirmed. Source: python-miio+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec.
 
 ## Exposed Capabilities
 

@@ -7,7 +7,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO zhimi humidifier v1 model `zhimi
 - Protocol: miIO
 - Model: `zhimi.humidifier.v1`
 - Basis: current `python-miio` lists exact model `zhimi.humidifier.v1` in the classic `AirHumidifier(Device)` implementation and uses `get_prop` plus `set_*` methods.
-- Evidence: confirmed. Source: python-miio-classic. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio-classic.
 
 ## Exposed Capabilities
 

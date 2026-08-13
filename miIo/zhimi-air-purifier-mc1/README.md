@@ -7,7 +7,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO zhimi air purifier mc1 model `zh
 - Protocol: miIO
 - Model: `zhimi.airpurifier.mc1`
 - Basis: current `python-miio` lists exact model `zhimi.airpurifier.mc1` in the classic `AirPurifier(Device)` implementation and uses `get_prop` plus `set_*` methods. The MIoT spec is equivalent capability-contract evidence only.
-- Evidence: confirmed. Source: python-miio-classic+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio-classic+miot-spec.
 
 ## Exposed Capabilities
 

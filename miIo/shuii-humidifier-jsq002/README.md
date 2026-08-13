@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for exact model `shuii.humidifier.jsq002`.
 - specModel: `shuii-jsq002`
 - URN: `urn:miot-spec-v2:device:humidifier:0000A00E:shuii-jsq002:1`
 - Basis: The exact hass-xiaomi-miot MIIO_TO_MIOT_SPECS entry defines get_props and the explicit classic setters used here; the MIoT spec is only the equivalent capability contract.
-- Evidence: confirmed. Source: hass-xiaomi-miot-miio2miot+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: hass-xiaomi-miot-miio2miot+miot-spec.
 
 ## Exposed Capabilities
 

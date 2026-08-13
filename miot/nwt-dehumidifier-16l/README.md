@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT dehumidifier model `nwt.fan.16l`
 - specModel: `nwt-16l`
 - URN: `urn:miot-spec-v2:device:dehumidifier:0000A02D:nwt-16l:2`
 - Basis: current `hass-xiaomi-miot` lists exact model `nwt.fan.16l` in `MIOT_LOCAL_MODELS` and has no `MIIO_TO_MIOT_SPECS` conversion for it, so its local host/token path sends `get_properties` and `set_properties` with `siid`/`piid`. The exact MIoT spec is the equivalent capability contract; the model id says `fan` but the exact device type is a dehumidifier.
-- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded. See "Evidence Grades" in the root README.md.
+- Evidence: circumstantial. The only source is exact-model membership in the hass-xiaomi-miot MIOT_LOCAL_MODELS list; this model is not in python-miio and no real device response is recorded.
 
 ## Exposed Capabilities
 

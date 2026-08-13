@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT fan model `zhimi.fan.za5`.
 - specModel: `zhimi-za5`
 - URN: `urn:miot-spec-v2:device:fan:0000A005:zhimi-za5:4`
 - Basis: python-miio `FanZA5` maps exact model `zhimi.fan.za5` with MIoT siid/piid properties; model docs identify it as Smartmi Standing Fan 3; exact MIoT spec confirms the mapped properties below.
-- Evidence: confirmed. Source: python-miio+miot-spec+model-doc. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec+model-doc.
 
 ## Exposed Capabilities
 

@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi/Deerma MIoT humidifier model `deerma.
 - specModel: `deerma-jsq5`
 - URN: `urn:miot-spec-v2:device:humidifier:0000A00E:deerma-jsq5:1`
 - Basis: python-miio `AirHumidifierJsqs` supports this model as a MIoT device; the exact MIoT spec confirms the mapped properties below.
-- Evidence: confirmed. Source: python-miio+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec.
 
 ## Exposed Capabilities
 

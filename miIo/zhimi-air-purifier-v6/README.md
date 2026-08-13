@@ -8,7 +8,7 @@ SmartThings Edge LAN driver for the Xiaomi Mi Air Purifier Pro product code `AC-
 - Model: `zhimi.airpurifier.v6`
 - Product code: `AC-M3-CA`
 - Basis: `python-miio` lists `zhimi.airpurifier.v6` in the classic Zhimi air purifier miIO integration and documents `favorite_level` with `set_level_favorite` range `0..17`.
-- Evidence: confirmed. Source: python-miio+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: confirmed. Source: python-miio+miot-spec.
 
 ## Exposed Capabilities
 

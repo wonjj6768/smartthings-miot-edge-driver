@@ -9,7 +9,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT heater model `zhimi.heater.ma5`.
 - specModel: `zhimi-ma5`
 - URN: `urn:miot-spec-v2:device:heater:0000A01A:zhimi-ma5:1`
 - Basis: current `hass-xiaomi-miot` lists exact model `zhimi.heater.ma5` in `MIOT_LOCAL_MODELS` with no classic converter, so its local path uses `get_properties` and `set_properties`; the exact MIoT spec supplies this mapping.
-- Evidence: circumstantial. Source: hass-xiaomi-miot-local+miot-spec. See "Evidence Grades" in the root README.md.
+- Evidence: circumstantial. Source: hass-xiaomi-miot-local+miot-spec.
 
 ## Exposed Capabilities
 
