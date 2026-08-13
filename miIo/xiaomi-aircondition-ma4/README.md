@@ -4,7 +4,7 @@ SmartThings Edge LAN driver for the Xiaomi classic miIO air conditioner model `x
 
 ## Protocol Decision
 
-- Protocol: classic miIO
+- Protocol: miIO
 - Model: `xiaomi.aircondition.ma4`
 - specModel: `xiaomi-ma4`
 - URN: `urn:miot-spec-v2:device:air-conditioner:0000A004:xiaomi-ma4:2`
