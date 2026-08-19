@@ -16,6 +16,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO zhimi air purifier sa1 model `zh
 - `temperatureMeasurement`
 - `relativeHumidityMeasurement`
 - `fineDustSensor`
+- `fanSpeedPercent`
 - `filterState`
 - `concertmirror08464.zhimiAirSa1Buzzer`
 - `concertmirror08464.zhimiAirSa1ChildLock`
@@ -31,6 +32,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO zhimi air purifier sa1 model `zh
 | temperature Measurement | R | Model-specific property/method constants in `src/init.lua` | `temperatureMeasurement` |
 | relative Humidity Measurement | R | Model-specific property/method constants in `src/init.lua` | `relativeHumidityMeasurement` |
 | fine Dust Sensor | R | Model-specific property/method constants in `src/init.lua` | `fineDustSensor` |
+| Favorite speed | RW | `favorite_level`, `set_level_favorite`; `0..17` mapped to `0..100 %` | `fanSpeedPercent` |
 | filter State | R | Model-specific property/method constants in `src/init.lua` | `filterState` |
 | zhimi Air Sa1 Buzzer | RW | Model-specific property/method constants in `src/init.lua` | `concertmirror08464.zhimiAirSa1Buzzer` |
 | zhimi Air Sa1 Child Lock | RW | Model-specific property/method constants in `src/init.lua` | `concertmirror08464.zhimiAirSa1ChildLock` |

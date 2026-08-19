@@ -12,6 +12,8 @@ components:
     version: 1
   - id: fineDustSensor
     version: 1
+  - id: fanSpeedPercent
+    version: 1
   - id: filterState
     version: 1
   - id: concertmirror08464.zhimiAirMa1Buzzer
@@ -75,6 +77,9 @@ deviceConfig:
       capability: fineDustSensor
       version: 1
     - component: main
+      capability: fanSpeedPercent
+      version: 1
+    - component: main
       capability: temperatureMeasurement
       version: 1
     - component: main
@@ -107,6 +112,9 @@ deviceConfig:
         capability: fineDustSensor
         version: 1
       - component: main
+        capability: fanSpeedPercent
+        version: 1
+      - component: main
         capability: temperatureMeasurement
         version: 1
       - component: main
@@ -121,6 +129,9 @@ deviceConfig:
         version: 1
       - component: main
         capability: concertmirror08464.zhimiAirMa1AirPurifierMode
+        version: 1
+      - component: main
+        capability: fanSpeedPercent
         version: 1
 
 preferences:
