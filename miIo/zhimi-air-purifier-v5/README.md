@@ -16,7 +16,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO air purifier model `zhimi.airpur
 - `temperatureMeasurement`
 - `relativeHumidityMeasurement`
 - `fineDustSensor`
-- `fanSpeedPercent`
+- `concertmirror08464.zhimiAirV5FavoriteFanLevel`
 - `filterState`
 - `concertmirror08464.zhimiAirV5Buzzer`, `concertmirror08464.zhimiAirV5ChildLock`, `concertmirror08464.zhimiAirV5LedBrightness`
 - `refresh`
@@ -27,7 +27,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO air purifier model `zhimi.airpur
 |---|---:|---|---|
 | Power | RW | `power`, `set_power` with `on` / `off` | `switch` |
 | Mode | RW | `mode`, `set_mode`; `auto`, `silent`, `favorite` | `zhimiAirPurifierClassicMode.airPurifierMode` |
-| Favorite speed | RW | `favorite_level`, `set_level_favorite`; `0..17` mapped to `0..100 %` | `fanSpeedPercent` |
+| Favorite speed | RW | `favorite_level`, `set_level_favorite`; `0..17` raw level | `concertmirror08464.zhimiAirV5FavoriteFanLevel` |
 | PM2.5 | R | `aqi` | `fineDustSensor` |
 | Humidity | R | `humidity`; % | `relativeHumidityMeasurement` |
 | Temperature | R | `temp_dec`; celsius x10 | `temperatureMeasurement` |

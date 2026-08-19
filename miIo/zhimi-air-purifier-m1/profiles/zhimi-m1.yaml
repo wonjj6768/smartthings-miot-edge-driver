@@ -12,7 +12,7 @@ components:
     version: 1
   - id: fineDustSensor
     version: 1
-  - id: fanSpeedPercent
+  - id: concertmirror08464.zhimiAirM1FavoriteFanLevel
     version: 1
   - id: filterState
     version: 1
@@ -77,7 +77,7 @@ deviceConfig:
       capability: fineDustSensor
       version: 1
     - component: main
-      capability: fanSpeedPercent
+      capability: concertmirror08464.zhimiAirM1FavoriteFanLevel
       version: 1
     - component: main
       capability: temperatureMeasurement
@@ -112,7 +112,7 @@ deviceConfig:
         capability: fineDustSensor
         version: 1
       - component: main
-        capability: fanSpeedPercent
+        capability: concertmirror08464.zhimiAirM1FavoriteFanLevel
         version: 1
       - component: main
         capability: temperatureMeasurement
@@ -131,7 +131,7 @@ deviceConfig:
         capability: concertmirror08464.zhimiAirM1AirPurifierMode
         version: 1
       - component: main
-        capability: fanSpeedPercent
+        capability: concertmirror08464.zhimiAirM1FavoriteFanLevel
         version: 1
 
 preferences:
