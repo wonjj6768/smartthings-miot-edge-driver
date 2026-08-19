@@ -9,20 +9,23 @@ local airModeAirPurifierMode = capabilities["concertmirror08464.zhimiAirMc1AirPu
 local deviceControlsBuzzer = capabilities["concertmirror08464.zhimiAirMc1Buzzer"]
 local deviceControlsChildLock = capabilities["concertmirror08464.zhimiAirMc1ChildLock"]
 local deviceControlsLedBrightness = capabilities["concertmirror08464.zhimiAirMc1LedBrightness"]
+local fanSpeedPercent = capabilities["fanSpeedPercent"]
 
 local PROFILE_NAME = "zhimi-mc1"
 local POLLING_TIMER = "polling_timer"
 local DEFAULT_POLLING_INTERVAL = 60
 
 -- miIO model: zhimi.airpurifier.mc1
--- Core read properties: power, mode, aqi, humidity, temp_dec, filter1_life, led, led_b, buzzer, child_lock
--- Core write methods: set_power, set_mode, set_led, set_led_b, set_buzzer, set_child_lock
+-- Core read properties: power, mode, aqi, humidity, temp_dec, favorite_level,
+-- filter1_life, led, led_b, buzzer, child_lock
+-- Core write methods: set_power, set_mode, set_level_favorite, set_led, set_led_b, set_buzzer, set_child_lock
 local STATUS_PROPERTIES = {
     "power",
     "mode",
     "aqi",
     "humidity",
     "temp_dec",
+    "favorite_level",
     "filter1_life",
     "led",
     "led_b",
@@ -41,6 +44,9 @@ local ST_TO_MODE = {
     sleep = "silent",
     favorite = "favorite"
 }
+local SUPPORTED_MODES = {"auto", "sleep", "favorite"}
+local FAVORITE_LEVEL_MIN = 0
+local FAVORITE_LEVEL_MAX = 17
 
 local LED_BRIGHTNESS_TO_ST = {
     [0] = "bright",
@@ -60,6 +66,20 @@ local function miio_on_off_to_st(value)
         return "off"
     end
     return nil
+end
+
+local function clamp(value, minimum, maximum)
+    return math.max(minimum, math.min(maximum, value))
+end
+
+local function favorite_level_to_percent(level)
+    local normalized = clamp(level, FAVORITE_LEVEL_MIN, FAVORITE_LEVEL_MAX) - FAVORITE_LEVEL_MIN
+    return math.floor((normalized * 100 / (FAVORITE_LEVEL_MAX - FAVORITE_LEVEL_MIN)) + 0.5)
+end
+
+local function percent_to_favorite_level(percent)
+    local normalized = clamp(percent, 0, 100)
+    return math.floor((normalized * (FAVORITE_LEVEL_MAX - FAVORITE_LEVEL_MIN) / 100) + 0.5) + FAVORITE_LEVEL_MIN
 end
 
 local function get_device_config(device)
@@ -117,6 +137,11 @@ local function poll_device_status(device)
 
     if values.temp_dec and type(values.temp_dec) == "number" then
         device:emit_event(capabilities.temperatureMeasurement.temperature({value = values.temp_dec / 10, unit = "C"}))
+    end
+
+    if values.favorite_level and type(values.favorite_level) == "number" then
+        local percent = favorite_level_to_percent(values.favorite_level)
+        device:emit_event(fanSpeedPercent.percent({value = percent, unit = "%"}))
     end
 
     if values.filter1_life and type(values.filter1_life) == "number" then
@@ -197,6 +222,25 @@ local function set_air_purifier_mode_handler(_, device, command)
     end
 end
 
+local function set_fan_speed_percent_handler(_, device, command)
+    local ip, token = get_device_config(device)
+    if not ip then return end
+
+    local percent = clamp(command.args.percent, 0, 100)
+    local favorite_level = percent_to_favorite_level(percent)
+
+    miio.set_prop(device, ip, token, "set_power", {"on"})
+    miio.set_prop(device, ip, token, "set_mode", {"favorite"})
+    if miio.set_prop(device, ip, token, "set_level_favorite", {favorite_level}) then
+        device:emit_event(capabilities.switch.switch.on())
+        device:emit_event(airModeAirPurifierMode.airPurifierMode({value = "favorite"}))
+        device:emit_event(fanSpeedPercent.percent({value = percent, unit = "%"}))
+        device.thread:call_with_delay(1, function()
+            pcall(poll_device_status, device)
+        end)
+    end
+end
+
 local function set_led_brightness_handler(_, device, command)
     local ip, token = get_device_config(device)
     if not ip then return end
@@ -243,7 +287,7 @@ local function refresh_handler(_, device, _)
 end
 
 local function ensure_profile(device)
-    if not device:supports_capability_by_id(airModeAirPurifierMode.ID, "main") then
+    if not device:supports_capability_by_id(fanSpeedPercent.ID, "main") then
         device:try_update_metadata({profile = PROFILE_NAME})
     end
 end
@@ -252,9 +296,11 @@ local function device_added(_, device)
     ensure_profile(device)
     device:emit_event(capabilities.switch.switch.off())
     device:emit_event(airModeAirPurifierMode.airPurifierMode({value = "auto"}))
+    device:emit_event(airModeAirPurifierMode.supportedAirPurifierModes({value = SUPPORTED_MODES}))
     device:emit_event(capabilities.temperatureMeasurement.temperature({value = 0, unit = "C"}))
     device:emit_event(capabilities.relativeHumidityMeasurement.humidity(0))
     device:emit_event(capabilities.fineDustSensor.fineDustLevel(0))
+    device:emit_event(fanSpeedPercent.percent({value = 0, unit = "%"}))
     device:emit_event(capabilities.filterState.filterLifeRemaining({value = 100, unit = "%"}))
     device:emit_event(deviceControlsLedBrightness.ledBrightness({value = "bright"}))
     device:emit_event(deviceControlsBuzzer.buzzer({value = "off"}))
@@ -314,6 +360,9 @@ local driver = Driver("miio-air-purifier-mc1", {
         },
         [airModeAirPurifierMode.ID] = {
             [airModeAirPurifierMode.commands.setAirPurifierMode.NAME] = set_air_purifier_mode_handler
+        },
+        [fanSpeedPercent.ID] = {
+            [fanSpeedPercent.commands.setPercent.NAME] = set_fan_speed_percent_handler
         },
         [deviceControlsLedBrightness.ID] = {
             [deviceControlsLedBrightness.commands.setLedBrightness.NAME] = set_led_brightness_handler
