@@ -1,0 +1,191 @@
+name: xiaomi-fan-p90
+components:
+- id: main
+  capabilities:
+  - id: switch
+    version: 1
+  - id: fanSpeedPercent
+    version: 1
+  - id: fanOscillationMode
+    version: 1
+  - id: concertmirror08464.xiaomiFanP90FanMode
+    version: 1
+  - id: concertmirror08464.xiaomiFanP90IndicatorLight
+    version: 1
+  - id: concertmirror08464.xiaomiFanP90Buzzer
+    version: 1
+  - id: concertmirror08464.xiaomiFanP90ChildLock
+    version: 1
+  - id: concertmirror08464.xiaomiFanP90LeftAngleV2
+    version: 1
+  - id: concertmirror08464.xiaomiFanP90RightAngleV2
+    version: 1
+  - id: concertmirror08464.xiaomiFanP90UpAngleV2
+    version: 1
+  - id: concertmirror08464.xiaomiFanP90DownAngleV2
+    version: 1
+  - id: refresh
+    version: 1
+  categories:
+  - name: Fan
+deviceConfig:
+  dashboard:
+    states:
+      - component: main
+        capability: switch
+        version: 1
+        group: main
+        values:
+          - label: "{{switch.value}}"
+        composite: true
+      - component: main
+        capability: fanSpeedPercent
+        version: 1
+        group: main
+        values:
+          - label: " {{percent.value}}{{percent.unit}}"
+        composite: true
+    actions:
+      - component: main
+        capability: switch
+        version: 1
+    basicPlus: []
+  detailView:
+    - component: main
+      capability: switch
+      version: 1
+    - component: main
+      capability: fanSpeedPercent
+      version: 1
+    - component: main
+      capability: fanOscillationMode
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiFanP90FanMode
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiFanP90IndicatorLight
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiFanP90Buzzer
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiFanP90ChildLock
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiFanP90LeftAngleV2
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiFanP90RightAngleV2
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiFanP90UpAngleV2
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiFanP90DownAngleV2
+      version: 1
+    - component: main
+      capability: refresh
+      version: 1
+  automation:
+    conditions:
+      - component: main
+        capability: switch
+        version: 1
+      - component: main
+        capability: fanSpeedPercent
+        version: 1
+      - component: main
+        capability: fanOscillationMode
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiFanP90FanMode
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiFanP90IndicatorLight
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiFanP90Buzzer
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiFanP90ChildLock
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiFanP90LeftAngleV2
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiFanP90RightAngleV2
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiFanP90UpAngleV2
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiFanP90DownAngleV2
+        version: 1
+    actions:
+      - component: main
+        capability: switch
+        version: 1
+      - component: main
+        capability: fanSpeedPercent
+        version: 1
+      - component: main
+        capability: fanOscillationMode
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiFanP90FanMode
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiFanP90IndicatorLight
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiFanP90Buzzer
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiFanP90ChildLock
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiFanP90LeftAngleV2
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiFanP90RightAngleV2
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiFanP90UpAngleV2
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiFanP90DownAngleV2
+        version: 1
+preferences:
+- name: ipAddress
+  title: IP Address
+  description: Mijia Smart DC Inverter Circulation Fan Pro의 IP 주소
+  required: true
+  preferenceType: string
+  definition:
+    stringType: text
+    default: ""
+- name: token
+  title: Token
+  description: Mijia Smart DC Inverter Circulation Fan Pro의 32자리 토큰
+  required: true
+  preferenceType: string
+  definition:
+    stringType: text
+    default: ""
+- name: pollingInterval
+  title: Polling Interval
+  description: 상태 갱신 주기(초)
+  required: true
+  preferenceType: integer
+  definition:
+    minimum: 30
+    maximum: 300
+    default: 60
+- name: createDev
+  title: Create Device
+  description: 토글하면 새 장치를 생성합니다.
+  required: true
+  preferenceType: boolean
+  definition:
+    default: false

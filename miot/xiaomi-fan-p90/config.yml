@@ -1,0 +1,5 @@
+name: 'Xiaomi Fan P90'
+packageKey: 'xiaomi-fan-p90'
+permissions:
+  lan: {}
+  discovery: {}
