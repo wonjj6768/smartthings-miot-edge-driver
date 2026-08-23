@@ -33,7 +33,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO zhimi air purifier m2 model `zhi
 | Humidity | R | `humidity`, % | `relativeHumidityMeasurement` |
 | PM2.5 | R | `aqi`, µg/m³ | `fineDustSensor` |
 | Favorite speed | RW | `favorite_level`, `set_level_favorite`; `0..17` raw level | `concertmirror08464.zhimiAirM2FavoriteFanLevel` |
-| Filter life | R | `filter1_life`, % | `filterState` |
+| Filter life | R / Action | `filter1_life`, %; `reset_filter1` with no arguments | `filterState` |
 | Buzzer | RW | `buzzer`, `set_buzzer` | `concertmirror08464.zhimiAirM2Buzzer` |
 | Child lock | RW | `child_lock`, `set_child_lock` | `concertmirror08464.zhimiAirM2ChildLock` |
 | LED brightness | RW | `led` / `led_b`, `set_led` / `set_led_b` | `concertmirror08464.zhimiAirM2LedBrightness` |
