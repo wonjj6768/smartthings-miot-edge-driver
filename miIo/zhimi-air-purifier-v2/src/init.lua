@@ -81,6 +81,16 @@ local function clamp(value, minimum, maximum)
     return math.max(minimum, math.min(maximum, value))
 end
 
+local function get_device_config(device)
+    local ip = device.preferences.ipAddress
+    local token = device.preferences.token
+
+    if ip and ip ~= "" and token and #token == 32 and token:match("^[0-9a-fA-F]+$") then
+        return ip, token
+    end
+    return nil, nil
+end
+
 local function get_properties(device, ip, token)
     local response = miio.cmd(device, ip, token, "get_prop", STATUS_PROPERTIES)
     local values = {}
@@ -104,6 +114,7 @@ local function poll_device_status(device)
 
     local ok, values = pcall(get_properties, device, ip, token)
     if not ok then
+        device.log.error("V2 get_prop failed: " .. tostring(values))
         return
     end
 
@@ -139,6 +150,13 @@ local function poll_device_status(device)
     emit_device_controls(device, values)
 end
 
+local function run_poll(device, source)
+    local ok, err = pcall(poll_device_status, device)
+    if not ok then
+        device.log.error(string.format("V2 poll failed (%s): %s", source, tostring(err)))
+    end
+end
+
 function emit_device_controls(device, values)
     local led_brightness = LED_BRIGHTNESS_TO_ST[values.led_b]
     if values.led == "off" then
@@ -165,7 +183,7 @@ end
 local function start_polling_timer(device)
     local interval = device.preferences.pollingInterval or DEFAULT_POLLING_INTERVAL
     local timer = device.thread:call_on_schedule(interval, function()
-        pcall(poll_device_status, device)
+        run_poll(device, "timer")
     end, "Polling")
     device:set_field(POLLING_TIMER, timer)
 end
@@ -183,7 +201,7 @@ local function switch_on_handler(_, device, _)
     if ip and miio.set_prop(device, ip, token, "set_power", {"on"}) then
         device:emit_event(capabilities.switch.switch.on())
         device.thread:call_with_delay(1, function()
-            pcall(poll_device_status, device)
+            run_poll(device, "switch-on")
         end)
     end
 end
@@ -223,7 +241,7 @@ local function set_favorite_fan_level_handler(_, device, command)
         device:emit_event(airModeAirPurifierMode.airPurifierMode({value = "favorite"}))
         device:emit_event(favoriteFanLevel.favoriteFanLevel(level))
         device.thread:call_with_delay(1, function()
-            pcall(poll_device_status, device)
+            run_poll(device, "favorite-level")
         end)
     end
 end
@@ -269,7 +287,7 @@ local function set_child_lock_handler(_, device, command)
 end
 
 local function refresh_handler(_, device, _)
-    pcall(poll_device_status, device)
+    run_poll(device, "refresh")
 end
 
 local function ensure_profile(device)
@@ -300,7 +318,7 @@ local function device_init(_, device)
     local ip = get_device_config(device)
     if ip then
         start_polling_timer(device)
-        pcall(poll_device_status, device)
+        run_poll(device, "init")
     end
 end
 
@@ -326,7 +344,7 @@ local function device_info_changed(driver, device, _, args)
         local ip = get_device_config(device)
         if ip then
             start_polling_timer(device)
-            pcall(poll_device_status, device)
+            run_poll(device, "preferences")
         end
     end
 end
