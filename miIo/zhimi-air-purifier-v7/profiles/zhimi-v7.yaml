@@ -20,7 +20,7 @@ components:
     version: 1
   - id: concertmirror08464.zhimiAirV7ChildLock
     version: 1
-  - id: concertmirror08464.zhimiAirV7LedBrightness
+  - id: concertmirror08464.zhimiAirV7IndicatorLight
     version: 1
   - id: refresh
     version: 1
@@ -50,7 +50,7 @@ deviceConfig:
         capability: concertmirror08464.zhimiAirV7ChildLock
         version: 1
       - component: main
-        capability: concertmirror08464.zhimiAirV7LedBrightness
+        capability: concertmirror08464.zhimiAirV7IndicatorLight
         version: 1
     actions:
       - component: main
@@ -60,7 +60,7 @@ deviceConfig:
         capability: concertmirror08464.zhimiAirV7ChildLock
         version: 1
       - component: main
-        capability: concertmirror08464.zhimiAirV7LedBrightness
+        capability: concertmirror08464.zhimiAirV7IndicatorLight
         version: 1
       - component: main
         capability: switch
@@ -95,7 +95,7 @@ deviceConfig:
       capability: concertmirror08464.zhimiAirV7ChildLock
       version: 1
     - component: main
-      capability: concertmirror08464.zhimiAirV7LedBrightness
+      capability: concertmirror08464.zhimiAirV7IndicatorLight
       version: 1
     - component: main
       capability: refresh

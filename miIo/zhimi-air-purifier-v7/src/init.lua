@@ -9,7 +9,7 @@ local airModeAirPurifierMode = capabilities["concertmirror08464.zhimiAirV7AirPur
 local deviceControlsBuzzer = capabilities["concertmirror08464.zhimiAirV7Buzzer"]
 local deviceControlsChildLock = capabilities["concertmirror08464.zhimiAirV7ChildLock"]
 local favoriteFanLevel = capabilities["concertmirror08464.zhimiAirV7FavoriteFanLevel"]
-local deviceControlsLedBrightness = capabilities["concertmirror08464.zhimiAirV7LedBrightness"]
+local indicatorLight = capabilities["concertmirror08464.zhimiAirV7IndicatorLight"]
 
 local PROFILE_NAME = "zhimi-v7"
 local POLLING_TIMER = "polling_timer"
@@ -17,9 +17,9 @@ local DEFAULT_POLLING_INTERVAL = 60
 
 -- miIO model: zhimi.airpurifier.v7
 -- Core read properties: power, mode, aqi, humidity, temp_dec, favorite_level,
--- filter1_life, led, led_b, buzzer, child_lock
--- Core write methods: set_power, set_mode, set_level_favorite, reset_filter1,
--- set_led, set_led_b, set_buzzer, set_child_lock
+-- filter1_life, led, volume, child_lock
+-- Core write methods: set_power, set_mode, set_level_favorite, set_led,
+-- set_volume, set_child_lock
 local STATUS_PROPERTIES = {
     "power",
     "mode",
@@ -29,8 +29,7 @@ local STATUS_PROPERTIES = {
     "favorite_level",
     "filter1_life",
     "led",
-    "led_b",
-    "buzzer",
+    "volume",
     "child_lock"
 }
 
@@ -58,17 +57,6 @@ local FAVORITE_LEVEL_MIN = 0
 local FAVORITE_LEVEL_MAX = 17
 local SUPPORTED_MODES = {"auto", "sleep", "favorite"}
 
-local LED_BRIGHTNESS_TO_ST = {
-    [0] = "bright",
-    [1] = "dim",
-    [2] = "off"
-}
-local ST_TO_LED_BRIGHTNESS = {
-    bright = 0,
-    dim = 1,
-    off = 2
-}
-
 local function miio_on_off_to_st(value)
     if value == "on" or value == true then
         return "on"
@@ -94,12 +82,16 @@ end
 
 local function get_properties(device, ip, token)
     local response = miio.cmd(device, ip, token, "get_prop", STATUS_PROPERTIES)
-    local values = {}
+    if not response or type(response.result) ~= "table" then
+        local response_error = response and response.error
+        local code = response_error and response_error.code or "unknown"
+        local message = response_error and response_error.message or "missing result"
+        error(string.format("get_prop response error code=%s message=%s", tostring(code), tostring(message)))
+    end
 
-    if response and response.result then
-        for index, property in ipairs(STATUS_PROPERTIES) do
-            values[property] = response.result[index]
-        end
+    local values = {}
+    for index, property in ipairs(STATUS_PROPERTIES) do
+        values[property] = response.result[index]
     end
 
     return values
@@ -159,20 +151,14 @@ local function run_poll(device, source)
 end
 
 function emit_device_controls(device, values)
-    local led_brightness = LED_BRIGHTNESS_TO_ST[values.led_b]
-    if values.led == "off" then
-        led_brightness = "off"
-    elseif values.led == "on" and not led_brightness then
-        led_brightness = "bright"
+    local indicator = miio_on_off_to_st(values.led)
+    if indicator then
+        device:emit_event(indicatorLight.indicatorLight({value = indicator}))
     end
 
-    if led_brightness then
-        device:emit_event(deviceControlsLedBrightness.ledBrightness({value = led_brightness}))
-    end
-
-    local buzzer = miio_on_off_to_st(values.buzzer)
-    if buzzer then
-        device:emit_event(deviceControlsBuzzer.buzzer({value = buzzer}))
+    if type(values.volume) == "number" then
+        local sound = values.volume > 0 and "on" or "off"
+        device:emit_event(deviceControlsBuzzer.buzzer({value = sound}))
     end
 
     local child_lock = miio_on_off_to_st(values.child_lock)
@@ -182,6 +168,11 @@ function emit_device_controls(device, values)
 end
 
 local function start_polling_timer(device)
+    local existing_timer = device:get_field(POLLING_TIMER)
+    if existing_timer then
+        device.thread:cancel_timer(existing_timer)
+    end
+
     local interval = device.preferences.pollingInterval or DEFAULT_POLLING_INTERVAL
     local timer = device.thread:call_on_schedule(interval, function()
         run_poll(device, "timer")
@@ -246,24 +237,15 @@ local function set_favorite_fan_level_handler(_, device, command)
         end)
     end
 end
-local function set_led_brightness_handler(_, device, command)
+local function set_indicator_light_handler(_, device, command)
     local ip, token = get_device_config(device)
     if not ip then return end
 
-    local brightness = command.args.brightness
-    local led_b = ST_TO_LED_BRIGHTNESS[brightness]
-    if led_b == nil then return end
+    local value = command.args.indicatorLight
+    if value ~= "on" and value ~= "off" then return end
 
-    local led_ok
-    if brightness == "off" then
-       led_ok = miio.set_prop(device, ip, token, "set_led", {"off"})
-    else
-       led_ok = miio.set_prop(device, ip, token, "set_led", {"on"})
-    end
-
-    local brightness_ok = miio.set_prop(device, ip, token, "set_led_b", {led_b})
-    if led_ok and brightness_ok then
-        device:emit_event(deviceControlsLedBrightness.ledBrightness({value = brightness}))
+    if miio.set_prop(device, ip, token, "set_led", {value}) then
+        device:emit_event(indicatorLight.indicatorLight({value = value}))
     end
 end
 
@@ -272,7 +254,8 @@ local function set_buzzer_handler(_, device, command)
     if not ip then return end
 
     local buzzer = command.args.buzzer
-    if miio.set_prop(device, ip, token, "set_buzzer", {buzzer}) then
+    local volume = buzzer == "on" and 100 or buzzer == "off" and 0 or nil
+    if volume and miio.set_prop(device, ip, token, "set_volume", {volume}) then
         device:emit_event(deviceControlsBuzzer.buzzer({value = buzzer}))
     end
 end
@@ -287,26 +270,13 @@ local function set_child_lock_handler(_, device, command)
     end
 end
 
-local function reset_filter_handler(_, device, _)
-    local ip, token = get_device_config(device)
-    if not ip then return end
-
-    if miio.set_prop(device, ip, token, "reset_filter1", {}) then
-        device.thread:call_with_delay(1, function()
-            run_poll(device, "filter-reset")
-        end)
-    else
-        device.log.error("V7 reset_filter1 failed")
-    end
-end
-
 local function refresh_handler(_, device, _)
-    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
     run_poll(device, "refresh")
 end
 
 local function ensure_profile(device)
-    if not device:supports_capability_by_id(favoriteFanLevel.ID, "main") then
+    if not device:supports_capability_by_id(indicatorLight.ID, "main") then
         device:try_update_metadata({profile = PROFILE_NAME})
     end
 end
@@ -320,9 +290,9 @@ local function device_added(_, device)
     device:emit_event(capabilities.relativeHumidityMeasurement.humidity(0))
     device:emit_event(capabilities.fineDustSensor.fineDustLevel(0))
     device:emit_event(favoriteFanLevel.favoriteFanLevel(0))
-    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
     device:emit_event(capabilities.filterState.filterLifeRemaining({value = 100, unit = "%"}))
-    device:emit_event(deviceControlsLedBrightness.ledBrightness({value = "bright"}))
+    device:emit_event(indicatorLight.indicatorLight({value = "on"}))
     device:emit_event(deviceControlsBuzzer.buzzer({value = "off"}))
     device:emit_event(deviceControlsChildLock.childLock({value = "off"}))
 end
@@ -330,12 +300,14 @@ end
 local function device_init(_, device)
     ensure_profile(device)
     device:online()
-    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
 
     local ip = get_device_config(device)
     if ip then
         start_polling_timer(device)
         run_poll(device, "init")
+    else
+        device.log.error("V7 polling disabled: invalid or missing IP/token preferences")
     end
 end
 
@@ -384,17 +356,15 @@ local driver = Driver("miio-air-purifier-v7", {
         },
         [favoriteFanLevel.ID] = {
             [favoriteFanLevel.commands.setFavoriteFanLevel.NAME] = set_favorite_fan_level_handler
-        },        [deviceControlsLedBrightness.ID] = {
-            [deviceControlsLedBrightness.commands.setLedBrightness.NAME] = set_led_brightness_handler
+        },
+        [indicatorLight.ID] = {
+            [indicatorLight.commands.setIndicatorLight.NAME] = set_indicator_light_handler
         },
         [deviceControlsBuzzer.ID] = {
             [deviceControlsBuzzer.commands.setBuzzer.NAME] = set_buzzer_handler
         },
         [deviceControlsChildLock.ID] = {
             [deviceControlsChildLock.commands.setChildLock.NAME] = set_child_lock_handler
-        },
-        [capabilities.filterState.ID] = {
-            [capabilities.filterState.commands.resetFilter.NAME] = reset_filter_handler
         },
         [capabilities.refresh.ID] = {
             [capabilities.refresh.commands.refresh.NAME] = refresh_handler

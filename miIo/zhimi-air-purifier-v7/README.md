@@ -20,7 +20,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO zhimi air purifier v7 model `zhi
 - `filterState`
 - `concertmirror08464.zhimiAirV7Buzzer`
 - `concertmirror08464.zhimiAirV7ChildLock`
-- `concertmirror08464.zhimiAirV7LedBrightness`
+- `concertmirror08464.zhimiAirV7IndicatorLight`
 - `refresh`
 
 ## miIO Mapping
@@ -33,10 +33,10 @@ SmartThings Edge LAN driver for the Xiaomi/miIO zhimi air purifier v7 model `zhi
 | relative Humidity Measurement | R | Model-specific property/method constants in `src/init.lua` | `relativeHumidityMeasurement` |
 | fine Dust Sensor | R | Model-specific property/method constants in `src/init.lua` | `fineDustSensor` |
 | Favorite speed | RW | `favorite_level`, `set_level_favorite`; `0..17` raw level | `concertmirror08464.zhimiAirV7FavoriteFanLevel` |
-| Filter life | R / Action | `filter1_life`, %; `reset_filter1` with no arguments | `filterState` |
-| zhimi Air V7 Buzzer | RW | Model-specific property/method constants in `src/init.lua` | `concertmirror08464.zhimiAirV7Buzzer` |
+| Filter life | R | `filter1_life`, %; exact V7 sources expose no reset action | `filterState` |
+| zhimi Air V7 Buzzer | RW | `volume`, `set_volume`; `0` = off, `100` = on | `concertmirror08464.zhimiAirV7Buzzer` |
 | zhimi Air V7 Child Lock | RW | Model-specific property/method constants in `src/init.lua` | `concertmirror08464.zhimiAirV7ChildLock` |
-| zhimi Air V7 Led Brightness | RW | Model-specific property/method constants in `src/init.lua` | `concertmirror08464.zhimiAirV7LedBrightness` |
+| Indicator light | RW | `led`, `set_led`; `on` / `off` | `concertmirror08464.zhimiAirV7IndicatorLight` |
 | Refresh | Action | Re-read the model-specific status properties | `refresh` |
 
 Not exposed: diagnostic faults, accumulated usage, hardware metadata, private services, and other non-core values are intentionally omitted.
