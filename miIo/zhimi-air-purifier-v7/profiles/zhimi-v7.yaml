@@ -16,7 +16,7 @@ components:
     version: 1
   - id: filterState
     version: 1
-  - id: concertmirror08464.zhimiAirV7Buzzer
+  - id: audioVolume
     version: 1
   - id: concertmirror08464.zhimiAirV7ChildLock
     version: 1
@@ -44,7 +44,7 @@ deviceConfig:
           - label: " PM2.5: {{fineDustLevel.value}}"
         composite: true
       - component: main
-        capability: concertmirror08464.zhimiAirV7Buzzer
+        capability: audioVolume
         version: 1
       - component: main
         capability: concertmirror08464.zhimiAirV7ChildLock
@@ -54,7 +54,7 @@ deviceConfig:
         version: 1
     actions:
       - component: main
-        capability: concertmirror08464.zhimiAirV7Buzzer
+        capability: audioVolume
         version: 1
       - component: main
         capability: concertmirror08464.zhimiAirV7ChildLock
@@ -89,7 +89,7 @@ deviceConfig:
       capability: filterState
       version: 1
     - component: main
-      capability: concertmirror08464.zhimiAirV7Buzzer
+      capability: audioVolume
       version: 1
     - component: main
       capability: concertmirror08464.zhimiAirV7ChildLock

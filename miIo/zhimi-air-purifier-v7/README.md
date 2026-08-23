@@ -18,7 +18,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO zhimi air purifier v7 model `zhi
 - `fineDustSensor`
 - `concertmirror08464.zhimiAirV7FavoriteFanLevel`
 - `filterState`
-- `concertmirror08464.zhimiAirV7Buzzer`
+- `audioVolume`
 - `concertmirror08464.zhimiAirV7ChildLock`
 - `concertmirror08464.zhimiAirV7IndicatorLight`
 - `refresh`
@@ -34,7 +34,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO zhimi air purifier v7 model `zhi
 | fine Dust Sensor | R | Model-specific property/method constants in `src/init.lua` | `fineDustSensor` |
 | Favorite speed | RW | `favorite_level`, `set_level_favorite`; `0..17` raw level | `concertmirror08464.zhimiAirV7FavoriteFanLevel` |
 | Filter life | R | `filter1_life`, %; exact V7 sources expose no reset action | `filterState` |
-| zhimi Air V7 Buzzer | RW | `volume`, `set_volume`; `0` = off, `100` = on | `concertmirror08464.zhimiAirV7Buzzer` |
+| Audio volume | RW | `volume`, `set_volume`; integer `0..100`, `%` | `audioVolume` |
 | zhimi Air V7 Child Lock | RW | Model-specific property/method constants in `src/init.lua` | `concertmirror08464.zhimiAirV7ChildLock` |
 | Indicator light | RW | `led`, `set_led`; `on` / `off` | `concertmirror08464.zhimiAirV7IndicatorLight` |
 | Refresh | Action | Re-read the model-specific status properties | `refresh` |

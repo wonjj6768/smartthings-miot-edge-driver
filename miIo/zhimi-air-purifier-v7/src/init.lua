@@ -6,7 +6,6 @@ local discovery = require "discovery"
 local miio = require "miio"
 
 local airModeAirPurifierMode = capabilities["concertmirror08464.zhimiAirV7AirPurifierMode"]
-local deviceControlsBuzzer = capabilities["concertmirror08464.zhimiAirV7Buzzer"]
 local deviceControlsChildLock = capabilities["concertmirror08464.zhimiAirV7ChildLock"]
 local favoriteFanLevel = capabilities["concertmirror08464.zhimiAirV7FavoriteFanLevel"]
 local indicatorLight = capabilities["concertmirror08464.zhimiAirV7IndicatorLight"]
@@ -157,8 +156,8 @@ function emit_device_controls(device, values)
     end
 
     if type(values.volume) == "number" then
-        local sound = values.volume > 0 and "on" or "off"
-        device:emit_event(deviceControlsBuzzer.buzzer({value = sound}))
+        local volume = clamp(math.floor(values.volume), 0, 100)
+        device:emit_event(capabilities.audioVolume.volume({value = volume, unit = "%"}))
     end
 
     local child_lock = miio_on_off_to_st(values.child_lock)
@@ -249,15 +248,37 @@ local function set_indicator_light_handler(_, device, command)
     end
 end
 
-local function set_buzzer_handler(_, device, command)
+local function set_volume(device, requested_volume)
     local ip, token = get_device_config(device)
     if not ip then return end
 
-    local buzzer = command.args.buzzer
-    local volume = buzzer == "on" and 100 or buzzer == "off" and 0 or nil
-    if volume and miio.set_prop(device, ip, token, "set_volume", {volume}) then
-        device:emit_event(deviceControlsBuzzer.buzzer({value = buzzer}))
+    local volume = clamp(math.floor(requested_volume), 0, 100)
+    if miio.set_prop(device, ip, token, "set_volume", {volume}) then
+        device:emit_event(capabilities.audioVolume.volume({value = volume, unit = "%"}))
     end
+end
+
+local function set_volume_handler(_, device, command)
+    if type(command.args.volume) ~= "number" then return end
+    set_volume(device, command.args.volume)
+end
+
+local function change_volume(device, delta)
+    local current = device:get_latest_state(
+        "main",
+        capabilities.audioVolume.ID,
+        capabilities.audioVolume.volume.NAME
+    )
+    if type(current) ~= "number" then return end
+    set_volume(device, current + delta)
+end
+
+local function volume_up_handler(_, device, _)
+    change_volume(device, 1)
+end
+
+local function volume_down_handler(_, device, _)
+    change_volume(device, -1)
 end
 
 local function set_child_lock_handler(_, device, command)
@@ -276,7 +297,8 @@ local function refresh_handler(_, device, _)
 end
 
 local function ensure_profile(device)
-    if not device:supports_capability_by_id(indicatorLight.ID, "main") then
+    if not device:supports_capability_by_id(indicatorLight.ID, "main")
+        or not device:supports_capability_by_id(capabilities.audioVolume.ID, "main") then
         device:try_update_metadata({profile = PROFILE_NAME})
     end
 end
@@ -293,7 +315,7 @@ local function device_added(_, device)
     device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
     device:emit_event(capabilities.filterState.filterLifeRemaining({value = 100, unit = "%"}))
     device:emit_event(indicatorLight.indicatorLight({value = "on"}))
-    device:emit_event(deviceControlsBuzzer.buzzer({value = "off"}))
+    device:emit_event(capabilities.audioVolume.volume({value = 0, unit = "%"}))
     device:emit_event(deviceControlsChildLock.childLock({value = "off"}))
 end
 
@@ -360,8 +382,10 @@ local driver = Driver("miio-air-purifier-v7", {
         [indicatorLight.ID] = {
             [indicatorLight.commands.setIndicatorLight.NAME] = set_indicator_light_handler
         },
-        [deviceControlsBuzzer.ID] = {
-            [deviceControlsBuzzer.commands.setBuzzer.NAME] = set_buzzer_handler
+        [capabilities.audioVolume.ID] = {
+            [capabilities.audioVolume.commands.setVolume.NAME] = set_volume_handler,
+            [capabilities.audioVolume.commands.volumeUp.NAME] = volume_up_handler,
+            [capabilities.audioVolume.commands.volumeDown.NAME] = volume_down_handler
         },
         [deviceControlsChildLock.ID] = {
             [deviceControlsChildLock.commands.setChildLock.NAME] = set_child_lock_handler
