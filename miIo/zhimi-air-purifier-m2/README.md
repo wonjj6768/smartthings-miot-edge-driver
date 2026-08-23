@@ -6,8 +6,8 @@ SmartThings Edge LAN driver for the Xiaomi/miIO zhimi air purifier m2 model `zhi
 
 - Protocol: miIO
 - Model: `zhimi.airpurifier.m2`
-- Basis: python-miio lists this under classic AirPurifier(Device) miIO support; MIoT spec exists but does not determine the LAN helper.
-- Evidence: confirmed. Source: python-miio+miot-spec.
+- Basis: An exact `zhimi.airpurifier.m2` v1.4.3_105 device returned its status through authenticated LAN `get_prop`; python-miio also lists this model under classic `AirPurifier(Device)` support.
+- Evidence: confirmed. Source: real-device+python-miio.
 
 ## Exposed Capabilities
 
@@ -27,16 +27,16 @@ SmartThings Edge LAN driver for the Xiaomi/miIO zhimi air purifier m2 model `zhi
 
 | Feature | Access | miIO Key | SmartThings |
 |---|---:|---|---|
-| switch | RW | Model-specific property/method constants in `src/init.lua` | `switch` |
-| zhimi Air M2 Air Purifier Mode | RW | Model-specific property/method constants in `src/init.lua` | `concertmirror08464.zhimiAirM2AirPurifierMode` |
-| temperature Measurement | R | Model-specific property/method constants in `src/init.lua` | `temperatureMeasurement` |
-| relative Humidity Measurement | R | Model-specific property/method constants in `src/init.lua` | `relativeHumidityMeasurement` |
-| fine Dust Sensor | R | Model-specific property/method constants in `src/init.lua` | `fineDustSensor` |
+| Power | RW | `power`, `set_power` with `on` / `off` | `switch` |
+| Mode | RW | `mode`, `set_mode`; `auto`, `silent`, `favorite` | `concertmirror08464.zhimiAirM2AirPurifierMode` |
+| Temperature | R | `temp_dec`, divide by 10 for °C | `temperatureMeasurement` |
+| Humidity | R | `humidity`, % | `relativeHumidityMeasurement` |
+| PM2.5 | R | `aqi`, µg/m³ | `fineDustSensor` |
 | Favorite speed | RW | `favorite_level`, `set_level_favorite`; `0..17` raw level | `concertmirror08464.zhimiAirM2FavoriteFanLevel` |
-| filter State | R | Model-specific property/method constants in `src/init.lua` | `filterState` |
-| zhimi Air M2 Buzzer | RW | Model-specific property/method constants in `src/init.lua` | `concertmirror08464.zhimiAirM2Buzzer` |
-| zhimi Air M2 Child Lock | RW | Model-specific property/method constants in `src/init.lua` | `concertmirror08464.zhimiAirM2ChildLock` |
-| zhimi Air M2 Led Brightness | RW | Model-specific property/method constants in `src/init.lua` | `concertmirror08464.zhimiAirM2LedBrightness` |
-| Refresh | Action | Re-read the model-specific status properties | `refresh` |
+| Filter life | R | `filter1_life`, % | `filterState` |
+| Buzzer | RW | `buzzer`, `set_buzzer` | `concertmirror08464.zhimiAirM2Buzzer` |
+| Child lock | RW | `child_lock`, `set_child_lock` | `concertmirror08464.zhimiAirM2ChildLock` |
+| LED brightness | RW | `led` / `led_b`, `set_led` / `set_led_b` | `concertmirror08464.zhimiAirM2LedBrightness` |
+| Refresh | Action | `get_prop` for the status property list | `refresh` |
 
 Not exposed: diagnostic faults, accumulated usage, hardware metadata, private services, and other non-core values are intentionally omitted.
