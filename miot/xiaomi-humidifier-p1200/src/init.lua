@@ -387,6 +387,7 @@ local function reset_filter_handler(_, device, _)
 end
 
 local function refresh_handler(_, device, _)
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
     pcall(poll_device_status, device)
 end
 
@@ -401,6 +402,7 @@ local function device_added(_, device)
     device:emit_event(capabilities.switch.switch.off())
     device:emit_event(capabilities.temperatureMeasurement.temperature({value = 0, unit = "C"}))
     device:emit_event(capabilities.relativeHumidityMeasurement.humidity(0))
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
     device:emit_event(capabilities.filterState.filterLifeRemaining({value = 100, unit = "%"}))
     device:emit_event(controlsMode.mode({value = "constantHumidity"}))
     device:emit_event(controlsTargetHumidity.targetHumidity({value = 50, unit = "%"}))
@@ -418,6 +420,7 @@ end
 local function device_init(_, device)
     ensure_profile(device)
     device:online()
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
 
     local ip = get_device_config(device)
     if ip then

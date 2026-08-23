@@ -284,6 +284,7 @@ local set_volume_handler = make_percent_handler(ALARM_SIID, VOLUME_PIID, volumeC
 local set_brightness_handler = make_percent_handler(SCREEN_SIID, BRIGHTNESS_PIID, brightnessCap, "screenBrightness", "screenBrightness")
 
 local function refresh_handler(_, device, _)
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
     pcall(poll_device_status, device)
 end
 
@@ -297,6 +298,7 @@ local function device_added(_, device)
     device:emit_event(capabilities.dustSensor.dustLevel(0))
     device:emit_event(capabilities.temperatureMeasurement.temperature({value = 0, unit = "C"}))
     device:emit_event(capabilities.relativeHumidityMeasurement.humidity(0))
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
     device:emit_event(capabilities.filterState.filterLifeRemaining({value = 100, unit = "%"}))
     device:emit_event(screenCap.screen({value = "on"}))
     device:emit_event(brightnessCap.screenBrightness({value = 100, unit = "%"}))
@@ -309,6 +311,7 @@ end
 local function device_init(_, device)
     ensure_profile(device)
     device:online()
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
 
     local ip = get_device_config(device)
     if ip then

@@ -28,7 +28,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT air purifier model `zhimi.airpur
 |---|---:|---|---|
 | Power | RW | `siid=2`, `piid=1` | `switch` |
 | fanLevel | RW | `siid=2`, `piid=5` | `concertmirror08464.zhimiAirOa1FanLevel` |
-| Filter life | R | `siid=4`, `piid=2` | `filterState` |
+| Filter life | R | `siid=4`, `piid=2`; exact spec has no reset action | `filterState` |
 | buzzer | RW | `siid=2`, `piid=7` | `concertmirror08464.zhimiAirOa1Buzzer` |
 | childLock | RW | `siid=2`, `piid=9` | `concertmirror08464.zhimiAirOa1ChildLock` |
 | displayLevel | RW | `siid=2`, `piid=6` | `concertmirror08464.zhimiAirOa1DisplayLevel` |

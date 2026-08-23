@@ -36,6 +36,7 @@ SmartThings Edge LAN driver for the Xiaomi/MIoT zhimi air purifier mb5a model `z
 | relative Humidity Measurement | R | Model-specific siid/piid constants in `src/init.lua` | `relativeHumidityMeasurement` |
 | fine Dust Sensor | R | Model-specific siid/piid constants in `src/init.lua` | `fineDustSensor` |
 | filter State | R | Model-specific siid/piid constants in `src/init.lua` | `filterState` |
+| Reset filter life | Action | `siid=4`, `aiid=1` | `filterState.resetFilter` |
 | zhimi Air Mb5a Buzzer | RW | Model-specific siid/piid constants in `src/init.lua` | `concertmirror08464.zhimiAirMb5aBuzzer` |
 | zhimi Air Mb5a Child Lock | RW | Model-specific siid/piid constants in `src/init.lua` | `concertmirror08464.zhimiAirMb5aChildLock` |
 | zhimi Air Mb5a Led Brightness | RW | Model-specific siid/piid constants in `src/init.lua` | `concertmirror08464.zhimiAirMb5aLedBrightness` |

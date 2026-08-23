@@ -15,7 +15,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT electronic valve model `tmwl.val
 
 - `valve`
 - `powerMeter`
-- `energyMeter`
+- `concertmirror08464.tmwlValveEnergyUsage`
 - `refresh`
 
 ## MIoT Mapping
@@ -24,6 +24,6 @@ SmartThings Edge LAN driver for the Xiaomi MIoT electronic valve model `tmwl.val
 |---|---:|---|---|
 | Valve switch | RW | `siid=2`, `piid=1`; `true=open`, `false=closed` | `valve` |
 | Electric power | R | `siid=3`, `piid=6`; watt | `powerMeter` |
-| Power consumption | R | `siid=3`, `piid=1`; kWh | `energyMeter` |
+| Power consumption | R | `siid=3`, `piid=1`; kWh | `concertmirror08464.tmwlValveEnergyUsage` |
 
 Not exposed: target water level and the raw 0..100 fault code carry no documented enum in the exact spec, and the `siid=4`, `siid=6`, `siid=7`, and `siid=8` services hold terminal temperatures, leakage and overload thresholds, and device-lock internals rather than core SmartThings controls.

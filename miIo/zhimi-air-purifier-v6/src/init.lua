@@ -19,6 +19,7 @@ local DEFAULT_POLLING_INTERVAL = 60
 -- Core read properties: power, mode, aqi, humidity, temp_dec, favorite_level,
 -- filter1_life, led, led_b, buzzer, child_lock
 -- Core write methods: set_power, set_mode, set_level_favorite, set_led, set_led_b, set_buzzer, set_child_lock
+-- Filter reset: reset_filter1 is rejected by exact v6 hardware with -6009 not_support.
 local STATUS_PROPERTIES = {
     "power",
     "mode",
@@ -114,6 +115,7 @@ local function poll_device_status(device)
 
     local ok, values = pcall(get_properties, device, ip, token)
     if not ok then
+        device.log.error("V6 get_prop failed: " .. tostring(values))
         return
     end
 
@@ -150,6 +152,13 @@ local function poll_device_status(device)
     emit_device_controls(device, values)
 end
 
+local function run_poll(device, source)
+    local ok, err = pcall(poll_device_status, device)
+    if not ok then
+        device.log.error(string.format("V6 poll failed (%s): %s", source, tostring(err)))
+    end
+end
+
 function emit_device_controls(device, values)
     local led_brightness = LED_BRIGHTNESS_TO_ST[values.led_b]
     if values.led == "off" then
@@ -176,7 +185,7 @@ end
 local function start_polling_timer(device)
     local interval = device.preferences.pollingInterval or DEFAULT_POLLING_INTERVAL
     local timer = device.thread:call_on_schedule(interval, function()
-        pcall(poll_device_status, device)
+        run_poll(device, "timer")
     end, "Polling")
     device:set_field(POLLING_TIMER, timer)
 end
@@ -194,7 +203,7 @@ local function switch_on_handler(_, device, _)
     if ip and miio.set_prop(device, ip, token, "set_power", {"on"}) then
         device:emit_event(capabilities.switch.switch.on())
         device.thread:call_with_delay(1, function()
-            pcall(poll_device_status, device)
+            run_poll(device, "switch-on")
         end)
     end
 end
@@ -234,7 +243,7 @@ local function set_favorite_fan_level_handler(_, device, command)
         device:emit_event(airModeAirPurifierMode.airPurifierMode({value = "favorite"}))
         device:emit_event(favoriteFanLevel.favoriteFanLevel(level))
         device.thread:call_with_delay(1, function()
-            pcall(poll_device_status, device)
+            run_poll(device, "favorite-level")
         end)
     end
 end
@@ -281,7 +290,8 @@ local function set_child_lock_handler(_, device, command)
 end
 
 local function refresh_handler(_, device, _)
-    pcall(poll_device_status, device)
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
+    run_poll(device, "refresh")
 end
 
 local function ensure_profile(device)
@@ -299,6 +309,7 @@ local function device_added(_, device)
     device:emit_event(capabilities.relativeHumidityMeasurement.humidity(0))
     device:emit_event(capabilities.fineDustSensor.fineDustLevel(0))
     device:emit_event(favoriteFanLevel.favoriteFanLevel(0))
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
     device:emit_event(capabilities.filterState.filterLifeRemaining({value = 100, unit = "%"}))
     device:emit_event(deviceControlsLedBrightness.ledBrightness({value = "bright"}))
     device:emit_event(deviceControlsBuzzer.buzzer({value = "off"}))
@@ -308,11 +319,12 @@ end
 local function device_init(_, device)
     ensure_profile(device)
     device:online()
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
 
     local ip = get_device_config(device)
     if ip then
         start_polling_timer(device)
-        pcall(poll_device_status, device)
+        run_poll(device, "init")
     end
 end
 
@@ -338,7 +350,7 @@ local function device_info_changed(driver, device, _, args)
         local ip = get_device_config(device)
         if ip then
             start_polling_timer(device)
-            pcall(poll_device_status, device)
+            run_poll(device, "preferences")
         end
     end
 end

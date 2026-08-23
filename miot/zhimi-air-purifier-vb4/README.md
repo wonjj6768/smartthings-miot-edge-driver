@@ -36,6 +36,7 @@ SmartThings Edge LAN driver for the Xiaomi/MIoT zhimi air purifier vb4 model `zh
 | relative Humidity Measurement | R | Model-specific siid/piid constants in `src/init.lua` | `relativeHumidityMeasurement` |
 | fine Dust Sensor | R | Model-specific siid/piid constants in `src/init.lua` | `fineDustSensor` |
 | filter State | R | Model-specific siid/piid constants in `src/init.lua` | `filterState` |
+| Reset filter life | Action | `siid=4`, `aiid=1` | `filterState.resetFilter` |
 | zhimi Air Vb4 Buzzer | RW | Model-specific siid/piid constants in `src/init.lua` | `concertmirror08464.zhimiAirVb4Buzzer` |
 | zhimi Air Vb4 Child Lock | RW | Model-specific siid/piid constants in `src/init.lua` | `concertmirror08464.zhimiAirVb4ChildLock` |
 | zhimi Air Vb4 Led Brightness | RW | Model-specific siid/piid constants in `src/init.lua` | `concertmirror08464.zhimiAirVb4LedBrightness` |

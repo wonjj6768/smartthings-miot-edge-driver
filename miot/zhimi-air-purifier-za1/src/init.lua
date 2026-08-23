@@ -213,6 +213,7 @@ local function set_child_lock_handler(_, device, command)
 end
 
 local function refresh_handler(_, device, _)
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
     pcall(poll_device_status, device)
 end
 
@@ -229,6 +230,7 @@ local function device_added(_, device)
     device:emit_event(capabilities.temperatureMeasurement.temperature({value = 0, unit = "C"}))
     device:emit_event(capabilities.relativeHumidityMeasurement.humidity(0))
     device:emit_event(capabilities.fineDustSensor.fineDustLevel(0))
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
     device:emit_event(capabilities.filterState.filterLifeRemaining({value = 100, unit = "%"}))
     device:emit_event(deviceControlsLedBrightness.ledBrightness({value = "bright"}))
     device:emit_event(deviceControlsBuzzer.buzzer({value = "off"}))
@@ -238,6 +240,7 @@ end
 local function device_init(_, device)
     ensure_profile(device)
     device:online()
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
 
     local ip = get_device_config(device)
     if ip then

@@ -5,6 +5,8 @@ local Driver = require "st.driver"
 local discovery = require "discovery"
 local miot = require "miot"
 
+local energyUsage = capabilities["concertmirror08464.tmwlValveEnergyUsage"]
+
 local POLLING_TIMER = "polling_timer"
 local DEFAULT_POLLING_INTERVAL = 60
 local EXPECTED_PROFILE_NAME = "tmwl-electronic-valve-iotb2"
@@ -69,7 +71,7 @@ local function poll_device_status(device)
                 device:emit_event(value and capabilities.valve.valve.open() or capabilities.valve.valve.closed())
             elseif siid == POWER_SIID then
                 if piid == ENERGY_PIID then
-                    device:emit_event(capabilities.energyMeter.energy({value = value, unit = "kWh"}))
+                    device:emit_event(energyUsage.energyUsage({value = value, unit = "kWh"}))
                 elseif piid == POWER_PIID then
                     device:emit_event(capabilities.powerMeter.power({value = value, unit = "W"}))
                 end
@@ -125,7 +127,7 @@ local function refresh_handler(_, device, _)
 end
 
 local function ensure_profile(device)
-    if not device:supports_capability_by_id(capabilities.valve.ID, "main") then
+    if not device:supports_capability_by_id(energyUsage.ID, "main") then
         device:try_update_metadata({profile = EXPECTED_PROFILE_NAME})
     end
 end
@@ -134,7 +136,7 @@ local function device_added(_, device)
     ensure_profile(device)
     device:emit_event(capabilities.valve.valve.closed())
     device:emit_event(capabilities.powerMeter.power({value = 0, unit = "W"}))
-    device:emit_event(capabilities.energyMeter.energy({value = 0, unit = "kWh"}))
+    device:emit_event(energyUsage.energyUsage({value = 0, unit = "kWh"}))
 end
 
 local function device_init(_, device)

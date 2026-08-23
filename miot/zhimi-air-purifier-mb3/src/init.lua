@@ -37,6 +37,7 @@ local TEMPERATURE_PIID = 8    -- 온도
 
 -- MIoT 속성 ID - Filter (siid=4)
 local FILTER_LIFE_PIID = 3    -- 필터 수명 레벨 (%)
+local RESET_FILTER_LIFE_AIID = 1 -- 필터 수명 초기화 action
 
 -- MIoT 속성 ID - Device Controls
 local BUZZER_SIID = 5
@@ -230,6 +231,17 @@ local function set_fan_mode_handler(_, device, command)
     end
 end
 
+local function fan_mode_shortcut_handler(mode)
+    return function(driver, device, _)
+        set_fan_mode_handler(driver, device, {args = {mode = mode}})
+    end
+end
+
+local set_auto_handler = fan_mode_shortcut_handler("auto")
+local set_sleep_handler = fan_mode_shortcut_handler("sleep")
+local set_favorite_handler = fan_mode_shortcut_handler("favorite")
+local set_manual_handler = fan_mode_shortcut_handler("manual")
+
 -- 팬 속도 설정 (커스텀 capability, 1-3)
 local function set_fan_speed_handler(_, device, command)
     local ip, token = get_device_config(device)
@@ -290,8 +302,21 @@ local function set_child_lock_handler(_, device, command)
     end
 end
 
+local function reset_filter_handler(_, device, _)
+    local ip, token = get_device_config(device)
+    if not ip then return end
+
+    local ok = pcall(miot.action, device, ip, token, FILTER_SIID, RESET_FILTER_LIFE_AIID, {})
+    if ok then
+        device.thread:call_with_delay(1, function()
+            pcall(poll_device_status, device)
+        end)
+    end
+end
+
 -- 새로고침
 local function refresh_handler(_, device, _)
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
     pcall(poll_device_status, device)
 end
 
@@ -313,6 +338,7 @@ local function device_added(_, device)
     device:emit_event(capabilities.temperatureMeasurement.temperature({value = 0, unit = "C"}))
     device:emit_event(capabilities.relativeHumidityMeasurement.humidity(0))
     device:emit_event(capabilities.fineDustSensor.fineDustLevel(0))
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
     device:emit_event(capabilities.filterState.filterLifeRemaining({value = 100, unit = "%"}))
     device:emit_event(deviceControlsLedBrightness.ledBrightness({value = "bright"}))
     device:emit_event(deviceControlsBuzzer.buzzer({value = "off"}))
@@ -323,6 +349,7 @@ end
 local function device_init(_, device)
     ensure_profile(device)
     device:online()
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
 
     local ip, token = get_device_config(device)
     if ip then
@@ -378,7 +405,11 @@ local driver = Driver("miot-air-purifier-mb3", {
             [capabilities.switch.commands.off.NAME] = switch_off_handler
         },
         [fanModeFanMode.ID] = {
-            [fanModeFanMode.commands.setFanMode.NAME] = set_fan_mode_handler
+            [fanModeFanMode.commands.setFanMode.NAME] = set_fan_mode_handler,
+            [fanModeFanMode.commands.setAuto.NAME] = set_auto_handler,
+            [fanModeFanMode.commands.setSleep.NAME] = set_sleep_handler,
+            [fanModeFanMode.commands.setFavorite.NAME] = set_favorite_handler,
+            [fanModeFanMode.commands.setManual.NAME] = set_manual_handler
         },
         [fanSpeedFanSpeed.ID] = {
             [fanSpeedFanSpeed.commands.setFanSpeed.NAME] = set_fan_speed_handler
@@ -391,6 +422,9 @@ local driver = Driver("miot-air-purifier-mb3", {
         },
         [deviceControlsChildLock.ID] = {
             [deviceControlsChildLock.commands.setChildLock.NAME] = set_child_lock_handler
+        },
+        [capabilities.filterState.ID] = {
+            [capabilities.filterState.commands.resetFilter.NAME] = reset_filter_handler
         },
         [capabilities.refresh.ID] = {
             [capabilities.refresh.commands.refresh.NAME] = refresh_handler

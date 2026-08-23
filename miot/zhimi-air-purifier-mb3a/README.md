@@ -35,7 +35,7 @@ SmartThings Edge LAN driver for the Xiaomi/MIoT zhimi air purifier mb3a model `z
 | temperature Measurement | R | Model-specific siid/piid constants in `src/init.lua` | `temperatureMeasurement` |
 | relative Humidity Measurement | R | Model-specific siid/piid constants in `src/init.lua` | `relativeHumidityMeasurement` |
 | fine Dust Sensor | R | Model-specific siid/piid constants in `src/init.lua` | `fineDustSensor` |
-| filter State | R | Model-specific siid/piid constants in `src/init.lua` | `filterState` |
+| Filter state | R | Model-specific siid/piid constants in `src/init.lua`; exact spec has no reset action | `filterState` |
 | zhimi Air Mb3a Buzzer | RW | Model-specific siid/piid constants in `src/init.lua` | `concertmirror08464.zhimiAirMb3aBuzzer` |
 | zhimi Air Mb3a Child Lock | RW | Model-specific siid/piid constants in `src/init.lua` | `concertmirror08464.zhimiAirMb3aChildLock` |
 | zhimi Air Mb3a Led Brightness | RW | Model-specific siid/piid constants in `src/init.lua` | `concertmirror08464.zhimiAirMb3aLedBrightness` |

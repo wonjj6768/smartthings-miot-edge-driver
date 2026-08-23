@@ -41,7 +41,7 @@ local AIR_QUALITY_PIID = 9       -- R enum, not exposed
 local FILTER_SIID = 4
 local FILTER_LIFE_PIID = 1       -- R uint8, 0..100 %
 local FILTER_USED_TIME_PIID = 3  -- R uint16 hours, not exposed
-local RESET_FILTER_AIID = 1      -- Action, not exposed
+local RESET_FILTER_AIID = 1      -- Action -> filterState.resetFilter
 
 -- Alarm service (siid=6)
 local BUZZER_SIID = 6
@@ -336,7 +336,18 @@ local function set_child_lock_handler(_, device, command)
     end
 end
 
+local function reset_filter_handler(_, device, _)
+    local ip, token = get_device_config(device)
+    if not ip then return end
+
+    local ok = pcall(miot.action, device, ip, token, FILTER_SIID, RESET_FILTER_AIID, {})
+    if ok then
+        schedule_refresh(device)
+    end
+end
+
 local function refresh_handler(_, device, _)
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
     pcall(poll_device_status, device)
 end
 
@@ -360,12 +371,14 @@ local function device_added(_, device)
     device:emit_event(capabilities.dustSensor.dustLevel(0))
     device:emit_event(capabilities.temperatureMeasurement.temperature({value = 0, unit = "C"}))
     device:emit_event(capabilities.relativeHumidityMeasurement.humidity(0))
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
     device:emit_event(capabilities.filterState.filterLifeRemaining({value = 100, unit = "%"}))
 end
 
 local function device_init(_, device)
     ensure_profile(device)
     device:online()
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
 
     local ip = get_device_config(device)
     if ip then
@@ -434,6 +447,9 @@ local driver = Driver("miot-air-purifier-meb1", {
         },
         [controlsChildLock.ID] = {
             [controlsChildLock.commands.setChildLock.NAME] = set_child_lock_handler
+        },
+        [capabilities.filterState.ID] = {
+            [capabilities.filterState.commands.resetFilter.NAME] = reset_filter_handler
         },
         [capabilities.refresh.ID] = {
             [capabilities.refresh.commands.refresh.NAME] = refresh_handler

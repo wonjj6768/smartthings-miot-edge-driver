@@ -33,7 +33,7 @@ SmartThings Edge LAN driver for the Baomi MIoT air purifier model `baomi.airpuri
 | Mode | RW | `siid=2`, `piid=4`; `0=silent`, `1=strong`, `2=smart` | `baomiAir450aMode.airPurifierMode` |
 | Fan level | RW | `siid=2`, `piid=5`; `0..4` shown as level 1..5 | `baomiAir450aFanLevel.fanLevel` |
 | PM2.5 | R | `siid=3`, `piid=4` | `dustSensor.fineDustLevel` |
-| Filter life | R | `siid=4`, `piid=1`; percent | `filterState.filterLifeRemaining` |
+| Filter life | R | `siid=4`, `piid=1`; percent; exact spec has no reset action | `filterState.filterLifeRemaining` |
 | Filter type | RW | `siid=9`, `piid=1`; `0=anti-mite`, `1=formaldehyde`, `2=baby care` | `baomiAir450aFilterType.filterType` |
 | Display | RW | `siid=7`, `piid=1` | `baomiAir450aScreen.screen` |
 | Child lock | RW | `siid=8`, `piid=1` | `baomiAir450aChildLock.childLock` |

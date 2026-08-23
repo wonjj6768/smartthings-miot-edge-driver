@@ -43,6 +43,7 @@ SmartThings Edge LAN driver for the Xiaomi MIoT air purifier model `xiaomi.airp.
 | PM10 | R | `siid=3`, `piid=5` | `dustSensor` |
 | Formaldehyde | R | `siid=3`, `piid=11` | `formaldehydeMeasurement` |
 | Filter life | R | `siid=4`, `piid=1` | `filterState` |
+| Reset filter life | Action | `siid=4`, `aiid=1` | `filterState.resetFilter` |
 | anion | RW | `siid=2`, `piid=6` | `concertmirror08464.xiaomiAirVa3Anion` |
 | uv | RW | `siid=2`, `piid=7` | `concertmirror08464.xiaomiAirVa3Uv` |
 | buzzer | RW | `siid=6`, `piid=1` | `concertmirror08464.xiaomiAirVa3Buzzer` |

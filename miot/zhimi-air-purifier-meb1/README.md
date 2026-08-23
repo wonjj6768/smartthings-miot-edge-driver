@@ -25,7 +25,7 @@ SmartThings Edge LAN driver for one MIoT model: `zhimi.airp.meb1`.
 - `dustSensor`: PM2.5 and PM10 density
 - `temperatureMeasurement`: temperature
 - `relativeHumidityMeasurement`: humidity
-- `filterState`: filter life remaining
+- `filterState`: filter life remaining and reset
 - `refresh`
 
 ## MIoT Mapping
@@ -52,7 +52,7 @@ Filter service `siid=4`:
 
 - `piid=1` filter life `0..100%`, read only
 - `piid=3` filter used time, read only, not exposed
-- `aiid=1` reset filter life, not exposed in this driver
+- `aiid=1` reset filter life action -> `filterState.resetFilter`
 
 Alarm service `siid=6`:
 

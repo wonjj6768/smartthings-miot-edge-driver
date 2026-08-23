@@ -37,6 +37,7 @@ local PROFILE_NAME = "xiaomi-air-purifier-va4"
 --   piid=11 hcho-density, float, R; range 0..5 step 0.001 mg/m3 -> formaldehydeMeasurement
 -- Filter service (siid=4)
 --   piid=1 filter-life-level, uint8, R; range 0..100 step 1 percentage -> filterState.filterLifeRemaining
+--   aiid=1 reset-filter-life, Action -> filterState.resetFilter
 --   piid=2 filter-left-time, uint16, R; range 0..8000 step 1 hours: not exposed
 --   piid=3 filter-used-time, uint16, R; range 0..8000 step 1 hours: not exposed
 -- Alarm service (siid=6)
@@ -80,6 +81,7 @@ local HCHO_DENSITY_PIID = 11
 
 local FILTER_SIID = 4
 local FILTER_LIFE_LEVEL_PIID = 1
+local RESET_FILTER_LIFE_AIID = 1
 
 local ALARM_SIID = 6
 local ALARM_PIID = 1
@@ -360,7 +362,20 @@ local set_uv_handler = make_bool_handler(AIR_PURIFIER_SIID, UV_PIID, uvCap, "uv"
 local set_buzzer_handler = make_bool_handler(ALARM_SIID, ALARM_PIID, buzzerCap, "buzzer", "buzzer")
 local set_childLock_handler = make_bool_handler(PHYSICAL_CONTROLS_LOCKED_SIID, PHYSICAL_CONTROLS_LOCKED_PIID, childLockCap, "childLock", "childLock")
 
+local function reset_filter_handler(_, device, _)
+    local ip, token = get_device_config(device)
+    if not ip then return end
+
+    local ok = pcall(miot.action, device, ip, token, FILTER_SIID, RESET_FILTER_LIFE_AIID, {})
+    if ok then
+        device.thread:call_with_delay(1, function()
+            pcall(poll_device_status, device)
+        end)
+    end
+end
+
 local function refresh_handler(_, device, _)
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
     pcall(poll_device_status, device)
 end
 
@@ -376,12 +391,14 @@ local function device_added(_, device)
     device:emit_event(buzzerCap.buzzer({value = "off"}))
     device:emit_event(childLockCap.childLock({value = "off"}))
     device:emit_event(displayLevelCap.displayLevel({value = "brightest"}))
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
     pcall(poll_device_status, device)
 end
 
 local function device_init(_, device)
     ensure_profile(device)
     device:online()
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
 
     local ip = get_device_config(device)
     if ip then
@@ -453,6 +470,9 @@ local driver = Driver("miot-xiaomi-air-purifier-va4", {
         },
         [displayLevelCap.ID] = {
             [displayLevelCap.commands.setDisplayLevel.NAME] = set_displayLevel_handler
+        },
+        [capabilities.filterState.ID] = {
+            [capabilities.filterState.commands.resetFilter.NAME] = reset_filter_handler
         },
         [capabilities.refresh.ID] = {
             [capabilities.refresh.commands.refresh.NAME] = refresh_handler

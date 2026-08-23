@@ -37,6 +37,7 @@ local PROFILE_NAME = "bj352-air-purifier-y106cm"
 --   piid=2 air-quality-index and piid=3 air-quality restate the PM2.5 reading
 -- Left Filter service (siid=4)
 --   piid=1 filter-life-level, uint8, R, percent
+--   aiid=1 reset-filter-life, Action -> filterState.resetFilter
 -- Right Filter service (siid=11)
 --   piid=1 filter-life-level, uint8, R, percent
 -- Indicator Light service (siid=5)
@@ -66,6 +67,7 @@ local HCHO_PIID = 11
 local FILTER_LEFT_SIID = 4
 local FILTER_RIGHT_SIID = 11
 local FILTER_LIFE_PIID = 1
+local RESET_FILTER_LIFE_AIID = 1
 
 local INDICATOR_SIID = 5
 local INDICATOR_PIID = 1
@@ -291,7 +293,20 @@ local set_indicator_handler = make_bool_handler(INDICATOR_SIID, INDICATOR_PIID, 
 local set_screen_handler = make_bool_handler(OTHER_SIID, SCREEN_PIID, screenCap, "screen", "screen")
 local set_child_lock_handler = make_bool_handler(LOCK_SIID, LOCK_PIID, childLockCap, "childLock", "childLock")
 
+local function reset_filter_handler(_, device, _)
+    local ip, token = get_device_config(device)
+    if not ip then return end
+
+    local ok = pcall(miot.action, device, ip, token, FILTER_LEFT_SIID, RESET_FILTER_LIFE_AIID, {})
+    if ok then
+        device.thread:call_with_delay(1, function()
+            pcall(poll_device_status, device)
+        end)
+    end
+end
+
 local function refresh_handler(_, device, _)
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
     pcall(poll_device_status, device)
 end
 
@@ -306,6 +321,7 @@ local function device_added(_, device)
     device:emit_event(capabilities.relativeHumidityMeasurement.humidity(0))
     device:emit_event(capabilities.tvocMeasurement.tvocLevel({value = 0, unit = "mg/m^3"}))
     device:emit_event(capabilities.formaldehydeMeasurement.formaldehydeLevel({value = 0, unit = "mg/m^3"}))
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
     device:emit_event(capabilities.filterState.filterLifeRemaining({value = 100, unit = "%"}))
     device:emit_event(filterRightCap.filterLife({value = 100, unit = "%"}))
     device:emit_event(anionCap.anion({value = "off"}))
@@ -318,6 +334,7 @@ end
 local function device_init(_, device)
     ensure_profile(device)
     device:online()
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
 
     local ip = get_device_config(device)
     if ip then
@@ -383,6 +400,9 @@ local driver = Driver("miot-bj352-air-purifier-y106cm", {
         },
         [childLockCap.ID] = {
             [childLockCap.commands.setChildLock.NAME] = set_child_lock_handler
+        },
+        [capabilities.filterState.ID] = {
+            [capabilities.filterState.commands.resetFilter.NAME] = reset_filter_handler
         },
         [capabilities.refresh.ID] = {
             [capabilities.refresh.commands.refresh.NAME] = refresh_handler

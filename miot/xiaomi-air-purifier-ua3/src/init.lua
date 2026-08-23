@@ -41,6 +41,7 @@ local PROFILE_NAME = "xiaomi-air-purifier-ua3"
 --   piid=11 pm1, uint16, R; range 0..600 step 1 μg/m3: not exposed
 -- Filter service (siid=4)
 --   piid=1 filter-life-level, uint8, R; range 0..100 step 1 percentage -> filterState.filterLifeRemaining
+--   aiid=1 reset-filter-life, Action -> filterState.resetFilter
 --   piid=2 filter-left-time, uint16, R; range 0..17520 step 1 hours: not exposed
 --   piid=3 filter-used-time, uint16, R; range 0..17520 step 1 hours: not exposed
 --   piid=4 filter-life-level, uint8, R; range 0..100 step 1 percentage: not exposed
@@ -134,6 +135,7 @@ local HCHO_DENSITY_PIID = 10
 
 local FILTER_SIID = 4
 local FILTER_LIFE_LEVEL_PIID = 1
+local RESET_FILTER_LIFE_AIID = 1
 
 local ALARM_SIID = 6
 local ALARM_PIID = 1
@@ -373,7 +375,20 @@ local set_childLock_handler = make_bool_handler(PHYSICAL_CONTROLS_LOCKED_SIID, P
 local set_display_handler = make_bool_handler(SCREEN_SIID, ON2_PIID, displayCap, "display", "display")
 local set_autoDisplayBrightness_handler = make_bool_handler(SCREEN_SIID, AUTO_SCREEN_BRIGHTNESS_PIID, autoDisplayBrightnessCap, "autoDisplayBrightness", "autoDisplayBrightness")
 
+local function reset_filter_handler(_, device, _)
+    local ip, token = get_device_config(device)
+    if not ip then return end
+
+    local ok = pcall(miot.action, device, ip, token, FILTER_SIID, RESET_FILTER_LIFE_AIID, {})
+    if ok then
+        device.thread:call_with_delay(1, function()
+            pcall(poll_device_status, device)
+        end)
+    end
+end
+
 local function refresh_handler(_, device, _)
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
     pcall(poll_device_status, device)
 end
 
@@ -389,12 +404,14 @@ local function device_added(_, device)
     device:emit_event(childLockCap.childLock({value = "off"}))
     device:emit_event(displayCap.display({value = "off"}))
     device:emit_event(autoDisplayBrightnessCap.autoDisplayBrightness({value = "off"}))
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
     pcall(poll_device_status, device)
 end
 
 local function device_init(_, device)
     ensure_profile(device)
     device:online()
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
 
     local ip = get_device_config(device)
     if ip then
@@ -466,6 +483,9 @@ local driver = Driver("miot-xiaomi-air-purifier-ua3", {
         },
         [autoDisplayBrightnessCap.ID] = {
             [autoDisplayBrightnessCap.commands.setAutoDisplayBrightness.NAME] = set_autoDisplayBrightness_handler
+        },
+        [capabilities.filterState.ID] = {
+            [capabilities.filterState.commands.resetFilter.NAME] = reset_filter_handler
         },
         [capabilities.refresh.ID] = {
             [capabilities.refresh.commands.refresh.NAME] = refresh_handler

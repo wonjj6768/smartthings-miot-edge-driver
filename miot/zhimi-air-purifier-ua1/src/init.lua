@@ -39,6 +39,7 @@ local PROFILE_NAME = "zhimi-air-purifier-ua1"
 --   piid=7 pm2.5, float, R; range 0..600 step 1 μg/m3: not exposed
 -- Filter service (siid=4)
 --   piid=1 filter-life-level, uint8, R; range 0..100 step 1 percentage -> filterState.filterLifeRemaining
+--   aiid=1 reset-filter-life, Action -> filterState.resetFilter
 --   piid=3 filter-used-time, uint16, R; range 0..35040 step 1 hours: not exposed
 --   piid=4 filter-left-time, uint16, R; range 0..35040 step 1 hours: not exposed
 --   piid=8 filter-life-level, uint8, R; range 0..100 step 1 percentage: not exposed
@@ -89,6 +90,7 @@ local HCHO_DENSITY_PIID = 6
 
 local FILTER_SIID = 4
 local FILTER_LIFE_LEVEL_PIID = 1
+local RESET_FILTER_LIFE_AIID = 1
 
 local ALARM_SIID = 6
 local ALARM_PIID = 1
@@ -331,13 +333,27 @@ local set_buzzer_handler = make_bool_handler(ALARM_SIID, ALARM_PIID, buzzerCap, 
 local set_childLock_handler = make_bool_handler(PHYSICAL_CONTROLS_LOCKED_SIID, PHYSICAL_CONTROLS_LOCKED_PIID, childLockCap, "childLock", "childLock")
 local set_display_handler = make_bool_handler(SCREEN_SIID, ON2_PIID, displayCap, "display", "display")
 
+local function reset_filter_handler(_, device, _)
+    local ip, token = get_device_config(device)
+    if not ip then return end
+
+    local ok = pcall(miot.action, device, ip, token, FILTER_SIID, RESET_FILTER_LIFE_AIID, {})
+    if ok then
+        device.thread:call_with_delay(1, function()
+            pcall(poll_device_status, device)
+        end)
+    end
+end
+
 local function refresh_handler(_, device, _)
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
     pcall(poll_device_status, device)
 end
 
 local function device_added(_, device)
     ensure_profile(device)
     device:online()
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
     device:emit_event(capabilities.switch.switch.off())
     device:emit_event(airPurifierModeCap.airPurifierMode({value = "auto"}))
     device:emit_event(fanLevelCap.fanLevel({value = "level1"}))
@@ -353,6 +369,7 @@ end
 local function device_init(_, device)
     ensure_profile(device)
     device:online()
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
 
     local ip = get_device_config(device)
     if ip then
@@ -421,6 +438,9 @@ local driver = Driver("miot-zhimi-air-purifier-ua1", {
         },
         [displayCap.ID] = {
             [displayCap.commands.setDisplay.NAME] = set_display_handler
+        },
+        [capabilities.filterState.ID] = {
+            [capabilities.filterState.commands.resetFilter.NAME] = reset_filter_handler
         },
         [capabilities.refresh.ID] = {
             [capabilities.refresh.commands.refresh.NAME] = refresh_handler

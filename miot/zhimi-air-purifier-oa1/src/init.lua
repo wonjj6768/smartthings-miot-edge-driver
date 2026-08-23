@@ -205,6 +205,7 @@ local set_childLock_handler = make_bool_handler(AIR_PURIFIER_SIID, PHYSICAL_CONT
 local set_displayLevel_handler = make_bool_handler(AIR_PURIFIER_SIID, BRIGHTNESS_PIID, displayLevelCap, "displayLevel", "displayLevel")
 
 local function refresh_handler(_, device, _)
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
     pcall(poll_device_status, device)
 end
 
@@ -213,6 +214,7 @@ local function device_added(_, device)
     device:online()
     device:emit_event(capabilities.switch.switch.off())
     device:emit_event(fanLevelCap.fanLevel({value = "level1"}))
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
     device:emit_event(buzzerCap.buzzer({value = "off"}))
     device:emit_event(childLockCap.childLock({value = "off"}))
     device:emit_event(displayLevelCap.displayLevel({value = "off"}))
@@ -222,6 +224,7 @@ end
 local function device_init(_, device)
     ensure_profile(device)
     device:online()
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
 
     local ip = get_device_config(device)
     if ip then

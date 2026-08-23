@@ -33,7 +33,7 @@ SmartThings Edge LAN driver for the Xiaomi/miIO zhimi air purifier mc1 model `zh
 | relative Humidity Measurement | R | Model-specific property/method constants in `src/init.lua` | `relativeHumidityMeasurement` |
 | fine Dust Sensor | R | `aqi` | `fineDustSensor` |
 | Favorite speed | RW | `favorite_level`, `set_level_favorite`; `0..17` raw level | `concertmirror08464.zhimiAirMc1FavoriteFanLevel` |
-| filter State | R | `filter1_life`; % | `filterState` |
+| Filter life | R / Action | `filter1_life`, %; `reset_filter1` with no arguments | `filterState` |
 | zhimi Air Mc1 Buzzer | RW | Model-specific property/method constants in `src/init.lua` | `concertmirror08464.zhimiAirMc1Buzzer` |
 | zhimi Air Mc1 Child Lock | RW | Model-specific property/method constants in `src/init.lua` | `concertmirror08464.zhimiAirMc1ChildLock` |
 | zhimi Air Mc1 Led Brightness | RW | Model-specific property/method constants in `src/init.lua` | `concertmirror08464.zhimiAirMc1LedBrightness` |

@@ -35,7 +35,7 @@ SmartThings Edge LAN driver for the Xiaomi/MIoT zhimi air purifier va1 model `zh
 | temperature Measurement | R | Model-specific siid/piid constants in `src/init.lua` | `temperatureMeasurement` |
 | relative Humidity Measurement | R | Model-specific siid/piid constants in `src/init.lua` | `relativeHumidityMeasurement` |
 | fine Dust Sensor | R | Model-specific siid/piid constants in `src/init.lua` | `fineDustSensor` |
-| filter State | R | Model-specific siid/piid constants in `src/init.lua` | `filterState` |
+| Filter state | R | Model-specific siid/piid constants in `src/init.lua`; exact spec has no reset action | `filterState` |
 | zhimi Air Va1 Buzzer | RW | Model-specific siid/piid constants in `src/init.lua` | `concertmirror08464.zhimiAirVa1Buzzer` |
 | zhimi Air Va1 Child Lock | RW | Model-specific siid/piid constants in `src/init.lua` | `concertmirror08464.zhimiAirVa1ChildLock` |
 | zhimi Air Va1 Led Brightness | RW | Model-specific siid/piid constants in `src/init.lua` | `concertmirror08464.zhimiAirVa1LedBrightness` |

@@ -30,6 +30,7 @@ SmartThings Edge LAN driver for `zhimi.airp.cpa4`.
 | Mode | `siid=2`, `piid=4`, `0=Auto`, `1=Sleep`, `2=Favorite` | read/write | `concertmirror08464.zhimiAirCpa4AirPurifierMode` |
 | PM2.5 | `siid=3`, `piid=4`, `0..600 ug/m3` | read | `fineDustSensor` |
 | Filter life | `siid=4`, `piid=1`, `0..100 %` | read | `filterState.filterLifeRemaining` |
+| Reset filter life | `siid=4`, `aiid=1` | action | `filterState.resetFilter` |
 | Buzzer | `siid=6`, `piid=1` | read/write | `concertmirror08464.zhimiAirCpa4Buzzer` |
 | Child lock | `siid=8`, `piid=1` | read/write | `concertmirror08464.zhimiAirCpa4ChildLock` |
 | Screen brightness | `siid=13`, `piid=2`, `0=Close`, `1=Bright`, `2=Brightest` | read/write | `concertmirror08464.zhimiAirCpa4ScreenBrightness` |

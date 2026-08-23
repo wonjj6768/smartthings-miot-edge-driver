@@ -230,6 +230,17 @@ local function set_fan_mode_handler(_, device, command)
     end
 end
 
+local function fan_mode_shortcut_handler(mode)
+    return function(driver, device, _)
+        set_fan_mode_handler(driver, device, {args = {mode = mode}})
+    end
+end
+
+local set_auto_handler = fan_mode_shortcut_handler("auto")
+local set_sleep_handler = fan_mode_shortcut_handler("sleep")
+local set_favorite_handler = fan_mode_shortcut_handler("favorite")
+local set_manual_handler = fan_mode_shortcut_handler("manual")
+
 -- 팬 속도 설정 (커스텀 capability, 1-3)
 local function set_fan_speed_handler(_, device, command)
     local ip, token = get_device_config(device)
@@ -292,6 +303,7 @@ end
 
 -- 새로고침
 local function refresh_handler(_, device, _)
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
     pcall(poll_device_status, device)
 end
 
@@ -313,6 +325,7 @@ local function device_added(_, device)
     device:emit_event(capabilities.temperatureMeasurement.temperature({value = 0, unit = "C"}))
     device:emit_event(capabilities.relativeHumidityMeasurement.humidity(0))
     device:emit_event(capabilities.fineDustSensor.fineDustLevel(0))
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
     device:emit_event(capabilities.filterState.filterLifeRemaining({value = 100, unit = "%"}))
     device:emit_event(deviceControlsLedBrightness.ledBrightness({value = "bright"}))
     device:emit_event(deviceControlsBuzzer.buzzer({value = "off"}))
@@ -323,6 +336,7 @@ end
 local function device_init(_, device)
     ensure_profile(device)
     device:online()
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
 
     local ip, token = get_device_config(device)
     if ip then
@@ -378,7 +392,11 @@ local driver = Driver("miot-air-purifier-mb3a", {
             [capabilities.switch.commands.off.NAME] = switch_off_handler
         },
         [fanModeFanMode.ID] = {
-            [fanModeFanMode.commands.setFanMode.NAME] = set_fan_mode_handler
+            [fanModeFanMode.commands.setFanMode.NAME] = set_fan_mode_handler,
+            [fanModeFanMode.commands.setAuto.NAME] = set_auto_handler,
+            [fanModeFanMode.commands.setSleep.NAME] = set_sleep_handler,
+            [fanModeFanMode.commands.setFavorite.NAME] = set_favorite_handler,
+            [fanModeFanMode.commands.setManual.NAME] = set_manual_handler
         },
         [fanSpeedFanSpeed.ID] = {
             [fanSpeedFanSpeed.commands.setFanSpeed.NAME] = set_fan_speed_handler

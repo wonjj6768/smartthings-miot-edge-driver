@@ -32,7 +32,7 @@ SmartThings Edge LAN driver for the Xiaomi Mi Air Purifier Pro product code `AC-
 | PM2.5 | R | `aqi` | `fineDustSensor` |
 | Humidity | R | `humidity`; % | `relativeHumidityMeasurement` |
 | Temperature | R | `temp_dec`; celsius x10 | `temperatureMeasurement` |
-| Filter life | R | `filter1_life`; % | `filterState.filterLifeRemaining` |
+| Filter life | R | `filter1_life`, %; exact v6 rejects `reset_filter1` with `-6009 not_support` | `filterState` |
 | LED brightness | RW | `led`, `led_b`, `set_led`, `set_led_b`; `0=bright`, `1=dim`, `2=off` | `xiaomiDeviceControls.ledBrightness` |
 | Buzzer | RW | `buzzer`, `set_buzzer` | `xiaomiDeviceControls.buzzer` |
 | Child lock | RW | `child_lock`, `set_child_lock` | `xiaomiDeviceControls.childLock` |

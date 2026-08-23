@@ -42,6 +42,7 @@ SmartThings Edge LAN driver for the BJ352 MIoT air purifier model `bj352.airp.y1
 | TVOC | R | `siid=3`, `piid=9`; mg/m^3 | `tvocMeasurement.tvocLevel` |
 | Formaldehyde | R | `siid=3`, `piid=11`; mg/m^3 | `formaldehydeMeasurement.formaldehydeLevel` |
 | Left filter life | R | `siid=4`, `piid=1`; percent | `filterState.filterLifeRemaining` |
+| Reset left filter life | Action | `siid=4`, `aiid=1` | `filterState.resetFilter` |
 | Right filter life | R | `siid=11`, `piid=1`; percent | `bj352AirY106FilterRight.filterLife` |
 | Anion | RW | `siid=2`, `piid=6` | `bj352AirY106Anion.anion` |
 | Indicator light | RW | `siid=5`, `piid=1` | `bj352AirY106Indicator.indicatorLight` |

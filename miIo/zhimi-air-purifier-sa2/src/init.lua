@@ -18,7 +18,8 @@ local DEFAULT_POLLING_INTERVAL = 60
 -- miIO model: zhimi.airpurifier.sa2
 -- Core read properties: power, mode, aqi, humidity, temp_dec, favorite_level,
 -- filter1_life, led, led_b, buzzer, child_lock
--- Core write methods: set_power, set_mode, set_level_favorite, set_led, set_led_b, set_buzzer, set_child_lock
+-- Core write methods: set_power, set_mode, set_level_favorite, reset_filter1,
+-- set_led, set_led_b, set_buzzer, set_child_lock
 local STATUS_PROPERTIES = {
     "power",
     "mode",
@@ -286,7 +287,21 @@ local function set_child_lock_handler(_, device, command)
     end
 end
 
+local function reset_filter_handler(_, device, _)
+    local ip, token = get_device_config(device)
+    if not ip then return end
+
+    if miio.set_prop(device, ip, token, "reset_filter1", {}) then
+        device.thread:call_with_delay(1, function()
+            run_poll(device, "filter-reset")
+        end)
+    else
+        device.log.error("SA2 reset_filter1 failed")
+    end
+end
+
 local function refresh_handler(_, device, _)
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
     run_poll(device, "refresh")
 end
 
@@ -305,6 +320,7 @@ local function device_added(_, device)
     device:emit_event(capabilities.relativeHumidityMeasurement.humidity(0))
     device:emit_event(capabilities.fineDustSensor.fineDustLevel(0))
     device:emit_event(favoriteFanLevel.favoriteFanLevel(0))
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
     device:emit_event(capabilities.filterState.filterLifeRemaining({value = 100, unit = "%"}))
     device:emit_event(deviceControlsLedBrightness.ledBrightness({value = "bright"}))
     device:emit_event(deviceControlsBuzzer.buzzer({value = "off"}))
@@ -314,6 +330,7 @@ end
 local function device_init(_, device)
     ensure_profile(device)
     device:online()
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {"resetFilter"}}))
 
     local ip = get_device_config(device)
     if ip then
@@ -375,6 +392,9 @@ local driver = Driver("miio-air-purifier-sa2", {
         },
         [deviceControlsChildLock.ID] = {
             [deviceControlsChildLock.commands.setChildLock.NAME] = set_child_lock_handler
+        },
+        [capabilities.filterState.ID] = {
+            [capabilities.filterState.commands.resetFilter.NAME] = reset_filter_handler
         },
         [capabilities.refresh.ID] = {
             [capabilities.refresh.commands.refresh.NAME] = refresh_handler

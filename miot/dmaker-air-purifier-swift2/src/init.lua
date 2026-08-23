@@ -408,6 +408,7 @@ local set_fan_on_handler = make_bool_handler(FAN_SIID, FAN_ON_PIID, fanOnCap, "f
 local set_swing_handler = make_bool_handler(FAN_SIID, FAN_SWING_PIID, swingCap, "horizontalSwing", "horizontalSwing")
 
 local function refresh_handler(_, device, _)
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
     pcall(poll_device_status, device)
 end
 
@@ -421,6 +422,7 @@ local function device_added(_, device)
     device:emit_event(capabilities.temperatureMeasurement.temperature({value = 0, unit = "C"}))
     device:emit_event(capabilities.relativeHumidityMeasurement.humidity(0))
     device:emit_event(capabilities.tvocMeasurement.tvocLevel({value = 0, unit = "ppb"}))
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
     device:emit_event(capabilities.filterState.filterLifeRemaining({value = 100, unit = "%"}))
     device:emit_event(fanOnCap.fanOn({value = "off"}))
     device:emit_event(fanSpeedCap.fanSpeed({value = 1, unit = "%"}))
@@ -437,6 +439,7 @@ end
 local function device_init(_, device)
     ensure_profile(device)
     device:online()
+    device:emit_event(capabilities.filterState.supportedFilterCommands({value = {}}))
 
     local ip = get_device_config(device)
     if ip then

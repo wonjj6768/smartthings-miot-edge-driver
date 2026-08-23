@@ -6,7 +6,7 @@ components:
     version: 1
   - id: powerMeter
     version: 1
-  - id: energyMeter
+  - id: concertmirror08464.tmwlValveEnergyUsage
     version: 1
   - id: refresh
     version: 1
@@ -42,7 +42,7 @@ deviceConfig:
     capability: powerMeter
     version: 1
   - component: main
-    capability: energyMeter
+    capability: concertmirror08464.tmwlValveEnergyUsage
     version: 1
   - component: main
     capability: refresh
@@ -56,7 +56,7 @@ deviceConfig:
       capability: powerMeter
       version: 1
     - component: main
-      capability: energyMeter
+      capability: concertmirror08464.tmwlValveEnergyUsage
       version: 1
     actions:
     - component: main

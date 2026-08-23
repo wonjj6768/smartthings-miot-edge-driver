@@ -43,7 +43,7 @@ SmartThings Edge LAN driver for the Dmaker MIoT air purifier model `dmaker.airp.
 | Room temperature | R | `siid=3`, `piid=7`; celsius | `temperatureMeasurement` |
 | Room humidity | R | `siid=3`, `piid=1`; percent | `relativeHumidityMeasurement` |
 | VOC | R | `siid=3`, `piid=8`; ppb | `tvocMeasurement.tvocLevel` |
-| Filter life | R | `siid=4`, `piid=1`; percent | `filterState.filterLifeRemaining` |
+| Filter life | R | `siid=4`, `piid=1`; percent; exact spec has no reset action | `filterState.filterLifeRemaining` |
 | Fan output | RW | `siid=10`, `piid=1` | `dmakerAirSwiftFanOn.fanOn` |
 | Fan speed | RW | `siid=10`, `piid=2`; 1..100 | `dmakerAirSwiftFanSpeed.fanSpeed` |
 | Horizontal swing | RW | `siid=10`, `piid=3` | `dmakerAirSwiftSwing.horizontalSwing` |
