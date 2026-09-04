@@ -1,3 +1,6 @@
+# Source synchronization only. This script does not package or upload drivers,
+# assign a channel version, or update an installed hub. After it runs, verify
+# target-copy equality, then deploy each intended driver as a separate step.
 $ErrorActionPreference = "Stop"
 
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
