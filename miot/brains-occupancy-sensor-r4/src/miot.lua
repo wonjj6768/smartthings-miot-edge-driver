@@ -45,9 +45,10 @@ local function next_message_id(device)
 end
 
 local function assert_success(response)
-    local result = response and response.result and response.result[1]
-    if not result or result.code ~= 0 then
-        local code = result and result.code or "nil"
+    local response_result = response and response.result
+    local status = type(response_result) == "table" and (response_result[1] or response_result) or nil
+    if not status or status.code ~= 0 then
+        local code = status and status.code or "nil"
         error("MIoT 명령 실패: " .. tostring(code))
     end
     return response
@@ -207,11 +208,14 @@ end
 
 -- 액션 호출: miot.action(device, ip, token, siid, aiid, params)
 function miot.action(device, ip, token, siid, aiid, params)
+    local action_params = params or {}
+    setmetatable(action_params, json.array_mt)
+
     local response = send_with_retry(device, ip, token, "action", {
         did = string.format("call.%d.%d", siid, aiid),
         siid = siid,
         aiid = aiid,
-        ["in"] = params or {}
+        ["in"] = action_params
     })
     return assert_success(response)
 end
