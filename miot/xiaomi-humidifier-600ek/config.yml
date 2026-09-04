@@ -1,0 +1,5 @@
+name: 'Mijia Smart Evaporative Humidifier Pro'
+packageKey: 'Xiaomi Humidifier 600EK Driver'
+permissions:
+  lan: {}
+  discovery: {}

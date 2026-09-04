@@ -7,6 +7,8 @@ $groups = @(
         Source = "libs\miot.lua"
         Targets = @(
             "miot\xiaomi-air-purifier-cpa4\src\miot.lua",
+            "miot\xiaomi-air-purifier-cpa5\src\miot.lua",
+            "miot\xiaomi-air-purifier-mb5\src\miot.lua",
             "miot\xiaomi-air-purifier-mp4\src\miot.lua",
             "miot\xiaomi-air-purifier-mp5\src\miot.lua",
             "miot\xiaomi-air-purifier-pa1\src\miot.lua",
@@ -59,6 +61,7 @@ $groups = @(
             "miot\deerma-humidifier-jsq5\src\miot.lua",
             "miot\deerma-humidifier-jsq2w\src\miot.lua",
             "miot\xiaomi-humidifier-airmx\src\miot.lua",
+            "miot\xiaomi-humidifier-600ek\src\miot.lua",
             "miot\xiaomi-humidifier-p800\src\miot.lua",
             "miot\xiaomi-humidifier-p1200\src\miot.lua",
             "miot\dmaker-humidifier-p2\src\miot.lua",
@@ -227,6 +230,8 @@ $groups = @(
         Source = "libs\md5.lua"
         Targets = @(
             "miot\xiaomi-air-purifier-cpa4\src\md5.lua",
+            "miot\xiaomi-air-purifier-cpa5\src\md5.lua",
+            "miot\xiaomi-air-purifier-mb5\src\md5.lua",
             "miot\xiaomi-air-purifier-mp4\src\md5.lua",
             "miot\xiaomi-air-purifier-mp5\src\md5.lua",
             "miot\xiaomi-air-purifier-pa1\src\md5.lua",
@@ -279,6 +284,7 @@ $groups = @(
             "miot\deerma-humidifier-jsq5\src\md5.lua",
             "miot\deerma-humidifier-jsq2w\src\md5.lua",
             "miot\xiaomi-humidifier-airmx\src\md5.lua",
+            "miot\xiaomi-humidifier-600ek\src\md5.lua",
             "miot\xiaomi-humidifier-p800\src\md5.lua",
             "miot\xiaomi-humidifier-p1200\src\md5.lua",
             "miot\dmaker-humidifier-p2\src\md5.lua",

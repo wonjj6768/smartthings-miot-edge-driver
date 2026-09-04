@@ -1,0 +1,5 @@
+name: 'Xiaomi Pet Air CPA5'
+packageKey: 'Xiaomi Pet Air CPA5'
+permissions:
+  lan: {}
+  discovery: {}

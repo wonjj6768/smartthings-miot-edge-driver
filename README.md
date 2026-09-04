@@ -54,6 +54,8 @@ Supported drivers are grouped by protocol and device type.
 | `miot/zhimi-air-purifier-va1` | `zhimi.airpurifier.va1` | Xiaomi Mi Air Purifier Pro H CN | `Zhimi Air Purifier VA1` |
 | `miot/zhimi-air-purifier-vb2` | `zhimi.airpurifier.vb2` | Xiaomi Mi Air Purifier Pro H | `Zhimi Air Purifier VB2` |
 | `miot/xiaomi-air-purifier-cpa4` | `xiaomi.airp.cpa4` | Xiaomi Air Purifier CPA4 | `Xiaomi Air Purifier CPA4` |
+| `miot/xiaomi-air-purifier-cpa5` | `xiaomi.airp.cpa5` | Xiaomi Smart Pet Care Air Purifier | `Xiaomi Pet Air CPA5` |
+| `miot/xiaomi-air-purifier-mb5` | `xiaomi.airp.mb5` | Mijia Smart Air Purifier 6 | `Mijia Smart Air Purifier 6` |
 | `miot/xiaomi-air-purifier-mp4` | `xiaomi.airp.mp4` | Xiaomi Air Purifier MP4 | `Xiaomi Air Purifier MP4` |
 | `miot/xiaomi-air-purifier-mp5` | `xiaomi.airp.mp5` | Xiaomi Air Purifier MP5 | `Xiaomi Air Purifier MP5` |
 | `miot/xiaomi-air-purifier-pa1` | `xiaomi.airp.pa1` | Xiaomi Air Purifier PA1 | `Xiaomi Air Purifier PA1` |
@@ -96,6 +98,7 @@ Supported drivers are grouped by protocol and device type.
 | `miot/deerma-humidifier-990dw` | `deerma.humidifier.990dw` | Deerma Humidifier 990DW | `Deerma Humidifier 990DW` |
 | `miot/pinlo-humidifier-sh01` | `pinlo.humidifier.sh01` | Pinlo Humidifier SH01 | `Pinlo Humidifier SH01` |
 | `miot/xiaomi-humidifier-airmx` | `xiaomi.humidifier.airmx` | Mijia Mist-Free Humidifier 3 Pro | `Mijia Mist-Free Humidifier 3 Pro` |
+| `miot/xiaomi-humidifier-600ek` | `xiaomi.humidifier.600ek` | Mijia Smart Evaporative Humidifier Pro | `Mijia Smart Evaporative Humidifier Pro` |
 | `miot/xiaomi-humidifier-p800` | `xiaomi.humidifier.p800` | Mijia Mist-Free Humidifier 3 (800) | `Xiaomi Humidifier P800` |
 | `miot/xiaomi-humidifier-p1200` | `xiaomi.humidifier.p1200` | Mijia No-Fog Humidifier 3 1200 | `Xiaomi Humidifier P1200` |
 | `miot/dmaker-humidifier-p2` | `dmaker.humidifier.p2` | Dmaker Humidifier P2 | `Dmaker Humidifier P2` |

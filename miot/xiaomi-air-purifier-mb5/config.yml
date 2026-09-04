@@ -1,0 +1,5 @@
+name: 'Mijia Smart Air Purifier 6'
+packageKey: 'Mijia Air Purifier 6 Driver'
+permissions:
+  lan: {}
+  discovery: {}
