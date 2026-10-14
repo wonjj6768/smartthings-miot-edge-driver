@@ -6,6 +6,8 @@ components:
     version: 1
   - id: switchLevel
     version: 1
+  - id: statelessSwitchLevelStep
+    version: 1
   - id: colorTemperature
     version: 1
   - id: colorControl
@@ -72,6 +74,9 @@ deviceConfig:
         version: 1
       - component: main
         capability: switchLevel
+        version: 1
+      - component: main
+        capability: statelessSwitchLevelStep
         version: 1
       - component: main
         capability: colorTemperature

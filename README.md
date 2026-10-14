@@ -299,6 +299,8 @@ Supported drivers are grouped by protocol and device type.
 | `miIo/yeelink-light-lamp1` | `yeelink.light.lamp1` | Xiaomi Mi Desk Lamp | `Xiaomi Mi Desk Lamp` |
 | `miIo/yeelink-light-mono1` | `yeelink.light.mono1` | Yeelight Mono Bulb | `Yeelight Mono Bulb` |
 
+Yeelight Color Bulb V2 supports the `statelessSwitchLevelStep` automation action for relative brightness changes. See its [mapping and profile update behavior](miIo/yeelink-light-color2/README.md).
+
 ## Libraries
 
 | Library | Description |
