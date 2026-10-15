@@ -56,6 +56,7 @@ Supported drivers are grouped by protocol and device type.
 | `miot/xiaomi-air-purifier-cpa4` | `xiaomi.airp.cpa4` | Xiaomi Air Purifier CPA4 | `Xiaomi Air Purifier CPA4` |
 | `miot/xiaomi-air-purifier-cpa5` | `xiaomi.airp.cpa5` | Xiaomi Smart Pet Care Air Purifier | `Xiaomi Pet Air CPA5` |
 | `miot/xiaomi-air-purifier-mb5` | `xiaomi.airp.mb5` | Mijia Smart Air Purifier 6 | `Mijia Smart Air Purifier 6` |
+| `miot/xiaomi-air-purifier-mb6` | `xiaomi.airp.mb6` | Mijia Smart Air Purifier Max | `Mijia Air Purifier Max` |
 | `miot/xiaomi-air-purifier-mp4` | `xiaomi.airp.mp4` | Xiaomi Air Purifier MP4 | `Xiaomi Air Purifier MP4` |
 | `miot/xiaomi-air-purifier-mp5` | `xiaomi.airp.mp5` | Xiaomi Air Purifier MP5 | `Xiaomi Air Purifier MP5` |
 | `miot/xiaomi-air-purifier-pa1` | `xiaomi.airp.pa1` | Xiaomi Air Purifier PA1 | `Xiaomi Air Purifier PA1` |

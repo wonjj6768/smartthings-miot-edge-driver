@@ -1,0 +1,228 @@
+name: xiaomi-air-purifier-mb6
+components:
+- id: main
+  capabilities:
+  - id: switch
+    version: 1
+  - id: concertmirror08464.xiaomiAirMb6Mode
+    version: 1
+  - id: concertmirror08464.xiaomiAirMb6FanLevel
+    version: 1
+  - id: concertmirror08464.xiaomiAirMb6FavoriteFanLevel
+    version: 1
+  - id: relativeHumidityMeasurement
+    version: 1
+  - id: temperatureMeasurement
+    version: 1
+  - id: dustSensor
+    version: 1
+  - id: veryFineDustSensor
+    version: 1
+  - id: formaldehydeMeasurement
+    version: 1
+  - id: concertmirror08464.xiaomiAirMb6AirQuality
+    version: 1
+  - id: filterState
+    version: 1
+  - id: concertmirror08464.xiaomiAirMb6Uv
+    version: 1
+  - id: concertmirror08464.xiaomiAirMb6Display
+    version: 1
+  - id: concertmirror08464.xiaomiAirMb6DisplayLevel
+    version: 1
+  - id: concertmirror08464.xiaomiAirMb6Buzzer
+    version: 1
+  - id: concertmirror08464.xiaomiAirMb6ChildLock
+    version: 1
+  - id: refresh
+    version: 1
+  categories:
+  - name: AirPurifier
+deviceConfig:
+  dashboard:
+    states:
+      - component: main
+        capability: switch
+        version: 1
+        group: main
+        values:
+          - label: "{{switch.value}}"
+        composite: true
+      - component: main
+        capability: dustSensor
+        version: 1
+        group: main
+        values:
+          - label: " {{fineDustLevel.value}} {{fineDustLevel.unit}}"
+        composite: true
+    actions:
+      - component: main
+        capability: switch
+        version: 1
+    basicPlus: []
+  detailView:
+    - component: main
+      capability: switch
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiAirMb6Mode
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiAirMb6FanLevel
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiAirMb6FavoriteFanLevel
+      version: 1
+    - component: main
+      capability: relativeHumidityMeasurement
+      version: 1
+    - component: main
+      capability: temperatureMeasurement
+      version: 1
+    - component: main
+      capability: dustSensor
+      version: 1
+    - component: main
+      capability: veryFineDustSensor
+      version: 1
+    - component: main
+      capability: formaldehydeMeasurement
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiAirMb6AirQuality
+      version: 1
+    - component: main
+      capability: filterState
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiAirMb6Uv
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiAirMb6Display
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiAirMb6DisplayLevel
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiAirMb6Buzzer
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiAirMb6ChildLock
+      version: 1
+    - component: main
+      capability: refresh
+      version: 1
+  automation:
+    conditions:
+      - component: main
+        capability: switch
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiAirMb6Mode
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiAirMb6FanLevel
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiAirMb6FavoriteFanLevel
+        version: 1
+      - component: main
+        capability: relativeHumidityMeasurement
+        version: 1
+      - component: main
+        capability: temperatureMeasurement
+        version: 1
+      - component: main
+        capability: dustSensor
+        version: 1
+      - component: main
+        capability: veryFineDustSensor
+        version: 1
+      - component: main
+        capability: formaldehydeMeasurement
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiAirMb6AirQuality
+        version: 1
+      - component: main
+        capability: filterState
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiAirMb6Uv
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiAirMb6Display
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiAirMb6DisplayLevel
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiAirMb6Buzzer
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiAirMb6ChildLock
+        version: 1
+    actions:
+      - component: main
+        capability: switch
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiAirMb6Mode
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiAirMb6FanLevel
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiAirMb6FavoriteFanLevel
+        version: 1
+      - component: main
+        capability: filterState
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiAirMb6Uv
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiAirMb6Display
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiAirMb6DisplayLevel
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiAirMb6Buzzer
+        version: 1
+      - component: main
+        capability: concertmirror08464.xiaomiAirMb6ChildLock
+        version: 1
+preferences:
+- name: ipAddress
+  title: IP Address
+  description: Mijia Smart Air Purifier Max의 IP 주소
+  required: true
+  preferenceType: string
+  definition:
+    stringType: text
+    default: ""
+- name: token
+  title: Token
+  description: Mijia Smart Air Purifier Max의 토큰 (32자리 hex)
+  required: true
+  preferenceType: string
+  definition:
+    stringType: text
+    default: ""
+- name: pollingInterval
+  title: 갱신주기 (초)
+  description: 상태 갱신 주기 (기본값 60초)
+  required: false
+  preferenceType: integer
+  definition:
+    minimum: 30
+    maximum: 300
+    default: 60
+- name: createDev
+  title: 추가 기기 만들기
+  description: 켜면 Mijia Smart Air Purifier Max 기기를 추가로 생성합니다.
+  required: false
+  preferenceType: boolean
+  definition:
+    default: false

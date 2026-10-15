@@ -1,0 +1,5 @@
+name: 'Mijia Air Purifier Max'
+packageKey: 'xiaomi-air-mb6'
+permissions:
+  lan: {}
+  discovery: {}
