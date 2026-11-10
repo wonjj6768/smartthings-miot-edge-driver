@@ -12,6 +12,8 @@ components:
     version: 1
   - id: colorControl
     version: 1
+  - id: concertmirror08464.yeelightColor2StepMinimum
+    version: 1
   - id: refresh
     version: 1
   categories:
@@ -19,26 +21,46 @@ components:
 deviceConfig:
   dashboard:
     states:
-      - component: main
-        capability: switch
-        version: 1
-        group: main
-        values:
-          - label: "{{switch.value}}"
-        composite: true
-      - component: main
-        capability: switchLevel
-        version: 1
-        group: main
-        values:
-          - label: " {{level.value}}{{level.unit}}"
-        composite: true
+    - component: main
+      capability: switch
+      version: 1
+      group: main
+      values:
+      - label: '{{switch.value}}'
+      composite: true
+    - component: main
+      capability: switchLevel
+      version: 1
+      group: main
+      values:
+      - label: ' {{level.value}}{{level.unit}}'
+      composite: true
     actions:
-      - component: main
-        capability: switch
-        version: 1
+    - component: main
+      capability: switch
+      version: 1
     basicPlus: []
   detailView:
+  - component: main
+    capability: switch
+    version: 1
+  - component: main
+    capability: switchLevel
+    version: 1
+  - component: main
+    capability: colorTemperature
+    version: 1
+  - component: main
+    capability: colorControl
+    version: 1
+  - component: main
+    capability: refresh
+    version: 1
+  - component: main
+    capability: concertmirror08464.yeelightColor2StepMinimum
+    version: 1
+  automation:
+    conditions:
     - component: main
       capability: switch
       version: 1
@@ -52,38 +74,27 @@ deviceConfig:
       capability: colorControl
       version: 1
     - component: main
-      capability: refresh
+      capability: concertmirror08464.yeelightColor2StepMinimum
       version: 1
-  automation:
-    conditions:
-      - component: main
-        capability: switch
-        version: 1
-      - component: main
-        capability: switchLevel
-        version: 1
-      - component: main
-        capability: colorTemperature
-        version: 1
-      - component: main
-        capability: colorControl
-        version: 1
     actions:
-      - component: main
-        capability: switch
-        version: 1
-      - component: main
-        capability: switchLevel
-        version: 1
-      - component: main
-        capability: statelessSwitchLevelStep
-        version: 1
-      - component: main
-        capability: colorTemperature
-        version: 1
-      - component: main
-        capability: colorControl
-        version: 1
+    - component: main
+      capability: switch
+      version: 1
+    - component: main
+      capability: switchLevel
+      version: 1
+    - component: main
+      capability: statelessSwitchLevelStep
+      version: 1
+    - component: main
+      capability: colorTemperature
+      version: 1
+    - component: main
+      capability: colorControl
+      version: 1
+    - component: main
+      capability: concertmirror08464.yeelightColor2StepMinimum
+      version: 1
 preferences:
 - name: ipAddress
   title: IP Address
@@ -92,7 +103,7 @@ preferences:
   preferenceType: string
   definition:
     stringType: text
-    default: ""
+    default: ''
 - name: token
   title: Token
   description: Yeelight Color Bulb V2의 토큰 (32자리 hex)
@@ -100,7 +111,7 @@ preferences:
   preferenceType: string
   definition:
     stringType: text
-    default: ""
+    default: ''
 - name: pollingInterval
   title: 갱신주기 (초)
   description: 얼마나 자주 갱신할지 설정 (기본값 60초)

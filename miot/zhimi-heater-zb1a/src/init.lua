@@ -7,6 +7,8 @@ local miot = require "miot"
 local buzzerCap = capabilities["concertmirror08464.zhimiHeaterZb1aBuzzer"]
 local childLockCap = capabilities["concertmirror08464.zhimiHeaterZb1aChildLock"]
 local indicatorBrightnessCap = capabilities["concertmirror08464.zhimiZb1aIndicatorBrightness"]
+local indicatorModeCap = capabilities["concertmirror08464.zhimiZb1aIndicatorModeV2"]
+local countdownCap = capabilities["concertmirror08464.zhimiZb1aCountdownHours"]
 local POLLING_TIMER = "polling_timer"
 local DEFAULT_POLLING_INTERVAL = 60
 local PROFILE_NAME = "zhimi-heater-zb1a"
@@ -15,7 +17,10 @@ local ENVIRONMENT_SIID, TEMPERATURE_PIID, HUMIDITY_PIID = 5, 8, 7
 local CHILD_LOCK_SIID, CHILD_LOCK_PIID = 7, 1
 local BUZZER_SIID, BUZZER_PIID = 3, 1
 local INDICATOR_SIID, INDICATOR_BRIGHTNESS_PIID = 6, 1
+local COUNTDOWN_SIID, COUNTDOWN_PIID = 4, 1
 local TARGET_MIN, TARGET_MAX, TARGET_STEP = 16, 28, 1
+local INDICATOR_TO_ST = {[0] = "bright", [1] = "dim", [2] = "off"}
+local ST_TO_INDICATOR = {bright = 0, dim = 1, off = 2}
 
 -- Exact MIoT contract: zhimi.heater.zb1a, zhimi-zb1a:1.
 -- Heater 2/2 on RW and 2/6 target temperature 16..28 C RW; alarm/buzzer
@@ -27,8 +32,20 @@ local function get_device_config(device)
     return nil, nil
 end
 local function ensure_profile(device)
-    if not device:supports_capability_by_id(indicatorBrightnessCap.ID, "main") then
-        device:try_update_metadata({profile = PROFILE_NAME})
+    for _, capability in ipairs({buzzerCap, childLockCap, indicatorBrightnessCap, indicatorModeCap, countdownCap}) do
+        if not device:supports_capability_by_id(capability.ID, "main") then
+            device:try_update_metadata({profile = PROFILE_NAME})
+            return false
+        end
+    end
+    return true
+end
+local function emit_indicator(device, value)
+    local mode = INDICATOR_TO_ST[value]
+    if not mode then return end
+    device:emit_event(indicatorBrightnessCap.indicatorBrightness({value = value, unit = "%"}))
+    if device:supports_capability_by_id(indicatorModeCap.ID, "main") then
+        device:emit_event(indicatorModeCap.indicatorMode({value = mode}))
     end
 end
 local function emit_range(device)
@@ -43,9 +60,13 @@ local function poll_device_status(device)
         {siid=ENVIRONMENT_SIID,piid=TEMPERATURE_PIID},{siid=ENVIRONMENT_SIID,piid=HUMIDITY_PIID},
         {siid=CHILD_LOCK_SIID,piid=CHILD_LOCK_PIID},
         {siid=BUZZER_SIID,piid=BUZZER_PIID},
-        {siid=INDICATOR_SIID,piid=INDICATOR_BRIGHTNESS_PIID}}
+        {siid=INDICATOR_SIID,piid=INDICATOR_BRIGHTNESS_PIID},
+        {siid=COUNTDOWN_SIID,piid=COUNTDOWN_PIID}}
     local ok, response = pcall(miot.gets, device, ip, token, properties)
-    if not ok or not response or not response.result then return end
+    if not ok or not response or not response.result then
+        device.log.error("zhimi.heater.zb1a get_properties failed: " .. tostring(response))
+        return
+    end
     for _, result in ipairs(response.result) do
         if result.code == 0 then
             local siid, piid, value = result.siid, result.piid, result.value
@@ -60,7 +81,12 @@ local function poll_device_status(device)
             elseif siid == CHILD_LOCK_SIID and piid == CHILD_LOCK_PIID then emit_bool(device, childLockCap.childLock, value)
             elseif siid == BUZZER_SIID and piid == BUZZER_PIID then emit_bool(device, buzzerCap.buzzer, value)
             elseif siid == INDICATOR_SIID and piid == INDICATOR_BRIGHTNESS_PIID then
-                device:emit_event(indicatorBrightnessCap.indicatorBrightness({value=value,unit="%"}))
+                emit_indicator(device, value)
+            elseif siid == COUNTDOWN_SIID and piid == COUNTDOWN_PIID then
+                if device:supports_capability_by_id(countdownCap.ID, "main") and
+                    type(value) == "number" and value >= 0 and value <= 8 and value % 1 == 0 then
+                    device:emit_event(countdownCap.countdownHours({value = value, unit = "h"}))
+                end
             end
         end
     end
@@ -74,7 +100,14 @@ local function stop_polling_timer(device)
 end
 local function set_property(device, siid, piid, value, event)
     local ip, token=get_device_config(device); if not ip then return false end
-    local ok=pcall(miot.set,device,ip,token,siid,piid,value); if ok then device:emit_event(event); return true end; return false
+    local ok, response = pcall(miot.set, device, ip, token, siid, piid, value)
+    if not ok then
+        device.log.error(string.format("zhimi.heater.zb1a set_properties %d/%d failed: %s",
+            siid, piid, tostring(response)))
+        return false
+    end
+    if event then device:emit_event(event) end
+    return true
 end
 local function switch_on_handler(_,device,_)
     if set_property(device,HEATER_SIID,POWER_PIID,true,capabilities.switch.switch.on()) then
@@ -89,10 +122,24 @@ local function set_bool_handler(capability,attribute,siid,piid,argument)
     return function(_,device,command) local value=command.args[argument]; if value~="off" and value~="on" then return end
         set_property(device,siid,piid,value=="on",capability[attribute]({value=value})) end
 end
-local function set_indicator_brightness_handler(_,device,command)
-    local value=math.max(0,math.min(2,math.floor(command.args.indicatorBrightness+0.5)))
-    set_property(device,INDICATOR_SIID,INDICATOR_BRIGHTNESS_PIID,value,
-        indicatorBrightnessCap.indicatorBrightness({value=value,unit="%"}))
+local function set_indicator_brightness_handler(_, device, command)
+    local value = math.max(0, math.min(2, math.floor(command.args.indicatorBrightness + 0.5)))
+    if set_property(device, INDICATOR_SIID, INDICATOR_BRIGHTNESS_PIID, value) then
+        emit_indicator(device, value)
+    end
+end
+local function set_indicator_mode_handler(_, device, command)
+    local value = ST_TO_INDICATOR[command.args.indicatorMode]
+    if value == nil then return end
+    if set_property(device, INDICATOR_SIID, INDICATOR_BRIGHTNESS_PIID, value) then
+        emit_indicator(device, value)
+    end
+end
+local function set_countdown_handler(_, device, command)
+    local hours = command.args.countdownHours
+    if type(hours) ~= "number" or hours < 0 or hours > 8 or hours % 1 ~= 0 then return end
+    set_property(device, COUNTDOWN_SIID, COUNTDOWN_PIID, hours,
+        countdownCap.countdownHours({value = hours, unit = "h"}))
 end
 local function refresh_handler(_,device,_) emit_range(device); pcall(poll_device_status,device) end
 local function device_added(_,device)
@@ -123,5 +170,8 @@ local driver=Driver("miot-zhimi-heater-zb1a",{discovery=discovery.handle_discove
         [buzzerCap.ID]={[buzzerCap.commands.setBuzzer.NAME]=set_bool_handler(buzzerCap,"buzzer",BUZZER_SIID,BUZZER_PIID,"buzzer")},
         [childLockCap.ID]={[childLockCap.commands.setChildLock.NAME]=set_bool_handler(childLockCap,"childLock",CHILD_LOCK_SIID,CHILD_LOCK_PIID,"childLock")},
         [indicatorBrightnessCap.ID]={[indicatorBrightnessCap.commands.setIndicatorBrightness.NAME]=set_indicator_brightness_handler},
+        [indicatorModeCap.ID] = {
+            [indicatorModeCap.commands.setIndicatorMode.NAME] = set_indicator_mode_handler},
+        [countdownCap.ID] = {[countdownCap.commands.setCountdownHours.NAME] = set_countdown_handler},
         [capabilities.refresh.ID]={[capabilities.refresh.commands.refresh.NAME]=refresh_handler}}})
 driver:run()

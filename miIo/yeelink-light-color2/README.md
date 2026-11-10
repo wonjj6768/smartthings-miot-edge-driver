@@ -31,3 +31,5 @@ SmartThings Edge LAN driver for the Xiaomi/miIO light model `yeelink.light.color
 Brightness steps use a fresh device reading, clamp the target to 0..100 %, and turn the light off at 0 %. An off light starts from 0 %; a zero step does nothing. After a successful step, the driver polls the actual device state. The standard capability provides an automation action and has no dashboard state or detail-view control. Existing devices receive the updated profile from `added`, `init`, `driverSwitched`, or `refresh` when the step capability is missing.
 
 Not exposed: scenes, color temperature delta, developer mode, default-state setting, name setting, and internal Yeelight app settings because they are auxiliary controls rather than core SmartThings light controls.
+
+The Minimum step brightness capability stores a local driver policy persistently. Set 0 to keep the existing ability to step down to Off, or 1 to stop downward steps at 1%. A negative step does not turn an already-off light on. Explicit Off and setLevel(0) remain available. This is a local policy, not a value read from the light; no preference is added.

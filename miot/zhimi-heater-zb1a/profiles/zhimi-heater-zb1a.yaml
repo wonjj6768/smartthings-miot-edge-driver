@@ -9,6 +9,8 @@ components:
   - {id: concertmirror08464.zhimiHeaterZb1aBuzzer, version: 1}
   - {id: concertmirror08464.zhimiHeaterZb1aChildLock, version: 1}
   - {id: concertmirror08464.zhimiZb1aIndicatorBrightness, version: 1}
+  - {id: concertmirror08464.zhimiZb1aIndicatorModeV2, version: 1}
+  - {id: concertmirror08464.zhimiZb1aCountdownHours, version: 1}
   - {id: refresh, version: 1}
   categories:
   - name: Thermostat
@@ -27,7 +29,8 @@ deviceConfig:
   - {component: main, capability: thermostatHeatingSetpoint, version: 1}
   - {component: main, capability: concertmirror08464.zhimiHeaterZb1aBuzzer, version: 1}
   - {component: main, capability: concertmirror08464.zhimiHeaterZb1aChildLock, version: 1}
-  - {component: main, capability: concertmirror08464.zhimiZb1aIndicatorBrightness, version: 1}
+  - {component: main, capability: concertmirror08464.zhimiZb1aIndicatorModeV2, version: 1}
+  - {component: main, capability: concertmirror08464.zhimiZb1aCountdownHours, version: 1}
   - {component: main, capability: refresh, version: 1}
   automation:
     conditions:
@@ -37,13 +40,15 @@ deviceConfig:
     - {component: main, capability: thermostatHeatingSetpoint, version: 1}
     - {component: main, capability: concertmirror08464.zhimiHeaterZb1aBuzzer, version: 1}
     - {component: main, capability: concertmirror08464.zhimiHeaterZb1aChildLock, version: 1}
-    - {component: main, capability: concertmirror08464.zhimiZb1aIndicatorBrightness, version: 1}
+    - {component: main, capability: concertmirror08464.zhimiZb1aIndicatorModeV2, version: 1}
+    - {component: main, capability: concertmirror08464.zhimiZb1aCountdownHours, version: 1}
     actions:
     - {component: main, capability: switch, version: 1}
     - {component: main, capability: thermostatHeatingSetpoint, version: 1}
     - {component: main, capability: concertmirror08464.zhimiHeaterZb1aBuzzer, version: 1}
     - {component: main, capability: concertmirror08464.zhimiHeaterZb1aChildLock, version: 1}
-    - {component: main, capability: concertmirror08464.zhimiZb1aIndicatorBrightness, version: 1}
+    - {component: main, capability: concertmirror08464.zhimiZb1aIndicatorModeV2, version: 1}
+    - {component: main, capability: concertmirror08464.zhimiZb1aCountdownHours, version: 1}
 preferences:
 - {name: ipAddress, title: IP Address, description: "Smartmi Heater ZB1A의 IP 주소", required: true, preferenceType: string, definition: {stringType: text, default: ""}}
 - {name: token, title: Token, description: "Smartmi Heater ZB1A의 토큰 (32자리 hex)", required: true, preferenceType: string, definition: {stringType: text, default: ""}}

@@ -1,0 +1,5 @@
+name: 'Mijia Evaporative Humidifier 3 (600 mL/h)'
+packageKey: 'Xiaomi Humidifier 600 Driver'
+permissions:
+  lan: {}
+  discovery: {}

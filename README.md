@@ -100,6 +100,7 @@ Supported drivers are grouped by protocol and device type.
 | `miot/pinlo-humidifier-sh01` | `pinlo.humidifier.sh01` | Pinlo Humidifier SH01 | `Pinlo Humidifier SH01` |
 | `miot/xiaomi-humidifier-airmx` | `xiaomi.humidifier.airmx` | Mijia Mist-Free Humidifier 3 Pro | `Mijia Mist-Free Humidifier 3 Pro` |
 | `miot/xiaomi-humidifier-600ek` | `xiaomi.humidifier.600ek` | Mijia Smart Evaporative Humidifier Pro | `Mijia Smart Evaporative Humidifier Pro` |
+| `miot/xiaomi-humidifier-600` | `xiaomi.humidifier.600` | Mijia Evaporative Humidifier 3 (600 mL/h) | `Mijia Evaporative Humidifier 3 (600 mL/h)` |
 | `miot/xiaomi-humidifier-p800` | `xiaomi.humidifier.p800` | Mijia Mist-Free Humidifier 3 (800) | `Xiaomi Humidifier P800` |
 | `miot/xiaomi-humidifier-p1200` | `xiaomi.humidifier.p1200` | Mijia No-Fog Humidifier 3 1200 | `Xiaomi Humidifier P1200` |
 | `miot/dmaker-humidifier-p2` | `dmaker.humidifier.p2` | Dmaker Humidifier P2 | `Dmaker Humidifier P2` |

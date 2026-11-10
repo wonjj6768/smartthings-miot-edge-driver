@@ -5,6 +5,9 @@ local Driver = require "st.driver"
 local discovery = require "discovery"
 local miio = require "miio"
 
+local stepMinimumCap = capabilities["concertmirror08464.yeelightColor2StepMinimum"]
+local MINIMUM_STEP_FIELD = "minimum_step_level"
+
 local MODEL = "yeelink.light.color2"
 local PROFILE_NAME = "yeelink-light-color2"
 local POLLING_TIMER = "polling_timer"
@@ -25,6 +28,23 @@ local function get_device_config(device)
         return ip, token
     end
     return nil, nil
+end
+
+local function get_step_minimum(device)
+    return device:get_field(MINIMUM_STEP_FIELD) == 1 and 1 or 0
+end
+
+local function emit_step_minimum(device)
+    if device:supports_capability_by_id(stepMinimumCap.ID, "main") then
+        device:emit_event(stepMinimumCap.minimumStepLevel({value = get_step_minimum(device), unit = "%"}))
+    end
+end
+
+local function set_step_minimum_handler(_, device, command)
+    local value = command.args.minimumStepLevel
+    if value ~= 0 and value ~= 1 then return end
+    device:set_field(MINIMUM_STEP_FIELD, value, {persist = true})
+    emit_step_minimum(device)
 end
 
 local function clamp(value, minimum, maximum)
@@ -124,6 +144,7 @@ local function set_property(device, ip, token, method, params)
 end
 
 local function poll_device_status(device)
+    emit_step_minimum(device)
     local ip, token = get_device_config(device)
     if not ip then
         return
@@ -229,8 +250,10 @@ local function step_level_handler(_, device, command)
         return
     end
 
+    local minimum = get_step_minimum(device)
+    if minimum == 1 and values.power == "off" and step < 0 then return end
     local level = values.power == "off" and 0 or values.bright
-    if set_level_handler(nil, device, {args = {level = clamp(level + step, 0, 100)}}) then
+    if set_level_handler(nil, device, {args = {level = clamp(level + step, minimum, 100)}}) then
         device.thread:call_with_delay(1, function()
             poll_device_status(device)
         end)
@@ -285,7 +308,8 @@ local function set_saturation_handler(_, device, command)
 end
 
 local function ensure_profile(device)
-    if not device:supports_capability_by_id(capabilities.statelessSwitchLevelStep.ID, "main") then
+    if not device:supports_capability_by_id(capabilities.statelessSwitchLevelStep.ID, "main") or
+        not device:supports_capability_by_id(stepMinimumCap.ID, "main") then
         device:try_update_metadata({profile = PROFILE_NAME})
         return true
     end
@@ -293,6 +317,7 @@ local function ensure_profile(device)
 end
 
 local function refresh_handler(_, device, _)
+    emit_step_minimum(device)
     if ensure_profile(device) then
         device.thread:call_with_delay(1, function()
             poll_device_status(device)
@@ -303,6 +328,7 @@ local function refresh_handler(_, device, _)
 end
 
 local function device_added(_, device)
+    emit_step_minimum(device)
     if ensure_profile(device) then
         device.thread:call_with_delay(1, function()
             poll_device_status(device)
@@ -322,6 +348,7 @@ local function device_added(_, device)
 end
 
 local function device_init(_, device)
+    emit_step_minimum(device)
     local profile_updated = ensure_profile(device)
     device:online()
 
@@ -344,6 +371,7 @@ local function device_removed(_, device)
 end
 
 local function device_info_changed(driver, device, _, args)
+    emit_step_minimum(device)
     if not args.old_st_store or not args.old_st_store.preferences then
         return
     end
@@ -393,6 +421,9 @@ local driver = Driver("miio-yeelink-light-color2", {
             [capabilities.colorControl.commands.setColor.NAME] = set_color_handler,
             [capabilities.colorControl.commands.setHue.NAME] = set_hue_handler,
             [capabilities.colorControl.commands.setSaturation.NAME] = set_saturation_handler
+        },
+        [stepMinimumCap.ID] = {
+            [stepMinimumCap.commands.setMinimumStepLevel.NAME] = set_step_minimum_handler
         },
         [capabilities.refresh.ID] = {
             [capabilities.refresh.commands.refresh.NAME] = refresh_handler

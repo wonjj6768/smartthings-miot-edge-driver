@@ -20,6 +20,8 @@ SmartThings Edge LAN driver for the Xiaomi MIoT heater model `zhimi.heater.zb1a`
 - `concertmirror08464.zhimiHeaterZb1aBuzzer`
 - `concertmirror08464.zhimiHeaterZb1aChildLock`
 - `concertmirror08464.zhimiZb1aIndicatorBrightness`
+- `concertmirror08464.zhimiZb1aIndicatorModeV2`
+- `concertmirror08464.zhimiZb1aCountdownHours`
 - `refresh`
 
 ## MIoT Mapping
@@ -33,5 +35,9 @@ SmartThings Edge LAN driver for the Xiaomi MIoT heater model `zhimi.heater.zb1a`
 | Current temperature | R | `siid=5`, `piid=8`, Celsius | `temperatureMeasurement` |
 | Child lock | RW | `siid=7`, `piid=1` | `zhimiHeaterZb1aChildLock.childLock` |
 | Indicator brightness | RW | `siid=6`, `piid=1`, `0..2 %`, step 1 | `zhimiZb1aIndicatorBrightness.indicatorBrightness` |
+| Indicator mode | RW | `siid=6`, `piid=1`; 0=bright, 1=dim, 2=off | `zhimiZb1aIndicatorModeV2.indicatorMode` |
+| Countdown hours | RW | `siid=4`, `piid=1`; 0..8 hours, step 1 | `zhimiZb1aCountdownHours.countdownHours` |
 
-Not exposed: broad fault range, countdown, button, and use time are auxiliary or internal.
+The indicator selector uses the exact-model user's report: 0=Bright, 1=Dim, 2=Off. The legacy numeric capability remains available to existing routines; new UI and routine choices use the selector.
+
+Not exposed: broad fault range, button, and use time are auxiliary or internal.
