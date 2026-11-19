@@ -1,6 +1,8 @@
 # Source synchronization only. This script does not package or upload drivers,
 # assign a channel version, or update an installed hub. After it runs, verify
 # target-copy equality, then deploy each intended driver as a separate step.
+param([string[]] $DriverPaths = @())
+
 $ErrorActionPreference = "Stop"
 
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -453,9 +455,39 @@ $groups = @(
     }
 )
 
+$latestModels = @(
+    "miot\xiaomi-humidifier-p1500",
+    "miot\xiaomi-humidifier-ha2",
+    "miot\xiaomi-humidifier-jsq2g",
+    "miot\xiaomi-humidifier-jsq2w",
+    "miot\xiaomi-air-purifier-rma6"
+)
+foreach ($group in $groups) {
+    if ($group.Source -in @("libs\miot.lua", "libs\md5.lua")) {
+        $library = Split-Path -Leaf $group.Source
+        $group.Targets += @($latestModels | ForEach-Object { "$_\src\$library" })
+    }
+}
+$groups += @{
+    Source = "libs\miot_driver.lua"
+    Targets = @($latestModels | ForEach-Object { "$_\src\miot_driver.lua" })
+}
+foreach ($driverPath in $DriverPaths) {
+    if (-not (Test-Path -LiteralPath (Join-Path $root "$driverPath/config.yml"))) {
+        throw "Unknown driver scope: $driverPath"
+    }
+}
+
 foreach ($group in $groups) {
     $source = Join-Path $root $group.Source
     foreach ($targetPath in $group.Targets) {
+        if ($DriverPaths.Count -gt 0) {
+            $selected = @($DriverPaths | Where-Object {
+                $prefix = $_.Replace('/', '\').TrimEnd('\') + '\src\'
+                $targetPath.StartsWith($prefix, [StringComparison]::OrdinalIgnoreCase)
+            })
+            if ($selected.Count -eq 0) { continue }
+        }
         $target = Join-Path $root $targetPath
         Copy-Item -LiteralPath $source -Destination $target -Force
     }

@@ -1,0 +1,5 @@
+name: Mijia Purifying Evaporative Humidifier 3 Pro
+packageKey: xiaomi-humidifier-ha2
+permissions:
+  lan: {}
+  discovery: {}

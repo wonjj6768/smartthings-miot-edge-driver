@@ -1,0 +1,163 @@
+name: xiaomi-humidifier-jsq2w
+components:
+- id: main
+  capabilities:
+  - id: switch
+    version: 1
+  - id: concertmirror08464.xiaomiHumJsq2wMode
+    version: 1
+  - id: concertmirror08464.xiaomiHumJsq2wTargetHum
+    version: 1
+  - id: concertmirror08464.xiaomiHumJsq2wFanLevel
+    version: 1
+  - id: concertmirror08464.xiaomiHumJsq2wWaterStatus
+    version: 1
+  - id: relativeHumidityMeasurement
+    version: 1
+  - id: temperatureMeasurement
+    version: 1
+  - id: concertmirror08464.xiaomiHumJsq2wDisplay
+    version: 1
+  - id: concertmirror08464.xiaomiHumJsq2wBuzzer
+    version: 1
+  - id: concertmirror08464.xiaomiHumJsq2wOverwet
+    version: 1
+  - id: refresh
+    version: 1
+  categories:
+  - name: Humidifier
+deviceConfig:
+  dashboard:
+    states:
+    - component: main
+      capability: switch
+      version: 1
+      group: main
+      values:
+      - label: '{{switch.value}}'
+    actions:
+    - component: main
+      capability: switch
+      version: 1
+    basicPlus: []
+  detailView:
+  - component: main
+    capability: switch
+    version: 1
+  - component: main
+    capability: concertmirror08464.xiaomiHumJsq2wMode
+    version: 1
+  - component: main
+    capability: concertmirror08464.xiaomiHumJsq2wTargetHum
+    version: 1
+  - component: main
+    capability: concertmirror08464.xiaomiHumJsq2wFanLevel
+    version: 1
+  - component: main
+    capability: concertmirror08464.xiaomiHumJsq2wWaterStatus
+    version: 1
+  - component: main
+    capability: relativeHumidityMeasurement
+    version: 1
+  - component: main
+    capability: temperatureMeasurement
+    version: 1
+  - component: main
+    capability: concertmirror08464.xiaomiHumJsq2wDisplay
+    version: 1
+  - component: main
+    capability: concertmirror08464.xiaomiHumJsq2wBuzzer
+    version: 1
+  - component: main
+    capability: concertmirror08464.xiaomiHumJsq2wOverwet
+    version: 1
+  - component: main
+    capability: refresh
+    version: 1
+  automation:
+    conditions:
+    - component: main
+      capability: switch
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2wMode
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2wTargetHum
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2wFanLevel
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2wWaterStatus
+      version: 1
+    - component: main
+      capability: relativeHumidityMeasurement
+      version: 1
+    - component: main
+      capability: temperatureMeasurement
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2wDisplay
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2wBuzzer
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2wOverwet
+      version: 1
+    actions:
+    - component: main
+      capability: switch
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2wMode
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2wTargetHum
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2wFanLevel
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2wDisplay
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2wBuzzer
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2wOverwet
+      version: 1
+preferences:
+- name: ipAddress
+  title: IP Address
+  description: Xiaomi Smart Humidifier 2의 IP 주소
+  required: true
+  preferenceType: string
+  definition:
+    stringType: text
+    default: ''
+- name: token
+  title: Token
+  description: Xiaomi Smart Humidifier 2의 토큰 (32자리 hex)
+  required: true
+  preferenceType: string
+  definition:
+    stringType: text
+    default: ''
+- name: pollingInterval
+  title: 갱신주기 (초)
+  description: 상태 갱신 주기 (기본값 60초)
+  required: false
+  preferenceType: integer
+  definition:
+    minimum: 30
+    maximum: 300
+    default: 60
+- name: createDev
+  title: 추가 기기 만들기
+  description: 켜면 Xiaomi Smart Humidifier 2 기기를 추가로 생성합니다.
+  required: false
+  preferenceType: boolean
+  definition:
+    default: false

@@ -1,0 +1,5 @@
+name: Mijia Smart Air Purifier 6C
+packageKey: xiaomi-air-purifier-rma6
+permissions:
+  lan: {}
+  discovery: {}

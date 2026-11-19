@@ -1,0 +1,5 @@
+name: Mijia Mist-Free Humidifier 3 1500mL/h
+packageKey: xiaomi-humidifier-p1500
+permissions:
+  lan: {}
+  discovery: {}

@@ -1,0 +1,5 @@
+name: Mijia Smart Anti-bacterial Humidifier 2
+packageKey: xiaomi-humidifier-jsq2g
+permissions:
+  lan: {}
+  discovery: {}

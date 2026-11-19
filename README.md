@@ -17,7 +17,7 @@ The `SmartThings driver name` column is the name shown in the SmartThings Edge c
 
 ## Requirements
 
-These LAN drivers need the Xiaomi device token and local IP address. Use [Xiaomi Cloud Tokens Extractor](https://github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor), select the same Xiaomi server region used in Mi Home, then copy the device `token` and `ip` into the SmartThings device preferences.
+Register the device with Xiaomi Home / Mi Home in its supported server region first. These LAN drivers need the Xiaomi device token and local IP address. Use [Xiaomi Cloud Tokens Extractor](https://github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor), select the same Xiaomi server region used in Mi Home, then copy the device `token` and `ip` into the SmartThings device preferences.
 
 ## Installation
 
@@ -31,11 +31,16 @@ These LAN drivers need the Xiaomi device token and local IP address. Use [Xiaomi
 
 Supported drivers are grouped by protocol and device type.
 
+The new `xiaomi.humidifier.p1500`, `xiaomi.humidifier.ha2`, `xiaomi.humidifier.jsq2g`,
+`xiaomi.humidifier.jsq2w`, and `xiaomi.airp.rma6` drivers use exact official MIoT specifications.
+Their LAN protocol is user-assumed MIoT and has not been verified on physical devices.
+
 ### MIoT Air Purifiers
 
 | Driver folder | Device model | Product name | SmartThings driver name |
 |---------------|--------------|--------------|-------------------------|
 | `miot/zhimi-air-purifier-airp-mb5` | `zhimi.airp.mb5` | Xiaomi Smart Air Purifier 4 | `Xiaomi Smart Air Purifier 4` |
+| `miot/xiaomi-air-purifier-rma6` | `xiaomi.airp.rma6` | Mijia Smart Air Purifier 6C | `Mijia Smart Air Purifier 6C` |
 | `miot/zhimi-air-purifier-mb5a` | `zhimi.airp.mb5a` | Xiaomi Smart Air Purifier 4 | `Zhimi Air Purifier MB5A` |
 | `miot/zhimi-air-purifier-va2` | `zhimi.airp.va2` | Xiaomi Air Purifier Pro H | `Zhimi Air Purifier VA2` |
 | `miot/zhimi-air-purifier-vb4` | `zhimi.airp.vb4` | Xiaomi Air Purifier Pro 4 | `Zhimi Air Purifier VB4` |
@@ -92,6 +97,10 @@ Supported drivers are grouped by protocol and device type.
 | Driver folder | Device model | Product name | SmartThings driver name |
 |---------------|--------------|--------------|-------------------------|
 | `miot/zhimi-humidifier-ca4` | `zhimi.humidifier.ca4` | Smartmi Evaporative Humidifier 2 | `Zhimi Humidifier CA4` |
+| `miot/xiaomi-humidifier-p1500` | `xiaomi.humidifier.p1500` | Mijia Mist-Free Humidifier 3 1500mL/h | `Mijia Mist-Free Humidifier 3 1500mL/h` |
+| `miot/xiaomi-humidifier-ha2` | `xiaomi.humidifier.ha2` | Mijia Purifying Evaporative Humidifier 3 Pro | `Mijia Purifying Evaporative Humidifier 3 Pro` |
+| `miot/xiaomi-humidifier-jsq2g` | `xiaomi.humidifier.jsq2g` | Mijia Smart Anti-bacterial Humidifier 2 | `Mijia Smart Anti-bacterial Humidifier 2` |
+| `miot/xiaomi-humidifier-jsq2w` | `xiaomi.humidifier.jsq2w` | Xiaomi Smart Humidifier 2 | `Xiaomi Smart Humidifier 2` |
 | `miot/zhimi-humidifier-ca6` | `zhimi.humidifier.ca6` | Smartmi Evaporative Humidifier CA6 | `Zhimi Humidifier CA6` |
 | `miot/zhimi-humidifier-ca7` | `zhimi.humidifier.ca7` | Zhimi Humidifier CA7 | `Zhimi Humidifier CA7` |
 | `miot/deerma-humidifier-jsq5` | `deerma.humidifier.jsq5` | Xiaomi Mi Smart Antibacterial Humidifier S | `Deerma Humidifier JSQ5` |

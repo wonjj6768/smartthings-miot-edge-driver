@@ -1,0 +1,5 @@
+name: Xiaomi Smart Humidifier 2
+packageKey: xiaomi-humidifier-jsq2w
+permissions:
+  lan: {}
+  discovery: {}

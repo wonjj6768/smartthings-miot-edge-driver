@@ -1,0 +1,174 @@
+name: xiaomi-humidifier-jsq2g
+components:
+- id: main
+  capabilities:
+  - id: switch
+    version: 1
+  - id: concertmirror08464.xiaomiHumJsq2gMode
+    version: 1
+  - id: concertmirror08464.xiaomiHumJsq2gTargetHum
+    version: 1
+  - id: concertmirror08464.xiaomiHumJsq2gFanLevel
+    version: 1
+  - id: concertmirror08464.xiaomiHumJsq2gWaterStatus
+    version: 1
+  - id: relativeHumidityMeasurement
+    version: 1
+  - id: temperatureMeasurement
+    version: 1
+  - id: concertmirror08464.xiaomiHumJsq2gDisplay
+    version: 1
+  - id: concertmirror08464.xiaomiHumJsq2gBuzzer
+    version: 1
+  - id: concertmirror08464.xiaomiHumJsq2gOverwet
+    version: 1
+  - id: concertmirror08464.xiaomiHumJsq2gConstantProtect
+    version: 1
+  - id: refresh
+    version: 1
+  categories:
+  - name: Humidifier
+deviceConfig:
+  dashboard:
+    states:
+    - component: main
+      capability: switch
+      version: 1
+      group: main
+      values:
+      - label: '{{switch.value}}'
+    actions:
+    - component: main
+      capability: switch
+      version: 1
+    basicPlus: []
+  detailView:
+  - component: main
+    capability: switch
+    version: 1
+  - component: main
+    capability: concertmirror08464.xiaomiHumJsq2gMode
+    version: 1
+  - component: main
+    capability: concertmirror08464.xiaomiHumJsq2gTargetHum
+    version: 1
+  - component: main
+    capability: concertmirror08464.xiaomiHumJsq2gFanLevel
+    version: 1
+  - component: main
+    capability: concertmirror08464.xiaomiHumJsq2gWaterStatus
+    version: 1
+  - component: main
+    capability: relativeHumidityMeasurement
+    version: 1
+  - component: main
+    capability: temperatureMeasurement
+    version: 1
+  - component: main
+    capability: concertmirror08464.xiaomiHumJsq2gDisplay
+    version: 1
+  - component: main
+    capability: concertmirror08464.xiaomiHumJsq2gBuzzer
+    version: 1
+  - component: main
+    capability: concertmirror08464.xiaomiHumJsq2gOverwet
+    version: 1
+  - component: main
+    capability: concertmirror08464.xiaomiHumJsq2gConstantProtect
+    version: 1
+  - component: main
+    capability: refresh
+    version: 1
+  automation:
+    conditions:
+    - component: main
+      capability: switch
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2gMode
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2gTargetHum
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2gFanLevel
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2gWaterStatus
+      version: 1
+    - component: main
+      capability: relativeHumidityMeasurement
+      version: 1
+    - component: main
+      capability: temperatureMeasurement
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2gDisplay
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2gBuzzer
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2gOverwet
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2gConstantProtect
+      version: 1
+    actions:
+    - component: main
+      capability: switch
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2gMode
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2gTargetHum
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2gFanLevel
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2gDisplay
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2gBuzzer
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2gOverwet
+      version: 1
+    - component: main
+      capability: concertmirror08464.xiaomiHumJsq2gConstantProtect
+      version: 1
+preferences:
+- name: ipAddress
+  title: IP Address
+  description: Mijia Smart Anti-bacterial Humidifier 2의 IP 주소
+  required: true
+  preferenceType: string
+  definition:
+    stringType: text
+    default: ''
+- name: token
+  title: Token
+  description: Mijia Smart Anti-bacterial Humidifier 2의 토큰 (32자리 hex)
+  required: true
+  preferenceType: string
+  definition:
+    stringType: text
+    default: ''
+- name: pollingInterval
+  title: 갱신주기 (초)
+  description: 상태 갱신 주기 (기본값 60초)
+  required: false
+  preferenceType: integer
+  definition:
+    minimum: 30
+    maximum: 300
+    default: 60
+- name: createDev
+  title: 추가 기기 만들기
+  description: 켜면 Mijia Smart Anti-bacterial Humidifier 2 기기를 추가로 생성합니다.
+  required: false
+  preferenceType: boolean
+  definition:
+    default: false
